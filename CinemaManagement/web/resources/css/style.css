@@ -9,6 +9,12 @@ html, body {
 	color: #222;
 }
 
+.web-body {
+    background: url("../image/rapgiave-hinhrap-nvq-01_1557130993556.jpg");
+    background-size: cover;
+    background-attachment: fixed
+}
+
 .navbar {
 	background-color: rgb(59, 59, 59) !important;
 }
@@ -18,9 +24,11 @@ html, body {
 .navbar li a:hover {
     color: #FFD700 !important;
 }
+
 footer {
 	background-color: rgb(59, 59, 59) !important;
 	color: #d5d5d5;
+        margin-top: auto
 }
 hr.light {
 	border-top: 1px solid #d5d5d5;

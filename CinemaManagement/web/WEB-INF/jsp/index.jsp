@@ -3,3 +3,4 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@include file="header.jsp" %>
+<%@include file="footer.jsp" %>
