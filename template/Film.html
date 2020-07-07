@@ -8,6 +8,16 @@
     <!-- Import Boostrap css, js, font awesome here -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <style>
+            table, th, td {
+              border: none;
+              border-collapse: collapse;
+            }
+            th, td {
+              padding: 5px;
+              text-align: left;    
+            }
+            </style>
 </head>
 
 <body>
@@ -42,140 +52,189 @@
     </div>
 
     <div class="container-fluid">
-        <div class="col-12 ">
-            <a href="#">Phim đang chiếu</a>
-            <a href="#">Phim sắp chiếu chiếu</a>
-        </div>
+            <ul class="nav nav-tabs">
+                <li class="active">                
+                    <a href="#"> <button type="button" class="btn btn-outline-secondary"> Phim đang chiếu </button> </a>
+                </li>
+                <li>
+                    <a href="#"> <button type="button" class="btn btn-outline-secondary"> Phim sắp chiếu  </button> </a>                
+                </li> 
+            </ul>
         <hr color="#FFD700"> <!-- Horizontal Rule -->
     </div>
     <div class="container-fluid">
         <div class="Showtimes">
-            <div class="col-12 ">
-                <a href="#">Thứ 2</a>
-                <a href="#">Thứ 3</a>
-                <a href="#">Thứ 4</a>
-                <a href="#">Thứ 5</a>
-                <a href="#">Thứ 6</a>
-                <a href="#">Thứ 7</a>
-                <a href="#">Chủ Nhật</a>
+            <div class="col-md-12">
+                <ul class="nav nav-tabs">
+                    <li>                
+                        <a href="#">  <button type="button" class="btn btn-outline-secondary"> Thứ 2 </button></a>
+                    </li>
+                    <li>                
+                        <a href="#">  <button type="button" class="btn btn-outline-secondary"> Thứ 3 </button></a>
+                    </li>
+                    <li>                
+                        <a href="#">  <button type="button" class="btn btn-outline-secondary"> Thứ 4 </button></a>
+                    </li>
+                    <li>                
+                        <a href="#">  <button type="button" class="btn btn-outline-secondary"> Thứ 5 </button></a>
+                    </li>
+                    <li>                
+                        <a href="#">  <button type="button" class="btn btn-outline-secondary"> Thứ 6 </button></a>
+                    </li>
+                    <li>                
+                        <a href="#">  <button type="button" class="btn btn-outline-secondary"> Thứ 7 </button></a>
+                    </li>
+                    <li>  
+                        <a href="#">  <button type="button" class="btn btn-outline-secondary"> Chủ Nhật </button></a>              
+                    </li>
+                </ul>
             </div>
         </div>
         <hr color="#FFD700"> <!-- Horizontal Rule -->
     </div>
-    <div class="row movie-tabs">
-        <div class="col-md-2 col-sm-3">
-                <img src="./a.png" alt="film1" height="200px" width="200px">
-        </div>
-        <div class="col-md-10 col-sm-9">
-            <span class="title">Action, Adventure, Fantasy</span>
-            <h3 class="no-underline">It's over</h3>
-            <p>European mercenaries searching for black powder become embroiled in the defense of It's over of China
-                against a horde of monstrous creatures.</p>
-            <p><a href="single-movie.html" class="arrow-button">Full synopsis</a></p>
-            <div class="row">
-                <div class="col-md-8 col-sm-9">
-                    <hr class="space-10">
-                    <span class="viewing-times">
-                        Viewing times
-                    </span>
-                    <span class="time past">14:45</span>
-                    <span class="time">18:30</span>
-                    <span class="time">20:30</span>
-                    <span class="time">24:45</span>
+    <table style="width:100%">
+        <tr>
+          <th rowspan="5"><img src="./a.png" alt="film1" height="200px" width="200px"></th>
+          <td colspan="3" class="category">Thể Loại:</td>
+          <td>15 tuổi</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="title" > <h3>Mèo con</h3> </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="introduction">Mèo, chính xác hơn là mèo nhà để phân biệt với các loài trong họ Mèo khác, 
+                là động vật có vú, nhỏ nhắn và chuyên ăn thịt, sống chung với loài người, được nuôi để săn vật gây hại hoặc làm thú nuôi cùng với chó nhà. </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="info" > <a href="#">thông tin phim</a> </td>
+          </tr>
+        <tr>
+            <td colspan="4">
+                <div class="row">
+                    <div class="col-md-8 col-sm-9">
+                        <span class="viewing-times">
+                            Viewing times
+                        </span>
+                        <span class="time past">14:45</span>
+                        <span class="time">18:30</span>
+                        <span class="time">20:30</span>
+                        <span class="time">24:45</span>
+                    </div>
+                    <div class="col-md-4 col-sm-3 running-time">
+                        105 mins 
+                    </div>
                 </div>
-                <div class="col-md-4 col-sm-3 running-time">
-                    <hr class="space-10">
-                    105 mins <span class="certificate">15</span>
-                </div>
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+      </table>
     <hr color="#FFD700"> <!-- Horizontal Rule -->
-    <div class="row movie-tabs">
-        <div class="col-md-2 col-sm-3">
-                <img src="./a.png" alt="film1" height="200px" width="200px">
-        </div>
-        <div class="col-md-10 col-sm-9">
-            <span class="title">Action, Adventure, Fantasy</span>
-            <h3 class="no-underline">It's over</h3>
-            <p>European mercenaries searching for black powder become embroiled in the defense of It's over of China
-                against a horde of monstrous creatures.</p>
-            <p><a href="single-movie.html" class="arrow-button">Full synopsis</a></p>
-            <div class="row">
-                <div class="col-md-8 col-sm-9">
-                    <hr class="space-10">
-                    <span class="viewing-times">
-                        Viewing times
-                    </span>
-                    <span class="time past">14:45</span>
-                    <span class="time">18:30</span>
-                    <span class="time">20:30</span>
-                    <span class="time">24:45</span>
+    <table style="width:100%">
+        <tr>
+          <th rowspan="5"><img src="./a.png" alt="film1" height="200px" width="200px"></th>
+          <td colspan="3" class="category">Thể Loại:</td>
+          <td>15 tuổi</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="title" > <h3>Mèo con</h3> </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="introduction">Mèo, chính xác hơn là mèo nhà để phân biệt với các loài trong họ Mèo khác, 
+                là động vật có vú, nhỏ nhắn và chuyên ăn thịt, sống chung với loài người, được nuôi để săn vật gây hại hoặc làm thú nuôi cùng với chó nhà. </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="info" > <a href="#">thông tin phim</a> </td>
+          </tr>
+        <tr>
+            <td colspan="4">
+                <div class="row">
+                    <div class="col-md-8 col-sm-9">
+                        <span class="viewing-times">
+                            Viewing times
+                        </span>
+                        <span class="time past">14:45</span>
+                        <span class="time">18:30</span>
+                        <span class="time">20:30</span>
+                        <span class="time">24:45</span>
+                    </div>
+                    <div class="col-md-4 col-sm-3 running-time">
+                        105 mins 
+                    </div>
                 </div>
-                <div class="col-md-4 col-sm-3 running-time">
-                    <hr class="space-10">
-                    105 mins <span class="certificate">15</span>
-                </div>
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+      </table>
     <hr color="#FFD700"> <!-- Horizontal Rule -->
-    <div class="row movie-tabs">
-        <div class="col-md-2 col-sm-3">
-                <img src="./a.png" alt="film1" height="200px" width="200px">
-        </div>
-        <div class="col-md-10 col-sm-9">
-            <span class="title">Action, Adventure, Fantasy</span>
-            <h3 class="no-underline">It's over</h3>
-            <p>European mercenaries searching for black powder become embroiled in the defense of It's over of China
-                against a horde of monstrous creatures.</p>
-            <p><a href="single-movie.html" class="arrow-button">Full synopsis</a></p>
-            <div class="row">
-                <div class="col-md-8 col-sm-9">
-                    <hr class="space-10">
-                    <span class="viewing-times">
-                        Viewing times
-                    </span>
-                    <span class="time past">14:45</span>
-                    <span class="time">18:30</span>
-                    <span class="time">20:30</span>
-                    <span class="time">24:45</span>
+    <table style="width:100%">
+        <tr>
+          <th rowspan="5"><img src="./a.png" alt="film1" height="200px" width="200px"></th>
+          <td colspan="3" class="category">Thể Loại:</td>
+          <td>15 tuổi</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="title" > <h3>Mèo con</h3> </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="introduction">Mèo, chính xác hơn là mèo nhà để phân biệt với các loài trong họ Mèo khác, 
+                là động vật có vú, nhỏ nhắn và chuyên ăn thịt, sống chung với loài người, được nuôi để săn vật gây hại hoặc làm thú nuôi cùng với chó nhà. </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="info" > <a href="#">thông tin phim</a> </td>
+          </tr>
+        <tr>
+            <td colspan="4">
+                <div class="row">
+                    <div class="col-md-8 col-sm-9">
+                        <span class="viewing-times">
+                            Viewing times
+                        </span>
+                        <span class="time past">14:45</span>
+                        <span class="time">18:30</span>
+                        <span class="time">20:30</span>
+                        <span class="time">24:45</span>
+                    </div>
+                    <div class="col-md-4 col-sm-3 running-time">
+                        105 mins 
+                    </div>
                 </div>
-                <div class="col-md-4 col-sm-3 running-time">
-                    <hr class="space-10">
-                    105 mins <span class="certificate">15</span>
-                </div>
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+      </table>
     <hr color="#FFD700"> <!-- Horizontal Rule -->
-    <div class="row movie-tabs">
-        <div class="col-md-2 col-sm-3">
-                <img src="./a.png" alt="film1" height="200px" width="200px">
-        </div>
-        <div class="col-md-10 col-sm-9">
-            <span class="title">Action, Adventure, Fantasy</span>
-            <h3 class="no-underline">It's over</h3>
-            <p>European mercenaries searching for black powder become embroiled in the defense of It's over of China
-                against a horde of monstrous creatures.</p>
-            <p><a href="single-movie.html" class="arrow-button">Full synopsis</a></p>
-            <div class="row">
-                <div class="col-md-8 col-sm-9">
-                    <hr class="space-10">
-                    <span class="viewing-times">
-                        Viewing times
-                    </span>
-                    <span class="time past">14:45</span>
-                    <span class="time">18:30</span>
-                    <span class="time">20:30</span>
-                    <span class="time">24:45</span>
+    <table style="width:100%">
+        <tr>
+          <th rowspan="5"><img src="./a.png" alt="film1" height="200px" width="200px"></th>
+          <td colspan="3" class="category">Thể Loại:</td>
+          <td>15 tuổi</td>
+        </tr>
+        <tr>
+          <td colspan="4" class="title" > <h3>Mèo con</h3> </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="introduction">Mèo, chính xác hơn là mèo nhà để phân biệt với các loài trong họ Mèo khác, 
+                là động vật có vú, nhỏ nhắn và chuyên ăn thịt, sống chung với loài người, được nuôi để săn vật gây hại hoặc làm thú nuôi cùng với chó nhà. </td>
+        </tr>
+        <tr>
+            <td colspan="4" class="info" > <a href="#">thông tin phim</a> </td>
+          </tr>
+        <tr>
+            <td colspan="4">
+                <div class="row">
+                    <div class="col-md-8 col-sm-9">
+                        <span class="viewing-times">
+                            Viewing times
+                        </span>
+                        <span class="time past">14:45</span>
+                        <span class="time">18:30</span>
+                        <span class="time">20:30</span>
+                        <span class="time">24:45</span>
+                    </div>
+                    <div class="col-md-4 col-sm-3 running-time">
+                        105 mins 
+                    </div>
                 </div>
-                <div class="col-md-4 col-sm-3 running-time">
-                    <hr class="space-10">
-                    105 mins <span class="certificate">15</span>
-                </div>
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+      </table>
+    <hr color="#FFD700"> <!-- Horizontal Rule -->
     
 </body>
