@@ -10,6 +10,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import models.*;
+import org.springframework.messaging.tcp.reactor.ReactorNettyTcpClient;
 
 /**
  *
@@ -58,5 +61,37 @@ public class FilmDAO {
         } catch (Exception e) {};
         
         return imgPath;
+    }
+    
+    /**
+     * Get categories of film
+     * @param id
+     * @return
+     * @throws SQLException 
+     */
+    public ArrayList<Categories> getCategoriesInFilm(int id) throws SQLException {
+        ArrayList<Categories> categories = new ArrayList<Categories>();
+        
+        String sql = "SELECT * FROM `categoryinfilm` WHERE `fId` = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+        
+        ResultSet rs = null;
+        ResultSet ans = null;
+        try {
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                sql = "SELECT * FROM `categories` WHERE `cateId` = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, rs.getInt("cateId"));
+                
+                ans = ps.executeQuery();
+                if(ans.next()) {
+                    categories.add(new Categories(ans.getInt("cateId"), ans.getString("cateName"), ans.getString("description")));
+                }
+            }
+        } catch (Exception e) {};
+        
+        return categories;
     }
 }
