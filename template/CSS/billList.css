@@ -1,0 +1,27 @@
+table {
+    border-collapse: collapse;
+    /* width: 80%; */
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+}
+
+table, th, td {
+    border: 1px solid goldenrod;
+}
+
+th {
+    height: 60px;
+    font-size: x-large;
+    background-color:  rgb(59, 59, 59);
+    color: goldenrod;
+}
+
+td {
+    font-size: 20px;
+}
+
+button {
+    background-color: rgb(59, 59, 59);
+    color: goldenrod;
+}
+
