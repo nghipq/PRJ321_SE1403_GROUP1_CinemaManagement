@@ -24,7 +24,9 @@ html, body {
 .navbar li a:hover {
     color: #FFD700 !important;
 }
-
+.btn{
+    background-color: white;
+}
 footer {
 	background-color: rgb(59, 59, 59) !important;
 	color: #d5d5d5;

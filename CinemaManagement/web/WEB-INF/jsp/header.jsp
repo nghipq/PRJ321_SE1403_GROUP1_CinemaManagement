@@ -45,7 +45,7 @@
                     <li class="nav-item">
                         <form class="form-inline">
                             <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                            <button class="btn" type="submit">Search</button>
+                            <button class="btn" type="submit" >Search</button>
                         </form>
                     </li>
                 </ul>
