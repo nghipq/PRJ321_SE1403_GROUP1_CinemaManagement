@@ -6,6 +6,7 @@
 package models;
 
 import java.sql.Date;
+import java.sql.Time;
 
 /**
  *
@@ -15,9 +16,9 @@ public class Customer {
     private int cusId;
     private int levelAcount;
     private long totalPrice;
-    private Date totalTime;
+    private Time totalTime;
 
-    public Customer(int cusId, int levelAcount, long totalPrice, Date totalTime) {
+    public Customer(int cusId, int levelAcount, long totalPrice, Time totalTime) {
         this.cusId = cusId;
         this.levelAcount = levelAcount;
         this.totalPrice = totalPrice;
@@ -52,11 +53,11 @@ public class Customer {
         this.totalPrice = totalPrice;
     }
 
-    public Date getTotalTime() {
+    public Time getTotalTime() {
         return totalTime;
     }
 
-    public void setTotalTime(Date totalTime) {
+    public void setTotalTime(Time totalTime) {
         this.totalTime = totalTime;
     }
     
