@@ -31,3 +31,25 @@ html, body {
 	background-color: rgb(100, 216, 139);
 	border: 1px solid white;
 }
+.overlay {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: all 0.5s;
+}
+
+.overlay:hover {
+    opacity: 1;
+}
+
+.overlay .detail {
+    color: black;
+    transform: translate(-85%, -120%);
+}
+
+.inline {
+    list-style-type: none;
+    color: #635423;
+}
