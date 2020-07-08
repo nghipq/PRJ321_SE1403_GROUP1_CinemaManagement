@@ -1,3 +1,9 @@
+body{
+    background: url("../resources/image/rapgiave-hinhrap-nvq-01_1557130993556.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
+
 h1 {
     font-weight: bold;
     margin: 0;
@@ -91,6 +97,7 @@ input {
     width: 768px;
     max-width: 100%;
     min-height: 480px;
+    margin: auto;
 }
 
 .form-container {
@@ -153,9 +160,8 @@ input {
 }
 
 .overlay {
-    background: #ff416c;
-    background: -webkit-linear-gradient(to right, #ff4b2b, #ff416c);
-    background: linear-gradient(to right, #ff4b2b, #ff416c);
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 19%, rgba(59,59,59,1) 100%);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
@@ -178,7 +184,7 @@ input {
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    padding: 0 40px;
+    padding: 0;
     text-align: center;
     top: 0;
     height: 100%;

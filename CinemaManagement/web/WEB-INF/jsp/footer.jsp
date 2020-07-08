@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 </div>
+</div>
     <footer>
         <div class="container-fluid padding">
             <div class="row text-center">
