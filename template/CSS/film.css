@@ -15,3 +15,8 @@
     color: black;
     transform: translate(-85%, -120%);
 }
+
+.inline {
+    list-style-type: none;
+    color: #635423;
+}
