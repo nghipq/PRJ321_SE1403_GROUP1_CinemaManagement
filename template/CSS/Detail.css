@@ -2,14 +2,12 @@
     font-size: 4rem;
     font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
 }
-
 .background{
-    background-color: rgba(247, 230, 230, 0.8);
+    background-color: rgba(247, 230, 230, 0.9);
 }
-
 .formality {
     font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
-    font-size: 2rem;
+    font-size: 1rem;
 }
 
 div {
@@ -30,6 +28,25 @@ label {
 .attribute {
     font-size: 25px;
 }
+
+.days li{
+    padding: 10px;
+}
+
+.showtime{
+    font-size: 15px;
+}
+
+.showtime-text{
+    font-size: 25px;
+}
+.showtime button{
+    margin: 10px;
+}
+.listshow{
+    color: black;
+}
+
 
 body{
     background: url("../image/rapgiave-hinhrap-nvq-01_1557130993556.jpg");
