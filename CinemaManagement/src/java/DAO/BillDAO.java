@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.*;
 
 /**
  *
@@ -24,6 +25,58 @@ public class BillDAO {
         this.conn = conn;
     }
 
+    /**
+     * Get All Bill
+     *
+     * @return
+     * @throws SQLException
+     */
+    public ResultSet getAll() throws SQLException {
+        String sql = "SELECT * FROM `bill`";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ResultSet rs = null;
+
+        try {
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+        };
+
+        return rs;
+    }
+
+    /**
+     * Get bill by given bill id
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    public Bill getBillById(int id) throws SQLException {
+        String sql = "SELECT * FROM `bill` WHERE `bId` = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+
+        ResultSet rs = null;
+        Bill bill = null;
+        try {
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                bill = new Bill(id, rs.getInt("cusId"), rs.getInt("sId"), rs.getDate("dateBuy"), rs.getLong("total"));
+            }
+        } catch (Exception e) {
+        }
+
+        return bill;
+    }
+
+    /**
+     * Create new bill
+     *
+     * @param cusId
+     * @param total
+     * @return
+     * @throws SQLException
+     */
     public boolean createBill(int cusId, long total) throws SQLException {
         String sql = "INSERT INTO `bill`(`cusId`, `total`) values (?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -43,6 +96,32 @@ public class BillDAO {
         return false;
     }
 
+    /**
+     * Update bill by given values
+     *
+     * @param bId
+     * @param sId
+     * @param total
+     * @return
+     * @throws SQLException
+     */
+    public boolean updateBill(int bId, int sId, long total, int status) throws SQLException {
+        String sql = "UPDATE `bill` SET `sId` = ? `total` = ? `status` = ? WHERE `bId` = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, sId);
+        ps.setLong(2, total);
+        ps.setInt(3, bId);
+        ps.setInt(4, status);
+
+        int rs = ps.executeUpdate();
+        return rs > 0 ? true : false;
+    }
+
+    /**
+     * Get max bill id
+     *
+     * @return
+     */
     public int maxBill() {
         String sql = "Select max(bId) as bId from bill";
 
