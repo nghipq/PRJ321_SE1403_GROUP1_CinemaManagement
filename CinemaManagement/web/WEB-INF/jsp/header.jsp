@@ -13,6 +13,8 @@
     <title>Asterism Cinema</title>
     <!-- Import Boostrap css, js, font awesome here -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="<c:url value="/resources/public/OwlCarousel2-2.3.4/dist/assets/owl.carousel.min.css"/>"/>
+    <link rel="stylesheet" href="<c:url value="/resources/public/OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css"/>"/>
     <link href="<c:url value="/resources/css/style.css"/>" rel="stylesheet">
 </head>
 
@@ -31,7 +33,7 @@
                         <a class="nav-link active" href="#" onclick="window.location.reload();">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Phim</a>
+                        <a class="nav-link" href="/cinemaManagement/films.html">Phim</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Lịch Chiếu</a>
@@ -40,19 +42,12 @@
                         <a class="nav-link" href="#">Liên Hệ</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Đăng Nhập</a>
-                    </li>
-                    <li class="nav-item">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Tìm kiếm" aria-label="Search">
-                            <button class="btn" type="submit" >Search</button>
-                        </form>
+                        <a class="nav-link" href="/cinemaManagement/auth.html">Đăng Nhập</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="web-body">
-    <div class="container">
-                
-    
+
+

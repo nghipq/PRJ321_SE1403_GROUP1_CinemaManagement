@@ -15,14 +15,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 @RequestMapping("/auth")
-public class UserController {
-    @RequestMapping(value = {"/register"}, method = RequestMethod.GET)
-    public String RegisterAction(){
-        return "register";
-    }
-    
-    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
+public class UserController {    
+    @RequestMapping(value = {""}, method = RequestMethod.GET)
     public String LoginAction(){
-        return "login";
+        return "auth";
     }
 }

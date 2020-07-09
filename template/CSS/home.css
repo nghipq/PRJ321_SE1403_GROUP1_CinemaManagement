@@ -45,3 +45,9 @@ body{
 	background-color: rgb(100, 216, 139);
 	border: 1px solid white;
 }
+
+body{
+    background: url("../image/rapgiave-hinhrap-nvq-01_1557130993556.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
