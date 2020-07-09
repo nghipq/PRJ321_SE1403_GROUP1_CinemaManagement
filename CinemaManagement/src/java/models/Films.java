@@ -15,10 +15,8 @@ public class Films {
 
     private int fId;
     private String fName;
-    private int prId;
-    private int transId;
+    private int pId;
     private Date releaseDate;
-    private String description;
     private double rating;
     private int limitAge;
     private int status;
@@ -28,13 +26,11 @@ public class Films {
     public Films() {
     }
 
-    public Films(int fId, String fName, int prId, int transId, Date releaseDate, String description, double rating, int limitAge, int status, Date airDate, Date endDate) {
+    public Films(int fId, String fName, int pId, Date releaseDate, double rating, int limitAge, int status, Date airDate, Date endDate) {
         this.fId = fId;
         this.fName = fName;
-        this.prId = prId;
-        this.transId = transId;
+        this.pId = pId;
         this.releaseDate = releaseDate;
-        this.description = description;
         this.rating = rating;
         this.limitAge = limitAge;
         this.status = status;
@@ -58,20 +54,12 @@ public class Films {
         this.fName = fName;
     }
 
-    public int getPrId() {
-        return prId;
+    public int getpId() {
+        return pId;
     }
 
-    public void setPrId(int prId) {
-        this.prId = prId;
-    }
-
-    public int getTransId() {
-        return transId;
-    }
-
-    public void setTransId(int transId) {
-        this.transId = transId;
+    public void setpId(int pId) {
+        this.pId = pId;
     }
 
     public Date getReleaseDate() {
@@ -80,14 +68,6 @@ public class Films {
 
     public void setReleaseDate(Date releaseDate) {
         this.releaseDate = releaseDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public double getRating() {
