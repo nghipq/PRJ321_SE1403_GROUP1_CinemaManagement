@@ -14,24 +14,55 @@ import java.sql.SQLException;
  * @author phamq
  */
 public class billDetailDAO {
+
     private Connection conn;
 
     public billDetailDAO(Connection conn) {
         this.conn = conn;
     }
-    
+
+    /**
+     * Create bill detail
+     *
+     * @param tId
+     * @param bId
+     * @return
+     * @throws SQLException
+     */
     public boolean createBillDetail(int tId, int bId) throws SQLException {
         String sql = "INSERT INTO `billdetail`(`tId`, `bId`) values(?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, tId);
         ps.setInt(2, bId);
-        
+
         try {
             int insert = ps.executeUpdate();
-            if(insert == 1) return false;
-            else return true;
-        } catch (Exception e) {};
-        
+            if (insert == 1) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+        };
+
         return false;
+    }
+
+    /**
+     * Update bill detail
+     *
+     * @param tId
+     * @param bId
+     * @return
+     * @throws SQLException
+     */
+    public boolean updateBillDetail(int tId, int bId) throws SQLException {
+        String sql = "UPDATE `billDetail` SET `tId` = ? WHERE `bId` = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, tId);
+        ps.setInt(2, bId);
+
+        int rs = ps.executeUpdate();
+        return rs > 0 ? true : false;
     }
 }

@@ -14,13 +14,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @author phamq
  */
 @Controller
-@RequestMapping("/register")
+@RequestMapping("/auth")
 public class UserController {
-    @RequestMapping(value = {""}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/register"}, method = RequestMethod.GET)
     public String RegisterAction(){
         return "register";
     }
-    @RequestMapping(value = {""}, method = RequestMethod.GET)
+    
+    @RequestMapping(value = {"/login"}, method = RequestMethod.GET)
     public String LoginAction(){
         return "login";
     }

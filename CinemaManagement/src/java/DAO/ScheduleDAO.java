@@ -17,69 +17,53 @@ import models.*;
  * @author phamq
  */
 public class ScheduleDAO {
+
     private Connection conn;
 
     public ScheduleDAO(Connection conn) {
         this.conn = conn;
     }
-    
+
     /**
      * Get schedule in film
+     *
      * @param id
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public ResultSet getScheduleByFilmId(int id) throws SQLException {
         String sql = "SELECT * FROM `schedule` WHERE `fId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, id);
-        
+
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
-        } catch(Exception e) {}
-        
+        } catch (Exception e) {
+        }
+
         return rs;
     }
-    
+
     /**
-     * get session 
+     * get session
+     *
      * @param id
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public Session getSessionByScheduleId(int id) throws SQLException {
         Session ses = new Session();
         String sql = "SELECT * FROM `session` WHERE `sesId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, id);
-        
+
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
-        } catch(Exception e) {};
-        
+        } catch (Exception e) {
+        };
+
         return ses;
-    }
-    
-    /**
-     * Get ticket price
-     * @param id
-     * @return
-     * @throws SQLException 
-     */
-    public long getTicketPrice(int id) throws SQLException {
-        String sql = "SELECT * FROM `formality` WHERE `fmId` = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-        
-        ResultSet rs = null;
-        try {
-            rs = ps.executeQuery();
-            if(rs.next()) return rs.getInt("ticketPrice");
-            else return 0;
-        } catch(Exception e) {
-            return 0;
-        }
     }
 }
