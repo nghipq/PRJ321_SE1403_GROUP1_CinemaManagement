@@ -60,7 +60,7 @@ public class FilmDAO {
             }
         } catch (Exception e) {};
         
-        return imgPath;
+        return "<c:url value='/resources/image/" + imgPath + "'/>";
     }
     
     /**
