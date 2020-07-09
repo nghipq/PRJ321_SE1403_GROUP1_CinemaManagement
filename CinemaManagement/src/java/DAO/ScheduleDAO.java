@@ -10,6 +10,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.*;
 
 /**
@@ -66,4 +68,41 @@ public class ScheduleDAO {
 
         return ses;
     }
+
+    public boolean createSchedule(int sesId, int fmId, int status) throws SQLException {
+        String sql = "INSERT INTO `schedule`(`sesId`, `fmId`, `status`) values (?, ?, ?)";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, sesId);
+        ps.setInt(2, fmId);
+        ps.setInt(3, status);
+        
+
+        try {
+            int insert = ps.executeUpdate();
+            if (insert == 1) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+        };
+
+        return false;
+    }
+
+    public int getMaxScheId() {
+        try {
+            String sql = "select max(scheId) from schedule";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("scheId");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ScheduleDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+    }
+
+
 }

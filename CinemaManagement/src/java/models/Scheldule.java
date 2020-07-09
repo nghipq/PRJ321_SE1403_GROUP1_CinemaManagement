@@ -14,11 +14,13 @@ public class Scheldule {
     private int fId;
     private int sesId;
     private int fmId;
+    private int status;
 
-    public Scheldule(int fId, int sesId, int fmId) {
+    public Scheldule(int fId, int sesId, int fmId, int status) {
         this.fId = fId;
         this.sesId = sesId;
         this.fmId = fmId;
+        this.status = status;
     }
 
     public Scheldule() {
@@ -47,5 +49,15 @@ public class Scheldule {
     public void setFmId(int fmId) {
         this.fmId = fmId;
     }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    
 
 }

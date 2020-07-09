@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.*;
 
 /**
@@ -46,5 +48,40 @@ public class TicketDAO {
         } catch (Exception e) {
             return 0;
         }
+    }
+    
+    public int getTicketByCheduleId(int id) throws SQLException {
+        String sql = "SELECT * FROM `schedule` WHERE `scheId` = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+            return 0;
+        }
+        return 0;
+    }
+    
+    public boolean createTicket(int scheId, int seatId, int status) throws SQLException {
+        String sql = "INSERT INTO `ticket`(`scheId`, `seatId`, `status`) values (?, ?, ?)";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, scheId);
+        ps.setInt(2, seatId);
+        ps.setInt(3, status);
+        
+
+        try {
+            int insert = ps.executeUpdate();
+            if (insert == 1) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+        };
+
+        return false;
     }
 }
