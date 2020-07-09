@@ -30,7 +30,7 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#" onclick="window.location.reload();">Trang Chủ</a>
+                        <a class="nav-link active" href="/cinemaManagement/" onclick="window.location.reload();">Trang Chủ</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/cinemaManagement/films.html">Phim</a>
