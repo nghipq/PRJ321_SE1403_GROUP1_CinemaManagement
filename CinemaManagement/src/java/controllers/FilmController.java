@@ -6,6 +6,9 @@
 package controllers;
 
 import DAO.FilmDAO;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +31,17 @@ public class FilmController {
     }
     
     @RequestMapping(value = {"/film"}, method = RequestMethod.GET)
-    @ResponseBody
-    public String filmAction(@RequestParam String id) {
+    public String filmAction(@RequestParam String id, ModelMap mm) {
         int fId = Integer.parseInt(id);
         FilmDAO fd = new FilmDAO();
         
-        return "film";
+        try {
+            Films film = fd.getFilmsById(fId);
+            mm.put("film", film);
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "filmDetail";
     }
 }

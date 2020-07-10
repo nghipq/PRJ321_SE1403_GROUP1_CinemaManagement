@@ -1,0 +1,46 @@
+.title {
+    font-size: 4rem;
+    font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+}
+
+.formality {
+    font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-size: 1rem;
+}
+
+div {
+    padding: 1%;
+}
+
+label {
+    display: inline-block;
+    font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-weight: 600;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.attribute {
+    font-size: 25px;
+}
+
+.days li{
+    padding: 10px;
+}
+
+.showtime{
+    font-size: 15px;
+}
+
+.showtime-text{
+    font-size: 25px;
+}
+.showtime button{
+    margin: 10px;
+}
+.listshow{
+    color: black;
+}

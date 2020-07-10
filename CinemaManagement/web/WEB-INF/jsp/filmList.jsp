@@ -25,7 +25,7 @@
                       String imgLink = fd.getFilmPoster(fId);
                       out.print("<div class='item' style='width: 10rem; height: 20rem;'>");
                       out.print("<img src="+ imgLink +" alt='poster' class='w-100' />");
-                      out.print("<a href='/cinemaManagement/films/film?id="+ fId +"'>");
+                      out.print("<a href='/cinemaManagement/films/film.html?id="+ fId +"'>");
                       out.print("<div class='overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center'>");
                       out.print("<p class='detail'>Chi Tiết</p>");
                       out.print("</div>");
