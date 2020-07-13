@@ -54,38 +54,22 @@
             <h3 style="color: #505050;" class="p-3">PHIM MỚI</h3>
         </div>
         <div class="owl-carousel px-5 owl-theme bg-white">
-            <div class="item" style="width: 10rem; height: 20rem;">
-                <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                <a href="#">
-                    <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-                        <p class="detail">Chi Tiết</p>
-                    </div>
-                </a>
-            </div>
-            <div class="item" style="width: 10rem; height: 20rem;">
-                <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                <a href="#">
-                    <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-                        <p class="detail">Chi Tiết</p>
-                    </div>
-                </a>
-            </div>
-            <div class="item" style="width: 10rem; height: 20rem;">
-                <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                <a href="#">
-                    <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-                        <p class="detail">Chi Tiết</p>
-                    </div>
-                </a>
-            </div>
-            <div class="item" style="width: 10rem; height: 20rem;">
-                <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                <a href="#">
-                    <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-                        <p class="detail">Chi Tiết</p>
-                    </div>
-                </a>
-            </div>
+            <c:forEach var="film" items="${films}">
+                <div class="item" style="width: 10rem; height: 15rem;">
+                    <c:set var="fId" value="${film.getfId()}"/>
+                    <%
+                        int fId = Integer.parseInt(pageContext.getAttribute("fId").toString());
+                        String imgPath = "/resources/image/" + new FilmDAO().getFilmPoster(fId);
+                        pageContext.setAttribute("imgPath", imgPath);
+                    %>
+                    <img src="<c:url value="${imgPath}"/>" alt="${film.getfName()}" class="w-100 h-100"/>
+                    <a href="/cinemaManagement/films/film.html?id=${film.getfId()}">
+                        <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
+                            <p class="detail">Chi Tiết</p>
+                        </div>
+                    </a>
+                </div>
+            </c:forEach>
         </div>
     </div>
     <div class="col bg-white mt-2 mb-2">
@@ -93,37 +77,23 @@
             <h3 style="color: #505050;" class="p-3">SỰ KIỆN</h3>
         </div>
         <div class="owl-carousel px-5 owl-theme bg-white">
-            <div class="item" style="width: 10rem; height: 20rem;">
-                <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                <a href="#">
-                    <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-                        <p class="detail">Chi Tiết</p>
-                    </div>
-                </a>
+            <div class="item" style="width: 15rem; height: 12rem;">
+                <img src="<c:url value="/resources/image/event1.png"/>" alt="event" class="w-100" />
             </div>
-            <div class="item" style="width: 10rem; height: 20rem;">
-                <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                <a href="#">
-                    <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-                        <p class="detail">Chi Tiết</p>
-                    </div>
-                </a>
+            <div class="item" style="width: 15rem; height: 12rem;">
+                <img src="<c:url value="/resources/image/event2.png"/>" alt="event" class="w-100" />
             </div>
-            <div class="item" style="width: 10rem; height: 20rem;">
-                <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                <a href="#">
-                    <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-                        <p class="detail">Chi Tiết</p>
-                    </div>
-                </a>
+            <div class="item" style="width: 15rem; height: 12rem;">
+                <img src="<c:url value="/resources/image/event3.jpg"/>" alt="event" class="w-100" />
             </div>
-            <div class="item" style="width: 10rem; height: 20rem;">
-                <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                <a href="#">
-                    <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
-                        <p class="detail">Chi Tiết</p>
-                    </div>
-                </a>
+            <div class="item" style="width: 15rem; height: 12rem;">
+                <img src="<c:url value="/resources/image/event4.jpg"/>" alt="event" class="w-100" />
+            </div>
+            <div class="item" style="width: 15rem; height: 12rem;">
+                <img src="<c:url value="/resources/image/event5.jpg"/>" alt="event" class="w-100" />
+            </div>
+            <div class="item" style="width: 15rem; height: 12rem;">
+                <img src="<c:url value="/resources/image/event6.jpg"/>" alt="event" class="w-100" />
             </div>
         </div>
     </div>

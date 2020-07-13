@@ -12,23 +12,26 @@
 </head>
 
 <body>
-    <div class="booking-progress">
-        <div class="page-title">
-            <h1>Booking Online</h1>
+    <div class="container">
+        <div class="bg-dark col-12 row p-3 rounded mt-2">
+            <h3 style="color: #ffd750;" class="text-center w-100">BOOKING ONLINE</h3>
+            <h5 style="color: #ffd750;" class="text-center w-100">Rạp 1</h5>
         </div>
-        <div class="top-content">
-
-            <div>
-                <p>Asterism | Cinema 3 | Số ghế (<em>64</em>/64)</p>
-                <p>07/07/2020 18:40 ~ 07/07/2020 20:52</p>
+        <div class="bg-white col-12 row p-3 rounded mb-2">
+            <div class="col-md-4 col-2 d-none d-lg-flex">
+                <img src="./image/Em_chưa_18.jpg" alt="poster" class="w-100"/>
             </div>
-
+            <div class="col-lg-8 col-12 d-flex flex-column justify-content-center align-items-center">
+                <div class="border w-100 p-lg-3 text-center bg-warning"><strong>Màng Hình</strong></div>
+                <div class="col-lg-8 col-12 d-flex flex-column justify-content-center align-items-center" id="seatList"></div>
+            </div>
         </div>
-        <div class="container">
-            <div class="row justify-content-md-center">
-              <div class="col-8">
-                <ol id="abc"></ol>
-            </div>
+        <div class="bg-dark col-12 row rounded p-3">
+            <form class="row col-12">
+                <button class="col-2 btn btn-warning">QUAY LẠI</button>
+                <input class="col-8 w-100 text-center" type="text" value="" id="seats" name="txtSeats" disabled/>
+                <input type="submit" value="TIẾP TỤC" class="col-2 btn btn-warning">
+            </form>
         </div>
     </div>
     <script src="JS/booking.js"></script> 

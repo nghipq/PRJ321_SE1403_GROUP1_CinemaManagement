@@ -67,7 +67,7 @@ public class FilmDAO {
             }
         } catch (Exception e) {};
         
-        return "<c:url value='/resources/image/" + imgPath + "'/>";
+        return imgPath;
     }
 
     /**
@@ -96,6 +96,39 @@ public class FilmDAO {
                 ans = ps.executeQuery();
                 if (ans.next()) {
                     categories.add(new Categories(ans.getInt("cateId"), ans.getString("cateName"), ans.getString("description")));
+                }
+            }
+        } catch (Exception e) {
+        };
+
+        return categories;
+    }
+    /*
+     * Get categories of film
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    public String getCategorieNamesInFilm(int id) throws SQLException {
+        String categories = "";
+
+        String sql = "SELECT * FROM `categoryinfilm` WHERE `fId` = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+
+        ResultSet rs = null;
+        ResultSet ans = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                sql = "SELECT * FROM `categories` WHERE `cateId` = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setInt(1, rs.getInt("cateId"));
+
+                ans = ps.executeQuery();
+                if (ans.next()) {
+                    categories += ans.getString("cateName");
                 }
             }
         } catch (Exception e) {

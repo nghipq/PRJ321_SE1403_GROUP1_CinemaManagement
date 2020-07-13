@@ -26,13 +26,12 @@ public class PersonDAO {
         conn = new DBConnection().getDBConnection();
     }
     
-    public HashMap<Integer, String> getPersonNameFilmId(int fId, int rId) throws SQLException {
-        HashMap<Integer, String> list = new HashMap<>();
+    public String getPersonNameFilmId(int fId, int rId) throws SQLException {
+        String list = "";
         
-        String sql = "SELECT * FROM `personinfilm` WHERE `fId` = ? and `rId` = ?";
+        String sql = "SELECT * FROM `personinfilm` WHERE `fId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, fId);
-        ps.setInt(2, rId);
         
         ResultSet rs = ps.executeQuery();
         ResultSet rs1 = null;
@@ -44,7 +43,9 @@ public class PersonDAO {
             sql = "SELECT * FROM `person` WHERE `pId` = " + rs.getInt("pId");
             rs1 = st.executeQuery(sql);
             if(rs1.next()) {
-                list.put(pId, rs1.getString("pName"));
+                if(rs1.getInt("rID") == rId) {
+                    list += rs1.getString("pName") + " ";
+                }
             }
         }
         

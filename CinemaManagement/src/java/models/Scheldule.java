@@ -10,20 +10,31 @@ package models;
  * @author Admin
  */
 public class Scheldule {
-
+    private int scheId;
     private int fId;
     private int sesId;
     private int fmId;
     private int status;
+    private int rId;
 
-    public Scheldule(int fId, int sesId, int fmId, int status) {
+    public Scheldule(int scheId, int fId, int sesId, int fmId, int status, int rId) {
+        this.scheId = scheId;
         this.fId = fId;
         this.sesId = sesId;
         this.fmId = fmId;
         this.status = status;
+        this.rId = rId;
     }
 
     public Scheldule() {
+    }
+
+    public int getScheId() {
+        return scheId;
+    }
+
+    public void setScheId(int scheId) {
+        this.scheId = scheId;
     }
 
     public int getfId() {
@@ -57,6 +68,16 @@ public class Scheldule {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    public int getrId() {
+        return rId;
+    }
+
+    public void setrId(int rId) {
+        this.rId = rId;
+    }
+
+    
 
     
 

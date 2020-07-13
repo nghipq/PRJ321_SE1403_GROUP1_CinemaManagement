@@ -12,29 +12,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import DAO.*;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import models.Ticket;
+import org.json.JSONObject;
 
 /**
  *
  * @author phamq
  */
 @Controller
-@RequestMapping("/bill")
-public class BillController {
+@RequestMapping("/room")
+public class RoomController {
     @RequestMapping(value = {""}, method = RequestMethod.GET)
-    public String beforeBillAction(@RequestParam String tickets, ModelMap mm) throws SQLException {
-        mm.put("tickets", tickets);
-        String[] ticketList = tickets.split(", ");
+    public String roomAction(@RequestParam String fId, String rId, String scheId, ModelMap mm) throws SQLException {
         TicketDAO td = new TicketDAO();
+        Map<String, String> tickets = (Map) td.getSeatAndTicketByScheduleId(Integer.parseInt(scheId));
+        JSONObject jobj = new JSONObject(tickets);
         
-        long totalPrice = td.getTicketPriceById(Integer.parseInt(ticketList[0]))*ticketList.length;
-        
-        mm.put("total", totalPrice);
-        
-        return "billForm";
-    }
-    
-    @RequestMapping(value = {"/billlist"}, method = RequestMethod.GET)
-    public String BillListAction() {
-        return "billList";
+        mm.put("fId", fId);
+        mm.put("rId", rId);
+        mm.put("tickets", jobj);
+        return "room";
     }
 }

@@ -61,7 +61,7 @@ public class BillDAO {
         try {
             rs = ps.executeQuery();
             if (rs.next()) {
-                bill = new Bill(id, rs.getInt("cusId"), rs.getInt("sId"), rs.getDate("dateBuy"), rs.getLong("total"));
+                bill = new Bill(id, rs.getInt("cusId"), rs.getInt("sId"), rs.getDate("dateBuy"), rs.getLong("total"), rs.getString("phone"), rs.getString("name"));
             }
         } catch (Exception e) {
         }
@@ -77,11 +77,13 @@ public class BillDAO {
      * @return
      * @throws SQLException
      */
-    public boolean createBill(int cusId, long total) throws SQLException {
-        String sql = "INSERT INTO `bill`(`cusId`, `total`) values (?, ?)";
+    public boolean createBill(int cusId, long total, String phone, String name) throws SQLException {
+        String sql = "INSERT INTO `bill`(`cusId`, `total`) values (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, cusId);
         ps.setInt(2, (int) total);
+        ps.setString(3, phone);
+        ps.setString(4, name);
 
         try {
             int insert = ps.executeUpdate();
@@ -105,13 +107,15 @@ public class BillDAO {
      * @return
      * @throws SQLException
      */
-    public boolean updateBill(int bId, int sId, long total, int status) throws SQLException {
-        String sql = "UPDATE `bill` SET `sId` = ? `total` = ? `status` = ? WHERE `bId` = ?";
+    public boolean updateBill(int bId, int sId, long total, int status, String phone, String name) throws SQLException {
+        String sql = "UPDATE `bill` SET `sId` = ?, `total` = ?, `status` = ?, `phone` = ?, `name` = ? WHERE `bId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, sId);
         ps.setLong(2, total);
         ps.setInt(3, bId);
         ps.setInt(4, status);
+        ps.setString(5, phone);
+        ps.setString(6, name);
 
         int rs = ps.executeUpdate();
         return rs > 0 ? true : false;

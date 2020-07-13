@@ -4,6 +4,11 @@
     Author     : phamq
 --%>
 
+<%@page import="models.Scheldule"%>
+<%@page import="org.springframework.scheduling.annotation.Scheduled"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="DAO.TicketDAO"%>
+<%@page import="DAO.FilmDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="header.jsp" %>
 <link href="<c:url value="/resources/css/Detail.css"/>" rel="stylesheet"/>
@@ -11,33 +16,38 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-12">
-                <img src="image/Ngoi_den_ki_quai.jpg" alt="image-film" style="width: 100%">
+                <%
+                    FilmDAO fd = new FilmDAO();
+                    String imgPath = "/resources/image/" + fd.getFilmPoster(Integer.parseInt(request.getParameter("id")));
+                    pageContext.setAttribute("imgPath", imgPath);
+                %>
+                <img class="w-100" src="<c:url value="${imgPath}"/>" alt="poster"/>
             </div>
             <div class="col-md-8 col-12">
                 <div class="title">${film.getfName()}</div>
                 <div class="formality">
                     <label>Đạo Diễn:</label>
-                    <a>Phontharis Chotkijsadarsopon</a>
+                    <a>${directors}</a>
                 </div>
                 <div class="formality">
                     <label>Diễn Viên:</label>
-                    <a>Phiravich Attachitsataporn, Timethai Plangsilp, Paisarnkulwong Vachiravit</a>
+                    <a>${actors}</a>
                 </div>
                 <div class="formality">
                     <label>Thể Loại:</label>
-                    <a>Hài, Kinh Dị</a>
+                    <a>${categories}</a>
                 </div>
-                <div class="formality">
-                    <label>Độ dài:</label>
-                    <a>115 phút</a>
-                </div>
-                <div class="formality">
-                    <label>Ngôn ngữ:</label>
-                    <a>Phụ đề tiếng Việt</a>
-                </div>
+                <!--                <div class="formality">
+                                    <label>Độ dài:</label>
+                                    <a>115 phút</a>
+                                </div>-->
+                <!--                <div class="formality">
+                                    <label>Ngôn ngữ:</label>
+                                    <a>Phụ đề tiếng Việt</a>
+                                </div>-->
                 <div class="formality">
                     <label>Ban Age:</label>
-                    <a>16+ - Phim cấm khán giả dưới 16 tuổi</a>
+                    <a>${film.getLimitAge()}+ - Phim cấm khán giả dưới ${film.getLimitAge()} tuổi</a>
                 </div>
             </div>
         </div>
@@ -80,36 +90,23 @@
                         <label class="showtime-text row">Lịch Chiếu: </label>
                     </div>
                     <div class="border row" >
-                        <button type="button" class="btn btn-secondary">                            
-                            8:30AM
-                            <br>
-                            64 ghế trống
-                        </button>
-                        <button type="button" class="btn btn-secondary">                            
-                            11:45AM
-                            <br>
-                            64 ghế trống
-                        </button>
-                        <button type="button" class="btn btn-secondary">                            
-                            13:00PM
-                            <br>
-                            64 ghế trống
-                        </button>
-                        <button type="button" class="btn btn-secondary">                            
-                            16:15PM
-                            <br>
-                            64 ghế trống
-                        </button>
-                        <button type="button" class="btn btn-secondary">                            
-                            19:30PM
-                            <br>
-                            64 ghế trống
-                        </button>
-                        <button type="button" class="btn btn-secondary">                            
-                            21:45PM
-                            <br>
-                            64 ghế trống
-                        </button>
+                        <c:forEach var="schedule" items="${schedules}">
+                            <a href="/cinemaManagement/room.html?rId=${schedule.value.getrId()}&scheId=${schedule.key}&fId=${schedule.value.getfId()}">
+                                <button type="button" class="btn btn-secondary">                            
+                                    <c:set var="sesId" value="${schedule.value.getSesId()}"/>
+                                    <c:set var="scheId" value="${schedule.value.getScheId()}"/>
+                                    <%
+                                        TicketDAO td = new TicketDAO();
+                                        int sesId = Integer.parseInt(pageContext.getAttribute("sesId").toString());
+                                        int scheId = Integer.parseInt(pageContext.getAttribute("scheId").toString());
+                                        ArrayList<String> details = td.getDetail(sesId, scheId);
+                                        pageContext.setAttribute("details", details);
+                                    %>
+                                    ${details.get(0)}<br/>
+                                    ${details.get(1)}
+                                </button>
+                            </a>
+                        </c:forEach>
                     </div>
                 </div>
             </div>

@@ -40,6 +40,10 @@ public class Films {
         this.endDate = endDate;
     }
 
+    public Films(int aInt, String string, String string0, int aInt0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     
 
     public int getfId() {
