@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.*;
-import org.json.JSONObject;
 import org.springframework.scheduling.annotation.Scheduled;
 import com.google.gson.Gson;
 
