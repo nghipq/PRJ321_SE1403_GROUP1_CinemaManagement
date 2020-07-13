@@ -54,14 +54,29 @@
             <h3 style="color: #505050;" class="p-3">PHIM MỚI</h3>
         </div>
         <div class="owl-carousel px-5 owl-theme bg-white">
-            <div class="item" style="width: 10rem; height: 20rem;">
+            <%
+                FilmDAO fdao = new FilmDAO();
+                ResultSet rs = fdao.getAll();
+                while(rs.next()){
+                    int fId = rs.getInt("fId");
+                    out.print("<div class='item' style='width: 10rem; height: 20rem;'>");
+                    out.print("<img src='<c:url value='/resources/image/"+fdao.getFilmPoster(fId)+"'/>' alt='poster' class='w-100'/>");
+                    out.print("<a href='#'>");///cinemaManagement/films/film?id="+ fId +"
+                    out.print("<div class='overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center'>");
+                    out.print("<p class='detail'>Chi Tiết</p>");
+                    out.print("</div>");
+                    out.print("</a>");
+                    out.print("</div>");
+                }
+            %>
+<!--            <div class="item" style="width: 10rem; height: 20rem;">
                 <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
                 <a href="#">
                     <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
                         <p class="detail">Chi Tiết</p>
                     </div>
                 </a>
-            </div>
+            </div>-->
             <div class="item" style="width: 10rem; height: 20rem;">
                 <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
                 <a href="#">

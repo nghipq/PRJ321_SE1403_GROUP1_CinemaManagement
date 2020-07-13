@@ -35,6 +35,12 @@
                     <input type="password" placeholder="Password" />
                     <button>Đăng nhập</button>
                 </form>
+                <!--                <spring:form method="post" commandName="tk" action="login.html">
+                                    <h1>Đăng Nhập</h1>
+                                    <spring:input path="email"/><br>
+                                    <spring:input path="password"/><br>
+                                    <spring:input type="submit" value="Login">
+                                </spring:form>-->
             </div>
             <div class="overlay-container">
                 <div class="overlay">
