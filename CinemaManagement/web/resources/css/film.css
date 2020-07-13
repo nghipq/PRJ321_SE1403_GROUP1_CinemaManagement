@@ -13,16 +13,10 @@
 
 .overlay .detail {
     color: black;
-    transform: translate(-85%, -120%);
+    transform: translateX(-85%);
 }
 
 .inline {
     list-style-type: none;
     color: #635423;
-}
-
-body{
-    background: url("../image/rapgiave-hinhrap-nvq-01_1557130993556.jpg");
-    background-size: cover;
-    background-attachment: fixed;
 }

@@ -17,18 +17,20 @@ public class Bill {
     private int sId;
     private Date dateBuy;
     private long total;
+    private String name;
+    private String phone;
 
-    public Bill(int bId, int cusId, int sId, Date dateBuy, long total) {
+    public Bill() {
+    }
+
+    public Bill(int bId, int cusId, int sId, Date dateBuy, long total, String name, String phone) {
         this.bId = bId;
         this.cusId = cusId;
         this.sId = sId;
         this.dateBuy = dateBuy;
         this.total = total;
-    }
-
-    
-    public Bill() {
-        
+        this.name = name;
+        this.phone = phone;
     }
 
     public int getbId() {
@@ -70,7 +72,22 @@ public class Bill {
     public void setTotal(long total) {
         this.total = total;
     }
-    
-    
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
     
 }

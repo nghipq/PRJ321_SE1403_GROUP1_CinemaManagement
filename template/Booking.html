@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>Asterism</title>
+    <link href="CSS/booking.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="bg-dark col-12 row p-3 rounded mt-2">
+            <h3 style="color: #ffd750;" class="text-center w-100">BOOKING ONLINE</h3>
+            <h5 style="color: #ffd750;" class="text-center w-100">Rạp 1</h5>
+        </div>
+        <div class="bg-white col-12 row p-3 rounded mb-2">
+            <div class="col-md-4 col-2 d-none d-lg-flex">
+                <img src="./image/Em_chưa_18.jpg" alt="poster" class="w-100"/>
+            </div>
+            <div class="col-lg-8 col-12 d-flex flex-column justify-content-center align-items-center">
+                <div class="border w-100 p-lg-3 text-center bg-warning"><strong>Màng Hình</strong></div>
+                <div class="col-lg-8 col-12 d-flex flex-column justify-content-center align-items-center" id="seatList"></div>
+            </div>
+        </div>
+        <div class="bg-dark col-12 row rounded p-3">
+            <form class="row col-12">
+                <button class="col-2 btn btn-warning">QUAY LẠI</button>
+                <input class="col-8 w-100 text-center" type="text" value="" id="seats" name="txtSeats" disabled/>
+                <input type="submit" value="TIẾP TỤC" class="col-2 btn btn-warning">
+            </form>
+        </div>
+    </div>
+    <script src="JS/booking.js"></script> 
+</body>
+
+</html>

@@ -12,18 +12,15 @@ package models;
 public class Ticket {
 
     private int tId;
-    private int sesId;
+    private int scheId;
     private int seatId;
     private int status;
 
-    public Ticket(int tId, int sesId, int seatId, int status) {
+    public Ticket(int tId, int scheId, int seatId, int status) {
         this.tId = tId;
-        this.sesId = sesId;
+        this.scheId = scheId;
         this.seatId = seatId;
         this.status = status;
-    }
-
-    public Ticket() {
     }
 
     public int gettId() {
@@ -34,12 +31,12 @@ public class Ticket {
         this.tId = tId;
     }
 
-    public int getSesId() {
-        return sesId;
+    public int getScheId() {
+        return scheId;
     }
 
-    public void setSesId(int sesId) {
-        this.sesId = sesId;
+    public void setScheId(int scheId) {
+        this.scheId = scheId;
     }
 
     public int getSeatId() {
@@ -57,5 +54,7 @@ public class Ticket {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    
 
 }

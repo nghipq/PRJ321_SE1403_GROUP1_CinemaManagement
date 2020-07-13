@@ -5,7 +5,7 @@
  */
 package models;
 
-import java.sql.Date;
+import java.sql.Time;
 
 /**
  *
@@ -14,10 +14,10 @@ import java.sql.Date;
 public class Session {
 
     private int sesId;
-    private Date startTime;
-    private Date endTime;
+    private Time startTime;
+    private Time endTime;
 
-    public Session(int sesId, Date startTime, Date endTime) {
+    public Session(int sesId, Time startTime, Time endTime) {
         this.sesId = sesId;
         this.startTime = startTime;
         this.endTime = endTime;
@@ -34,20 +34,22 @@ public class Session {
         this.sesId = sesId;
     }
 
-    public Date getStartTime() {
+    public Time getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Date startTime) {
+    public void setStartTime(Time startTime) {
         this.startTime = startTime;
     }
 
-    public Date getEndTime() {
+    public Time getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Date endTime) {
+    public void setEndTime(Time endTime) {
         this.endTime = endTime;
     }
+
+    
 
 }
