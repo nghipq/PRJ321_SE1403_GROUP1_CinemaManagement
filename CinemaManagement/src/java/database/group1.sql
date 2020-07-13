@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
--- Máy chủ: 127.0.0.1
--- Thời gian đã tạo: Th7 06, 2020 lúc 05:09 PM
--- Phiên bản máy phục vụ: 10.4.11-MariaDB
--- Phiên bản PHP: 7.4.3
+-- Host: 127.0.0.1
+-- Generation Time: Jul 13, 2020 at 03:47 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,27 +19,30 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Cơ sở dữ liệu: `group1`
+-- Database: `group1`
 --
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `bill`
+-- Table structure for table `bill`
 --
 
 CREATE TABLE `bill` (
   `bId` int(11) NOT NULL,
   `cusId` int(11) DEFAULT NULL,
-  `sId` int(11) DEFAULT NULL,
-  `dateBuy` datetime NOT NULL,
-  `total` int(11) NOT NULL
+  `sId` int(11) DEFAULT '-1',
+  `dateBuy` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `total` int(11) NOT NULL,
+  `status` int(11) DEFAULT '0',
+  `phone` varchar(15) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `name` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `billdetail`
+-- Table structure for table `billdetail`
 --
 
 CREATE TABLE `billdetail` (
@@ -50,7 +53,7 @@ CREATE TABLE `billdetail` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `categories`
+-- Table structure for table `categories`
 --
 
 CREATE TABLE `categories` (
@@ -60,7 +63,7 @@ CREATE TABLE `categories` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `categories`
+-- Dumping data for table `categories`
 --
 
 INSERT INTO `categories` (`cateId`, `cateName`, `description`) VALUES
@@ -72,7 +75,7 @@ INSERT INTO `categories` (`cateId`, `cateName`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `categoryinfilm`
+-- Table structure for table `categoryinfilm`
 --
 
 CREATE TABLE `categoryinfilm` (
@@ -80,10 +83,21 @@ CREATE TABLE `categoryinfilm` (
   `cateId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
+--
+-- Dumping data for table `categoryinfilm`
+--
+
+INSERT INTO `categoryinfilm` (`fId`, `cateId`) VALUES
+(1, 1),
+(5, 1),
+(2, 2),
+(3, 3),
+(4, 4);
+
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `customers`
+-- Table structure for table `customers`
 --
 
 CREATE TABLE `customers` (
@@ -96,7 +110,7 @@ CREATE TABLE `customers` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `films`
+-- Table structure for table `films`
 --
 
 CREATE TABLE `films` (
@@ -108,24 +122,25 @@ CREATE TABLE `films` (
   `status` int(11) NOT NULL,
   `releaseDate` datetime NOT NULL,
   `airDate` datetime NOT NULL,
-  `endDate` datetime NOT NULL
+  `endDate` datetime NOT NULL,
+  `description` varchar(500) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `films`
+-- Dumping data for table `films`
 --
 
-INSERT INTO `films` (`fId`, `fName`, `pId`, `rating`, `limitAge`, `status`, `releaseDate`, `airDate`, `endDate`) VALUES
-(1, 'NGÔI ĐỀN KỲ QUÁI 2', 3, 10, 16, 0, '2020-07-03 07:00:00', '2020-07-06 07:00:00', '2020-08-06 23:59:00'),
-(2, 'KẺ XÂM NHẬP\r\n', 1, 10, 16, 1, '2020-06-26 07:00:00', '2020-07-01 07:00:00', '2020-08-01 23:59:00'),
-(3, 'PHI VỤ BÃO TỐ', 2, 10, 16, 1, '2020-07-03 07:00:00', '2020-07-06 07:00:00', '2020-08-06 23:59:00'),
-(4, 'ANH THỢ SỬA ỐNG NƯỚC', 2, 10, 18, 1, '2020-07-03 07:00:00', '2020-07-06 07:00:00', '2020-08-06 23:59:00'),
-(5, 'EM CHƯA 18', 1, 10, 18, 2, '2019-07-03 07:00:00', '2019-07-06 07:00:00', '2019-08-06 23:59:00');
+INSERT INTO `films` (`fId`, `fName`, `pId`, `rating`, `limitAge`, `status`, `releaseDate`, `airDate`, `endDate`, `description`) VALUES
+(1, 'NGÔI ĐỀN KỲ QUÁI 2', 3, 10, 16, 0, '2020-07-03 07:00:00', '2020-07-06 07:00:00', '2020-08-06 23:59:00', NULL),
+(2, 'KẺ XÂM NHẬP\r\n', 1, 10, 16, 1, '2020-06-26 07:00:00', '2020-07-01 07:00:00', '2020-08-01 23:59:00', NULL),
+(3, 'PHI VỤ BÃO TỐ', 2, 10, 16, 1, '2020-07-03 07:00:00', '2020-07-06 07:00:00', '2020-08-06 23:59:00', NULL),
+(4, 'ANH THỢ SỬA ỐNG NƯỚC', 2, 10, 18, 1, '2020-07-03 07:00:00', '2020-07-06 07:00:00', '2020-08-06 23:59:00', NULL),
+(5, 'EM CHƯA 18', 1, 10, 18, 2, '2019-07-03 07:00:00', '2019-07-06 07:00:00', '2019-08-06 23:59:00', NULL);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `formality`
+-- Table structure for table `formality`
 --
 
 CREATE TABLE `formality` (
@@ -136,7 +151,7 @@ CREATE TABLE `formality` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `formality`
+-- Dumping data for table `formality`
 --
 
 INSERT INTO `formality` (`fmId`, `fmName`, `description`, `ticketPrice`) VALUES
@@ -146,7 +161,7 @@ INSERT INTO `formality` (`fmId`, `fmName`, `description`, `ticketPrice`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `graphic`
+-- Table structure for table `graphic`
 --
 
 CREATE TABLE `graphic` (
@@ -157,7 +172,7 @@ CREATE TABLE `graphic` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `graphic`
+-- Dumping data for table `graphic`
 --
 
 INSERT INTO `graphic` (`gId`, `fId`, `dateUpdate`, `path`) VALUES
@@ -170,7 +185,7 @@ INSERT INTO `graphic` (`gId`, `fId`, `dateUpdate`, `path`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `nationality`
+-- Table structure for table `nationality`
 --
 
 CREATE TABLE `nationality` (
@@ -179,7 +194,7 @@ CREATE TABLE `nationality` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `nationality`
+-- Dumping data for table `nationality`
 --
 
 INSERT INTO `nationality` (`nId`, `nName`) VALUES
@@ -193,12 +208,12 @@ INSERT INTO `nationality` (`nId`, `nName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `person`
+-- Table structure for table `person`
 --
 
 CREATE TABLE `person` (
   `pId` int(11) NOT NULL,
-  `dName` varchar(25) COLLATE utf8_vietnamese_ci NOT NULL,
+  `pName` varchar(25) COLLATE utf8_vietnamese_ci NOT NULL,
   `nId` int(11) DEFAULT NULL,
   `gender` int(11) NOT NULL,
   `birthday` datetime NOT NULL,
@@ -207,10 +222,10 @@ CREATE TABLE `person` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `person`
+-- Dumping data for table `person`
 --
 
-INSERT INTO `person` (`pId`, `dName`, `nId`, `gender`, `birthday`, `description`, `rId`) VALUES
+INSERT INTO `person` (`pId`, `pName`, `nId`, `gender`, `birthday`, `description`, `rId`) VALUES
 (1, 'Phontharis Chotkijsadarso', 1, 1, '1978-07-09 14:30:22', 'Thailand National Film Association Award for Best Art Direction', 1),
 (2, 'Attachitsataporn', 1, 1, '1998-03-05 14:38:31', 'Phiravich Attachitsataporn, nicknamed Mean is a Thai television actor and model. He is best known for his role as Tin in the 2018 Thai television drama Love by Chance', 2),
 (3, 'Timethai', 1, 1, '1996-01-02 18:38:31', 'Dharmthai Plangsilp (Thai: ธามไท แพลงศิลป์ - Thai pronunciation: [tʰɑːmtʰaɪ pʰlæŋsɪn]) (born January 2, 1996), known professionally as Timethai ', 2),
@@ -223,7 +238,7 @@ INSERT INTO `person` (`pId`, `dName`, `nId`, `gender`, `birthday`, `description`
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `personinfilm`
+-- Table structure for table `personinfilm`
 --
 
 CREATE TABLE `personinfilm` (
@@ -233,7 +248,7 @@ CREATE TABLE `personinfilm` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `personinfilm`
+-- Dumping data for table `personinfilm`
 --
 
 INSERT INTO `personinfilm` (`fId`, `pId`, `description`) VALUES
@@ -245,7 +260,7 @@ INSERT INTO `personinfilm` (`fId`, `pId`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `producers`
+-- Table structure for table `producers`
 --
 
 CREATE TABLE `producers` (
@@ -260,7 +275,7 @@ CREATE TABLE `producers` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `producers`
+-- Dumping data for table `producers`
 --
 
 INSERT INTO `producers` (`pId`, `pName`, `nId`, `description`, `birthday`, `address`, `phoneNumber`, `email`) VALUES
@@ -271,7 +286,7 @@ INSERT INTO `producers` (`pId`, `pName`, `nId`, `description`, `birthday`, `addr
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `role`
+-- Table structure for table `role`
 --
 
 CREATE TABLE `role` (
@@ -281,7 +296,7 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `role`
+-- Dumping data for table `role`
 --
 
 INSERT INTO `role` (`rId`, `rName`, `rDescription`) VALUES
@@ -292,7 +307,7 @@ INSERT INTO `role` (`rId`, `rName`, `rDescription`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `room`
+-- Table structure for table `room`
 --
 
 CREATE TABLE `room` (
@@ -303,7 +318,7 @@ CREATE TABLE `room` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `room`
+-- Dumping data for table `room`
 --
 
 INSERT INTO `room` (`rId`, `seatNumber`, `size`, `rStatus`) VALUES
@@ -316,7 +331,7 @@ INSERT INTO `room` (`rId`, `seatNumber`, `size`, `rStatus`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `roomseat`
+-- Table structure for table `roomseat`
 --
 
 CREATE TABLE `roomseat` (
@@ -326,7 +341,7 @@ CREATE TABLE `roomseat` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `roomseat`
+-- Dumping data for table `roomseat`
 --
 
 INSERT INTO `roomseat` (`seatId`, `rId`, `seatName`) VALUES
@@ -462,31 +477,33 @@ INSERT INTO `roomseat` (`seatId`, `rId`, `seatName`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `schedule`
+-- Table structure for table `schedule`
 --
 
 CREATE TABLE `schedule` (
   `scheId` int(11) NOT NULL,
   `sesId` int(11) DEFAULT NULL,
   `fmId` int(11) DEFAULT NULL,
-  `status` int(11) NOT NULL
+  `status` int(11) NOT NULL,
+  `fId` int(11) DEFAULT NULL,
+  `rId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `schedule`
+-- Dumping data for table `schedule`
 --
 
-INSERT INTO `schedule` (`scheId`, `sesId`, `fmId`, `status`) VALUES
-(1, 1, 1, 1),
-(2, 2, 2, 1),
-(3, 3, 1, 1),
-(4, 4, 2, 1),
-(5, 5, 1, 1);
+INSERT INTO `schedule` (`scheId`, `sesId`, `fmId`, `status`, `fId`, `rId`) VALUES
+(1, 1, 1, 1, 3, 1),
+(2, 2, 2, 1, 1, 2),
+(3, 3, 1, 1, 5, 1),
+(4, 4, 2, 1, 2, 2),
+(5, 5, 1, 1, 4, 2);
 
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `session`
+-- Table structure for table `session`
 --
 
 CREATE TABLE `session` (
@@ -496,7 +513,7 @@ CREATE TABLE `session` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `session`
+-- Dumping data for table `session`
 --
 
 INSERT INTO `session` (`sesId`, `startTime`, `endTime`) VALUES
@@ -509,7 +526,7 @@ INSERT INTO `session` (`sesId`, `startTime`, `endTime`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `staff`
+-- Table structure for table `staff`
 --
 
 CREATE TABLE `staff` (
@@ -521,7 +538,7 @@ CREATE TABLE `staff` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `ticket`
+-- Table structure for table `ticket`
 --
 
 CREATE TABLE `ticket` (
@@ -532,7 +549,7 @@ CREATE TABLE `ticket` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Đang đổ dữ liệu cho bảng `ticket`
+-- Dumping data for table `ticket`
 --
 
 INSERT INTO `ticket` (`tId`, `scheId`, `seatId`, `status`) VALUES
@@ -668,7 +685,7 @@ INSERT INTO `ticket` (`tId`, `scheId`, `seatId`, `status`) VALUES
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `updatehistory`
+-- Table structure for table `updatehistory`
 --
 
 CREATE TABLE `updatehistory` (
@@ -681,7 +698,7 @@ CREATE TABLE `updatehistory` (
 -- --------------------------------------------------------
 
 --
--- Cấu trúc bảng cho bảng `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
@@ -694,16 +711,16 @@ CREATE TABLE `user` (
   `gender` int(11) NOT NULL,
   `address` varchar(500) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `phone` varchar(15) COLLATE utf8_vietnamese_ci NOT NULL,
-  `regisDate` datetime DEFAULT current_timestamp(),
+  `regisDate` datetime DEFAULT CURRENT_TIMESTAMP,
   `permission` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
--- Chỉ mục cho các bảng đã đổ
+-- Indexes for dumped tables
 --
 
 --
--- Chỉ mục cho bảng `bill`
+-- Indexes for table `bill`
 --
 ALTER TABLE `bill`
   ADD PRIMARY KEY (`bId`),
@@ -711,59 +728,59 @@ ALTER TABLE `bill`
   ADD KEY `sId` (`sId`);
 
 --
--- Chỉ mục cho bảng `billdetail`
+-- Indexes for table `billdetail`
 --
 ALTER TABLE `billdetail`
   ADD KEY `tId` (`tId`),
   ADD KEY `bId` (`bId`);
 
 --
--- Chỉ mục cho bảng `categories`
+-- Indexes for table `categories`
 --
 ALTER TABLE `categories`
   ADD PRIMARY KEY (`cateId`);
 
 --
--- Chỉ mục cho bảng `categoryinfilm`
+-- Indexes for table `categoryinfilm`
 --
 ALTER TABLE `categoryinfilm`
   ADD PRIMARY KEY (`fId`),
   ADD KEY `cateId` (`cateId`);
 
 --
--- Chỉ mục cho bảng `customers`
+-- Indexes for table `customers`
 --
 ALTER TABLE `customers`
   ADD PRIMARY KEY (`cusId`);
 
 --
--- Chỉ mục cho bảng `films`
+-- Indexes for table `films`
 --
 ALTER TABLE `films`
   ADD PRIMARY KEY (`fId`),
   ADD KEY `pId` (`pId`);
 
 --
--- Chỉ mục cho bảng `formality`
+-- Indexes for table `formality`
 --
 ALTER TABLE `formality`
   ADD PRIMARY KEY (`fmId`);
 
 --
--- Chỉ mục cho bảng `graphic`
+-- Indexes for table `graphic`
 --
 ALTER TABLE `graphic`
   ADD PRIMARY KEY (`gId`),
   ADD KEY `fId` (`fId`);
 
 --
--- Chỉ mục cho bảng `nationality`
+-- Indexes for table `nationality`
 --
 ALTER TABLE `nationality`
   ADD PRIMARY KEY (`nId`);
 
 --
--- Chỉ mục cho bảng `person`
+-- Indexes for table `person`
 --
 ALTER TABLE `person`
   ADD PRIMARY KEY (`pId`),
@@ -771,59 +788,61 @@ ALTER TABLE `person`
   ADD KEY `rId` (`rId`);
 
 --
--- Chỉ mục cho bảng `personinfilm`
+-- Indexes for table `personinfilm`
 --
 ALTER TABLE `personinfilm`
   ADD PRIMARY KEY (`fId`),
   ADD KEY `pId` (`pId`);
 
 --
--- Chỉ mục cho bảng `producers`
+-- Indexes for table `producers`
 --
 ALTER TABLE `producers`
   ADD PRIMARY KEY (`pId`),
   ADD KEY `nId` (`nId`);
 
 --
--- Chỉ mục cho bảng `role`
+-- Indexes for table `role`
 --
 ALTER TABLE `role`
   ADD PRIMARY KEY (`rId`);
 
 --
--- Chỉ mục cho bảng `room`
+-- Indexes for table `room`
 --
 ALTER TABLE `room`
   ADD PRIMARY KEY (`rId`);
 
 --
--- Chỉ mục cho bảng `roomseat`
+-- Indexes for table `roomseat`
 --
 ALTER TABLE `roomseat`
   ADD PRIMARY KEY (`seatId`);
 
 --
--- Chỉ mục cho bảng `schedule`
+-- Indexes for table `schedule`
 --
 ALTER TABLE `schedule`
   ADD PRIMARY KEY (`scheId`),
   ADD KEY `sesId` (`sesId`),
-  ADD KEY `fmId` (`fmId`);
+  ADD KEY `fmId` (`fmId`),
+  ADD KEY `fId` (`fId`),
+  ADD KEY `rId` (`rId`);
 
 --
--- Chỉ mục cho bảng `session`
+-- Indexes for table `session`
 --
 ALTER TABLE `session`
   ADD PRIMARY KEY (`sesId`);
 
 --
--- Chỉ mục cho bảng `staff`
+-- Indexes for table `staff`
 --
 ALTER TABLE `staff`
   ADD PRIMARY KEY (`sId`);
 
 --
--- Chỉ mục cho bảng `ticket`
+-- Indexes for table `ticket`
 --
 ALTER TABLE `ticket`
   ADD PRIMARY KEY (`tId`),
@@ -831,7 +850,7 @@ ALTER TABLE `ticket`
   ADD KEY `seatId` (`seatId`);
 
 --
--- Chỉ mục cho bảng `updatehistory`
+-- Indexes for table `updatehistory`
 --
 ALTER TABLE `updatehistory`
   ADD PRIMARY KEY (`upId`),
@@ -839,204 +858,206 @@ ALTER TABLE `updatehistory`
   ADD KEY `sId` (`sId`);
 
 --
--- Chỉ mục cho bảng `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`uId`),
   ADD KEY `nId` (`nId`);
 
 --
--- AUTO_INCREMENT cho các bảng đã đổ
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT cho bảng `bill`
+-- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
   MODIFY `bId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `categories`
+-- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
   MODIFY `cateId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT cho bảng `films`
+-- AUTO_INCREMENT for table `films`
 --
 ALTER TABLE `films`
   MODIFY `fId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `formality`
+-- AUTO_INCREMENT for table `formality`
 --
 ALTER TABLE `formality`
   MODIFY `fmId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT cho bảng `graphic`
+-- AUTO_INCREMENT for table `graphic`
 --
 ALTER TABLE `graphic`
   MODIFY `gId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `nationality`
+-- AUTO_INCREMENT for table `nationality`
 --
 ALTER TABLE `nationality`
   MODIFY `nId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT cho bảng `person`
+-- AUTO_INCREMENT for table `person`
 --
 ALTER TABLE `person`
   MODIFY `pId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT cho bảng `producers`
+-- AUTO_INCREMENT for table `producers`
 --
 ALTER TABLE `producers`
   MODIFY `pId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `role`
+-- AUTO_INCREMENT for table `role`
 --
 ALTER TABLE `role`
-  MODIFY `rId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `rId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT cho bảng `room`
+-- AUTO_INCREMENT for table `room`
 --
 ALTER TABLE `room`
   MODIFY `rId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `roomseat`
+-- AUTO_INCREMENT for table `roomseat`
 --
 ALTER TABLE `roomseat`
   MODIFY `seatId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
--- AUTO_INCREMENT cho bảng `schedule`
+-- AUTO_INCREMENT for table `schedule`
 --
 ALTER TABLE `schedule`
   MODIFY `scheId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `session`
+-- AUTO_INCREMENT for table `session`
 --
 ALTER TABLE `session`
   MODIFY `sesId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT cho bảng `ticket`
+-- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
   MODIFY `tId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=129;
 
 --
--- AUTO_INCREMENT cho bảng `updatehistory`
+-- AUTO_INCREMENT for table `updatehistory`
 --
 ALTER TABLE `updatehistory`
   MODIFY `upId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT cho bảng `user`
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
   MODIFY `uId` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Các ràng buộc cho các bảng đã đổ
+-- Constraints for dumped tables
 --
 
 --
--- Các ràng buộc cho bảng `bill`
+-- Constraints for table `bill`
 --
 ALTER TABLE `bill`
   ADD CONSTRAINT `bill_ibfk_1` FOREIGN KEY (`cusId`) REFERENCES `customers` (`cusId`),
   ADD CONSTRAINT `bill_ibfk_2` FOREIGN KEY (`sId`) REFERENCES `staff` (`sId`);
 
 --
--- Các ràng buộc cho bảng `billdetail`
+-- Constraints for table `billdetail`
 --
 ALTER TABLE `billdetail`
   ADD CONSTRAINT `billdetail_ibfk_1` FOREIGN KEY (`tId`) REFERENCES `ticket` (`tId`),
   ADD CONSTRAINT `billdetail_ibfk_2` FOREIGN KEY (`bId`) REFERENCES `staff` (`sId`);
 
 --
--- Các ràng buộc cho bảng `categoryinfilm`
+-- Constraints for table `categoryinfilm`
 --
 ALTER TABLE `categoryinfilm`
   ADD CONSTRAINT `categoryinfilm_ibfk_1` FOREIGN KEY (`fId`) REFERENCES `films` (`fId`),
   ADD CONSTRAINT `categoryinfilm_ibfk_2` FOREIGN KEY (`cateId`) REFERENCES `categories` (`cateId`);
 
 --
--- Các ràng buộc cho bảng `customers`
+-- Constraints for table `customers`
 --
 ALTER TABLE `customers`
   ADD CONSTRAINT `customers_ibfk_1` FOREIGN KEY (`cusId`) REFERENCES `user` (`uId`);
 
 --
--- Các ràng buộc cho bảng `films`
+-- Constraints for table `films`
 --
 ALTER TABLE `films`
   ADD CONSTRAINT `films_ibfk_1` FOREIGN KEY (`pId`) REFERENCES `producers` (`pId`);
 
 --
--- Các ràng buộc cho bảng `graphic`
+-- Constraints for table `graphic`
 --
 ALTER TABLE `graphic`
   ADD CONSTRAINT `graphic_ibfk_1` FOREIGN KEY (`fId`) REFERENCES `films` (`fId`);
 
 --
--- Các ràng buộc cho bảng `person`
+-- Constraints for table `person`
 --
 ALTER TABLE `person`
   ADD CONSTRAINT `person_ibfk_1` FOREIGN KEY (`nId`) REFERENCES `nationality` (`nId`),
   ADD CONSTRAINT `person_ibfk_2` FOREIGN KEY (`rId`) REFERENCES `role` (`rId`);
 
 --
--- Các ràng buộc cho bảng `personinfilm`
+-- Constraints for table `personinfilm`
 --
 ALTER TABLE `personinfilm`
   ADD CONSTRAINT `personinfilm_ibfk_1` FOREIGN KEY (`fId`) REFERENCES `films` (`fId`),
   ADD CONSTRAINT `personinfilm_ibfk_2` FOREIGN KEY (`pId`) REFERENCES `person` (`pId`);
 
 --
--- Các ràng buộc cho bảng `producers`
+-- Constraints for table `producers`
 --
 ALTER TABLE `producers`
   ADD CONSTRAINT `producers_ibfk_1` FOREIGN KEY (`nId`) REFERENCES `nationality` (`nId`);
 
 --
--- Các ràng buộc cho bảng `schedule`
+-- Constraints for table `schedule`
 --
 ALTER TABLE `schedule`
   ADD CONSTRAINT `schedule_ibfk_1` FOREIGN KEY (`sesId`) REFERENCES `session` (`sesId`),
-  ADD CONSTRAINT `schedule_ibfk_2` FOREIGN KEY (`fmId`) REFERENCES `formality` (`fmId`);
+  ADD CONSTRAINT `schedule_ibfk_2` FOREIGN KEY (`fmId`) REFERENCES `formality` (`fmId`),
+  ADD CONSTRAINT `schedule_ibfk_3` FOREIGN KEY (`fId`) REFERENCES `films` (`fId`),
+  ADD CONSTRAINT `schedule_ibfk_4` FOREIGN KEY (`rId`) REFERENCES `room` (`rId`);
 
 --
--- Các ràng buộc cho bảng `staff`
+-- Constraints for table `staff`
 --
 ALTER TABLE `staff`
   ADD CONSTRAINT `staff_ibfk_1` FOREIGN KEY (`sId`) REFERENCES `user` (`uId`);
 
 --
--- Các ràng buộc cho bảng `ticket`
+-- Constraints for table `ticket`
 --
 ALTER TABLE `ticket`
   ADD CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`scheId`) REFERENCES `schedule` (`scheId`),
   ADD CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`seatId`) REFERENCES `roomseat` (`seatId`);
 
 --
--- Các ràng buộc cho bảng `updatehistory`
+-- Constraints for table `updatehistory`
 --
 ALTER TABLE `updatehistory`
   ADD CONSTRAINT `updatehistory_ibfk_1` FOREIGN KEY (`fId`) REFERENCES `films` (`fId`),
   ADD CONSTRAINT `updatehistory_ibfk_2` FOREIGN KEY (`sId`) REFERENCES `staff` (`sId`);
 
 --
--- Các ràng buộc cho bảng `user`
+-- Constraints for table `user`
 --
 ALTER TABLE `user`
   ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`nId`) REFERENCES `nationality` (`nId`);
