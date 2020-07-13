@@ -15,6 +15,7 @@ public class User {
     private int uId;
     private String username;
     private String password;
+    private String confirmpass;
     private int nId;
     private int gender;
     private Date birthday;
@@ -61,6 +62,14 @@ public class User {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getConfirmpass() {
+        return confirmpass;
+    }
+
+    public void setConfirmpass(String confirmpass) {
+        this.confirmpass = confirmpass;
     }
 
     public void setPassword(String password) {
