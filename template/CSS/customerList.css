@@ -1,0 +1,32 @@
+#navbarNav{
+    font-size: 130%;
+   
+    
+}
+
+table{
+    margin-left: 10%;
+}
+
+.title{
+    text-align: center;
+
+}
+body{
+    background: url("../image/background1.png") ;
+}
+
+.container{
+    position: relative;
+    left: 40%;
+    /* right: 40%; */
+}
+
+
+
+.nav-item:hover{
+    background-color: rgba(100, 100, 100, 0.3);
+}
+
+
+
