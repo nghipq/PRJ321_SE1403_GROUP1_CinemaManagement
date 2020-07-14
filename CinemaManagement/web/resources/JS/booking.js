@@ -49,5 +49,5 @@ function addSeat(name, tId) {
 }
 
 function billForm() {
-    location.href = "bill.html?tickets=" + ticketIds.join(", ")
+    location.href = `bill.html?rId=${rId}&tickets=${ticketIds.join(", ")}&ticketNames=${chooseSeats.join(", ")}` 
 }

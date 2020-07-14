@@ -42,7 +42,8 @@
 </div>
 <script>
     var tickets = ${tickets}
-    console.log(tickets)
+    var rId = ${rId}
+    console.log(rId)
 </script>
 <script src="<c:url value="/resources/JS/booking.js"/>"></script>
 <%@include file="footer.jsp" %>

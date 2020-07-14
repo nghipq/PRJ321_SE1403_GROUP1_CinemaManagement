@@ -1,0 +1,43 @@
+.title {
+    font-size: 4rem;
+    font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+}
+
+.background{
+    background-color: rgba(247, 230, 230, 0.8);
+}
+
+.formality {
+    font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-size: 2rem;
+}
+
+div {
+    padding: 1%;
+}
+
+label {
+    display: inline-block;
+    font-family: "Helvetica Neue", Verdana, Arial, sans-serif;
+    font-weight: 600;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.attribute {
+    font-size: 25px;
+}
+
+.button{
+    font-size: 25px;
+}
+
+
+body{
+    background: url("../image/rapgiave-hinhrap-nvq-01_1557130993556.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+}
