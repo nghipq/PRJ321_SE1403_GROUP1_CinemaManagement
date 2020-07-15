@@ -19,13 +19,13 @@
             <div class="form-container sign-up-container">
                                 <spring:form method = "POST" commandName="tk" action="auth/register.html">
                                     <h1>Đăng Ký</h1>
-                                    <input type="text" placeholder="Tên" />
+                                    <input type="text" name="txtName" placeholder="Tên" />
                                     <input type="email" name="txtEmail" placeholder="Email" />
                                     <input type="password" name="txtPass" placeholder="Mật khẩu" />
                                     <input type="password" name="txtconfirmpass" placeholder="Nhập lại mật khẩu" />
-                                    <input type="date">
-                                    <input type="text" placeholder="Địa chỉ" />
-                                    <input type="text" placeholder="SĐT" />
+                                    <input type="date" name="txtDate"/>
+                                    <input type="text" name="txtAddress" placeholder="Địa chỉ" />
+                                    <input type="text" name="txtPhone" placeholder="SĐT" />
                                     <button>Đăng ký</button>
                                 </spring:form>
             </div>

@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import DAO.CustomerDAO;
 import java.sql.ResultSet;
 import javax.servlet.http.HttpSession;
 import models.User;
@@ -61,8 +62,10 @@ public class UserController {
     @RequestMapping(value = {"/register"}, method = RequestMethod.POST)
     public String RegisAction(@ModelAttribute(value = "tk") User user, ModelMap mm, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
         UserDAO udao = new UserDAO();
+        CustomerDAO cdao = new CustomerDAO();
         if(request.getParameter("txtconfirmpass").equals(request.getParameter("txtPass"))){
-            udao.InsertUser(user);
+            udao.InsertUser(request.getParameter("txtName"),request.getParameter("txtEmail"), request.getParameter("txtPass"),Date.valueOf(request.getParameter("txtDate")), request.getParameter("txtAddress"),request.getParameter("txtPhone"));
+            cdao.InsertCustomers();
             return "index";
         }
         else

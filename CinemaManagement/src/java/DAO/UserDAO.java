@@ -8,6 +8,7 @@ package DAO;
 import com.sun.org.apache.xerces.internal.impl.xs.SchemaGrammar;
 import database.DBConnection;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -29,19 +30,18 @@ public class UserDAO {
         this.conn = db.getDBConnection();
     }
 
-    public boolean InsertUser(User s) {
+    public boolean InsertUser(String Username, String Email, String Password, Date Birthday, String Address, String Phone) {
         try {
-            String sql = "insert into user(username, email, password, birthday, nId, gender, address, phone, permission) values (?,?,?,?,?,?,?,?,?)";
+            String sql = "insert into user(username, email, password, birthday, gender, address, phone, permission) values (?,?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
-            pst.setString(1, s.getUsername());
-            pst.setString(2, s.getEmail());
-            pst.setString(3, s.getPassword());
-            pst.setDate(4, s.getBirthday());
-            pst.setInt(5, s.getnId());
-            pst.setInt(6, s.getGender());
-            pst.setString(7, s.getAddress());
-            pst.setString(8, s.getPhone());
-            pst.setInt(9, s.getPremission());
+            pst.setString(1, Username);
+            pst.setString(2, Email);
+            pst.setString(3, Password);
+            pst.setDate(4, Birthday);
+            pst.setInt(5, 0);
+            pst.setString(6, Address);
+            pst.setString(7, Phone);
+            pst.setInt(8, 0);
             return pst.execute();
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
