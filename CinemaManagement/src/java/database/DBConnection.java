@@ -31,4 +31,8 @@ public class DBConnection {
     public Connection getDBConnection(){
         return this.conn;
     }
+    
+    public static void main(String[] args) {
+        System.out.println("" + (new DBConnection().getDBConnection() != null));
+    }
 }

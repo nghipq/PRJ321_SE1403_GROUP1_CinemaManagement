@@ -1,27 +1,9 @@
-table {
-    border-collapse: collapse;
-    /* width: 80%; */
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    text-align: center;
+body{
+    /* background: url("../image/background1.png") ; */
+    background: url("../image/cinema1.jpg");
 }
 
-table, th, td {
-    border: 1px solid goldenrod;
+.container{
+    position: relative;
+    left: 35%;
 }
-
-th {
-    height: 60px;
-    font-size: x-large;
-    background-color:  rgb(59, 59, 59);
-    color: goldenrod;
-}
-
-td {
-    font-size: 20px;
-}
-
-button {
-    background-color: rgb(59, 59, 59);
-    color: goldenrod;
-}
-
