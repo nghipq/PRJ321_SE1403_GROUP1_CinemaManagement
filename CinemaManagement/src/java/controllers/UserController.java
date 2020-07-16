@@ -50,7 +50,7 @@ public class UserController {
         if (check != null) {
             Cookie emailCookie = new Cookie("ID", String.valueOf(check.getuId()));
             emailCookie.setMaxAge(60 * 60 * 24 * 365);
-            Cookie nameCookie = new Cookie("Name", String.valueOf(check.getUsername()));
+            Cookie nameCookie = new Cookie("Name", check.getUsername());
             nameCookie.setMaxAge(60 * 60 * 24 * 365);
             emailCookie.setPath("/");
             nameCookie.setPath("/");

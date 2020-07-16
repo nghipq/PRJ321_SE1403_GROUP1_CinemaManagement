@@ -32,7 +32,7 @@ public class UserDAO {
 
     public boolean InsertUser(String Username, String Email, String Password, Date Birthday, String Address, String Phone) {
         try {
-            String sql = "insert into user(username, email, password, birthday, gender, address, phone, permission) values (?,?,MD5(?),?,?,?,?,?)";
+            String sql = "insert into user(username, email, password, birthday, gender, address, phone, permission) values (?,?,?,?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, Username);
             pst.setString(2, Email);
