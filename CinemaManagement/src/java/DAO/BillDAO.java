@@ -78,7 +78,7 @@ public class BillDAO {
      * @throws SQLException
      */
     public boolean createBill(int cusId, long total, String phone, String name) throws SQLException {
-        String sql = "INSERT INTO `bill`(`cusId`, `total`) values (?, ?, ?, ?)";
+        String sql = "INSERT INTO `bill`(`cusId`, `total`,`phone`, `name`) values (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, cusId);
         ps.setInt(2, (int) total);

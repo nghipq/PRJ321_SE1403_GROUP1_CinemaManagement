@@ -7,6 +7,7 @@
 <%@page import="DAO.FilmDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="header.jsp" %>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="spring" %>
 <link href="<c:url value="/resources/css/billform.css"/>" rel="stylesheet"/>
     <div class="bg-white container mt-5">
         <div class="container">
@@ -29,14 +30,19 @@
                         <label>Ban Age:</label>
                         <a>${film.getLimitAge()}+ - Phim cấm khán giả dưới ${film.getLimitAge()} tuổi</a>
                     </div>
-                          <form>
+                    <spring:form commandName="billModel" action="bill/createBill.html?tickets=${tickets}" method="POST">
                             <div class="form-group">
-                              <input type="text" class="form-control" id="Name" placeholder="Họ Tên">
+                              <input type="text" class="form-control" id="Name" placeholder="Họ Tên" name="txtName">
+                              
                             </div>
                             <div class="form-group">
-                              <input type="text" class="form-control" id="Phone" placeholder="Số Điện Thoại">
+                                <input type="text" class="form-control" id="Phone" placeholder="Số Điện Thoại" name="txtSDT">
                             </div>
-                          </form>
+                            <div class="form-group">
+                                <input type="submit" value="Đặt Vé"/>
+<!--                                <button type="button" class="btn btn-warning btn-lg" onclick="">Đặt Vé</button>-->
+                            </div>
+                    </spring:form>
                 </div>
             </div>
         </div>
@@ -71,10 +77,6 @@
                     </div>
                     <div class="formality">
                         <label></label>
-                    </div>
-                    <div class="formality">
-                        <label></label>
-                        <button type="button" class="btn btn-warning btn-lg" onclick="booking()">Đặt Vé</button>
                     </div>
                 </div>
             </div>
