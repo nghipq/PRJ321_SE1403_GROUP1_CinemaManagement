@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -32,27 +33,29 @@ import org.springframework.web.servlet.ModelAndView;
 public class UserController {
 
     @RequestMapping(value = {""}, method = RequestMethod.GET)
-    public String LoginAction(ModelMap mm) {//
+    public String LoginAction(String id, ModelMap mm) {//
         mm.put("tk", new User());
         return "auth";
     }
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
-    public ModelAndView LoginAction(@ModelAttribute(value = "tk") User user, ModelMap mm, HttpSession session, HttpServletResponse response) {
+    public String LoginAction(@ModelAttribute(value = "tk") User user, ModelMap mm, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
         String emails = user.getEmail();
         String pass = user.getPassword();
         UserDAO udao = new UserDAO();
         User check = udao.Login(emails, pass);
+        int id = user.getuId();
+        String name = user.getUsername();
         if (check != null) {
             Cookie emailCookie = new Cookie("ID", String.valueOf(check.getuId()));
             emailCookie.setMaxAge(60 * 60 * 24 * 365);
             response.addCookie(emailCookie);
-            ModelAndView m = new ModelAndView("redirect:/");
-            return m;
+//            session.setAttribute("ID", id);
+//            session.setAttribute("Name", name);
+            return "index";
         } else {
-            ModelAndView m = new ModelAndView("redirect:/auth.html");
-            m.getModelMap().put("message", "Không hợp lệ");
-            return m;
+            mm.put("message", "Không hợp lệ");
+            return "auth";
         }
     }
 
