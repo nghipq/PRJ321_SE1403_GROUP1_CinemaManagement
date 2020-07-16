@@ -21,6 +21,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -37,7 +38,7 @@ public class UserController {
     }
 
     @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
-    public String LoginAction(@ModelAttribute(value = "tk") User user, ModelMap mm, HttpSession session, HttpServletResponse response) {
+    public ModelAndView LoginAction(@ModelAttribute(value = "tk") User user, ModelMap mm, HttpSession session, HttpServletResponse response) {
         String emails = user.getEmail();
         String pass = user.getPassword();
         UserDAO udao = new UserDAO();
@@ -46,10 +47,12 @@ public class UserController {
             Cookie emailCookie = new Cookie("ID", String.valueOf(check.getuId()));
             emailCookie.setMaxAge(60 * 60 * 24 * 365);
             response.addCookie(emailCookie);
-            return "index";
+            ModelAndView m = new ModelAndView("redirect:/");
+            return m;
         } else {
-            mm.put("message", "Không hợp lệ!");
-            return "auth";
+            ModelAndView m = new ModelAndView("redirect:/auth.html");
+            m.getModelMap().put("message", "Không hợp lệ");
+            return m;
         }
     }
 
@@ -58,19 +61,15 @@ public class UserController {
 //        mm.put("dktk", new User());
 //        return "auth";
 //    }
-
     @RequestMapping(value = {"/register"}, method = RequestMethod.POST)
     public String RegisAction(@ModelAttribute(value = "tk") User user, ModelMap mm, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
         UserDAO udao = new UserDAO();
         CustomerDAO cdao = new CustomerDAO();
-        if(request.getParameter("txtconfirmpass").equals(request.getParameter("txtPass"))){
-            udao.InsertUser(request.getParameter("txtName"),request.getParameter("txtEmail"), request.getParameter("txtPass"),Date.valueOf(request.getParameter("txtDate")), request.getParameter("txtAddress"),request.getParameter("txtPhone"));
+        if (request.getParameter("txtconfirmpass").equals(request.getParameter("txtPass"))) {
+            udao.InsertUser(request.getParameter("txtName"), request.getParameter("txtEmail"), request.getParameter("txtPass"), Date.valueOf(request.getParameter("txtDate")), request.getParameter("txtAddress"), request.getParameter("txtPhone"));
             cdao.InsertCustomers();
-            return "index";
         }
-        else
-            return "auth";
-        
-        
+        return "auth";
+
     }
 }

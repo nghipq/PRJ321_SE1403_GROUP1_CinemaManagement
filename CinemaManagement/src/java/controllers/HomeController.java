@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/")
 public class HomeController {
-
     @RequestMapping(value = {"index.html"}, method = RequestMethod.GET)
     public String homeAction(ModelMap mm) throws SQLException {
         FilmDAO fd = new FilmDAO();
