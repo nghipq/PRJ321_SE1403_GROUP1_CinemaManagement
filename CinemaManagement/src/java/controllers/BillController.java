@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import DAO.*;
 import models.*;
 import java.sql.SQLException;
+import javax.servlet.http.HttpServletRequest;
+import org.springframework.http.HttpRequest;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  *
@@ -40,13 +43,27 @@ public class BillController {
         
         mm.put("session", session);
         mm.put("rId", rId);
+        mm.put("tickets", tickets);
         mm.put("ticketNames", ticketNames);
         mm.put("formality", formality);
         mm.put("film", films);
         mm.put("schedule", schedule);
         mm.put("total", totalPrice);
+        mm.put("billModel", new Bill());
         
         return "billForm";
+    }
+    
+    @RequestMapping(value = {"/createBill"}, method = RequestMethod.POST)
+    public String billAction(@ModelAttribute(value = "billModel") Bill bill, @RequestParam String tickets, ModelMap mm, HttpServletRequest request) {
+        String[] ticketList = tickets.split(", ");
+        String name = request.getParameter("txtName");
+        String phone = request.getParameter("txtSDT");
+        
+        mm.put("name", name);
+        mm.put("phone", phone);
+        
+        return "bill";
     }
     
     @RequestMapping(value = {"/billlist"}, method = RequestMethod.GET)
