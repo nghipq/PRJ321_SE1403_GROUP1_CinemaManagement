@@ -45,26 +45,25 @@
                     <%
 
                         Cookie[] cookies = null;
-
                         // Get an array of Cookies associated with the this domain
                         cookies = request.getCookies();
 
                         if (cookies.length > 1) {
 
                             for (Cookie cookie : cookies) {
-                                if (cookie.getName().equals("name")) {
+                                if (cookie.getName().equals("Name")) {
                                     out.print("<li class='nav-item'>");
                                     out.print("<a class='nav-link' href='#'>" + cookie.getValue() + "</a>");
                                     out.print("</li>");
                                     out.print("<li class='nav-item'>");
                                     out.print("<a class='nav-link' href='/cinemaManagement/auth.html'>Đăng Xuất</a>");
-                                    out.print("</li>s");
+                                    out.print("</li>");
                                 }
                             }
                         } else {
                             out.print("<li class='nav-item'>");
                             out.print("<a class='nav-link' href='/cinemaManagement/auth.html'>Đăng Nhập</a>");
-                            out.print("</li>s");
+                            out.print("</li>");
                         }
                     %>
                 </ul>

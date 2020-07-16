@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import models.User;
 import DAO.UserDAO;
 import java.sql.Date;
+import javax.servlet.ServletContext;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,10 +50,16 @@ public class UserController {
         if (check != null) {
             Cookie emailCookie = new Cookie("ID", String.valueOf(check.getuId()));
             emailCookie.setMaxAge(60 * 60 * 24 * 365);
+            Cookie nameCookie = new Cookie("Name", String.valueOf(check.getUsername()));
+            nameCookie.setMaxAge(60 * 60 * 24 * 365);
+            emailCookie.setPath("/");
+            nameCookie.setPath("/");
             response.addCookie(emailCookie);
-//            session.setAttribute("ID", id);
-//            session.setAttribute("Name", name);
-            return "index";
+            response.addCookie(nameCookie);
+//            request.getSession().setAttribute("ID", id);
+//            request.getSession().setAttribute("Name", name);
+            
+            return "redirect:/";
         } else {
             mm.put("message", "Không hợp lệ");
             return "auth";
