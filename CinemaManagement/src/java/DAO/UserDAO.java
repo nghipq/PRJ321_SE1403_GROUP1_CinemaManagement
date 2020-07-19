@@ -8,6 +8,7 @@ package DAO;
 import com.sun.org.apache.xerces.internal.impl.xs.SchemaGrammar;
 import database.DBConnection;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,56 +22,62 @@ import models.User;
  * @author Admin
  */
 public class UserDAO {
-  public Connection conn; 
+
+    public Connection conn;
 
     public UserDAO() {
         DBConnection db = new DBConnection();
         this.conn = db.getDBConnection();
     }
-    public boolean InsertUser(User s){
-      try {
-          String sql = "insert into user(username, email, password, birthday, nId, gender, address, phone, permission) values (?,?,?,?,?,?,?,?,?)";
-          PreparedStatement pst = conn.prepareStatement(sql);
-          pst.setString(1, s.getUsername());
-          pst.setString(2, s.getUsername());
-          pst.setString(3, s.getPassword());
-          pst.setDate(4, s.getBirthday());
-          pst.setInt(5, s.getnId());
-          pst.setInt(6, s.getGender());
-          pst.setString(7, s.getAddress());
-          pst.setString(8, s.getPhone());
-          pst.setInt(9, s.getPremission());
-          return pst.execute();
-      } catch (SQLException ex) {
-          Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
-      return false;
+
+    public boolean InsertUser(String Username, String Email, String Password, Date Birthday, String Address, String Phone) {
+        try {
+            String sql = "insert into user(username, email, password, birthday, gender, address, phone, permission) values (?,?,?,?,?,?,?,?)";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, Username);
+            pst.setString(2, Email);
+            pst.setString(3, Password);
+            pst.setDate(4, Birthday);
+            pst.setInt(5, 0);
+            pst.setString(6, Address);
+            pst.setString(7, Phone);
+            pst.setInt(8, 0);
+            return pst.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
-    public boolean Login(String emails, String pass){
-      try {
-          String sql = "Select * from user where email = ?";
-          PreparedStatement pst = conn.prepareStatement(sql);
-          ResultSet rs = pst.executeQuery();
-          if(rs.next()){
-              return pass.equals(rs.getString("password"));
-          }
-          
-      } catch (SQLException ex) {
-          Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
-      return false;
+
+    public User Login(String emails, String pass) {
+        try {
+            String sql = "Select * from user where email = ? and password = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, emails);
+            pst.setString(2, pass);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return new User(rs.getInt("uId"), rs.getString("username"), rs.getString("password"), rs.getInt("nId"), rs.getInt("gender"), rs.getDate("birthday"), rs.getString("email"), rs.getString("address"), rs.getString("Phone"), rs.getDate("regisDate"), rs.getInt("permission"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+
     }
-    public int getMaxUser(){
-      try {
-          String sql = "select max(uId) from user";
-          PreparedStatement pst = conn.prepareStatement(sql);
-          ResultSet rs = pst.executeQuery();
-          if(rs.next()){
-              return rs.getInt("uId");
-          }
-      } catch (SQLException ex) {
-          Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
-      }
-      return 0;
+
+    public int getMaxUser() {
+        try {
+            String sql = "select max(uId) from user";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("uId");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 }

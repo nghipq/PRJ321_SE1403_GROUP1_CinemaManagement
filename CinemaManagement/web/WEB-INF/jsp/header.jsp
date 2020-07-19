@@ -42,9 +42,30 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Liên Hệ</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/cinemaManagement/auth.html">Đăng Nhập</a>
-                    </li>
+                    <%
+
+                        Cookie[] cookies = null;
+                        // Get an array of Cookies associated with the this domain
+                        cookies = request.getCookies();
+
+                        if (cookies.length > 1) {
+
+                            for (Cookie cookie : cookies) {
+                                if (cookie.getName().equals("Name")) {
+                                    out.print("<li class='nav-item'>");
+                                    out.print("<a class='nav-link' href='#'>" + cookie.getValue() + "</a>");
+                                    out.print("</li>");
+                                    out.print("<li class='nav-item'>");
+                                    out.print("<a class='nav-link' href='/cinemaManagement/auth.html'>Đăng Xuất</a>");
+                                    out.print("</li>");
+                                }
+                            }
+                        } else {
+                            out.print("<li class='nav-item'>");
+                            out.print("<a class='nav-link' href='/cinemaManagement/auth.html'>Đăng Nhập</a>");
+                            out.print("</li>");
+                        }
+                    %>
                 </ul>
             </div>
         </div>

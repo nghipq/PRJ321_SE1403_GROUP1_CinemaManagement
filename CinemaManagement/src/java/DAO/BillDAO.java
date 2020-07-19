@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import database.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,8 +22,9 @@ public class BillDAO {
 
     public Connection conn;
 
-    public BillDAO(Connection conn) {
-        this.conn = conn;
+    public BillDAO() {
+        DBConnection db = new DBConnection();
+        this.conn = db.getDBConnection();
     }
 
     /**
@@ -78,12 +80,12 @@ public class BillDAO {
      * @throws SQLException
      */
     public boolean createBill(int cusId, long total, String phone, String name) throws SQLException {
-        String sql = "INSERT INTO `bill`(`cusId`, `total`) values (?, ?, ?, ?)";
+        String sql = "INSERT INTO `bill`(`cusId`, `total`,`name`, `phone`) values (?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, cusId);
         ps.setInt(2, (int) total);
-        ps.setString(3, phone);
-        ps.setString(4, name);
+        ps.setString(3, name);
+        ps.setString(4, phone);
 
         try {
             int insert = ps.executeUpdate();

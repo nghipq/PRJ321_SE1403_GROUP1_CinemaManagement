@@ -13,6 +13,7 @@
         <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
     </ol>
     <div class="carousel-inner" style="height: 40rem;">
+        <>
         <div class="carousel-item active w-100 h-100">
             <img class="d-block w-100" src="<c:url value="/resources/image/cinema.jpg"/>" alt="First slide">
             <div class="carousel-caption">
@@ -54,6 +55,7 @@
             <h3 style="color: #505050;" class="p-3">PHIM MỚI</h3>
         </div>
         <div class="owl-carousel px-5 owl-theme bg-white">
+
             <c:forEach var="film" items="${films}">
                 <div class="item" style="width: 10rem; height: 15rem;">
                     <c:set var="fId" value="${film.getfId()}"/>

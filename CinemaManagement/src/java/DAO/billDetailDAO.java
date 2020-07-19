@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import database.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -17,8 +18,9 @@ public class billDetailDAO {
 
     private Connection conn;
 
-    public billDetailDAO(Connection conn) {
-        this.conn = conn;
+    public billDetailDAO() {
+        DBConnection db = new DBConnection();
+        this.conn = db.getDBConnection();
     }
 
     /**

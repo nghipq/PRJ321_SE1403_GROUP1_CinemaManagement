@@ -1,14 +1,10 @@
-body{
-    /* background: url("../image/background1.png") ; */
-    /* background: url("../image/cinema1.jpg"); */
-}
-
 #navbarNav{
-    font-size: 130%;
-    
-    
+    font-size: 130%;   
 }
 
+body{
+    background: url("../image/background1.png") ;
+}
 
 .container{
     position: relative;
@@ -16,8 +12,7 @@ body{
     /* right: 40%; */
 }
 
-
-
 .nav-item:hover{
     background-color: rgba(100, 100, 100, 0.3);
 }
+
