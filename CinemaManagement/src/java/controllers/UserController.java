@@ -45,8 +45,8 @@ public class UserController {
         String pass = user.getPassword();
         UserDAO udao = new UserDAO();
         User check = udao.Login(emails, pass);
-        int id = user.getuId();
-        String name = user.getUsername();
+//        int id = user.getuId();
+//        String name = user.getUsername();
         if (check != null) {
             Cookie emailCookie = new Cookie("ID", String.valueOf(check.getuId()));
             emailCookie.setMaxAge(60 * 60 * 24 * 365);
@@ -78,6 +78,7 @@ public class UserController {
         if (request.getParameter("txtconfirmpass").equals(request.getParameter("txtPass"))) {
             udao.InsertUser(request.getParameter("txtName"), request.getParameter("txtEmail"), request.getParameter("txtPass"), Date.valueOf(request.getParameter("txtDate")), request.getParameter("txtAddress"), request.getParameter("txtPhone"));
             cdao.InsertCustomers();
+            
         }
         return "auth";
 
