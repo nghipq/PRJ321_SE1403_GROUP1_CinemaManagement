@@ -39,6 +39,9 @@
                                 <input type="text" class="form-control" id="Phone" placeholder="Số Điện Thoại" name="txtSDT">
                             </div>
                             <div class="form-group">
+                                <input type="hidden" class="form-control" id="totals"  name="txtTotal" value="${total}">
+                            </div>
+                            <div class="form-group">
                                 <input type="submit" value="Đặt Vé"/>
 <!--                                <button type="button" class="btn btn-warning btn-lg" onclick="">Đặt Vé</button>-->
                             </div>

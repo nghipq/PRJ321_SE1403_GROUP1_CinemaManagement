@@ -6,3 +6,4 @@
 
 <h1>${name}</h1>
 <h1>${phone}</h1>
+<h1>${total}</h1>

@@ -161,18 +161,26 @@ public class TicketDAO {
         ps.setInt(1, scheId);
         ps.setInt(2, seatId);
         ps.setInt(3, status);
-        
 
+        int rs = ps.executeUpdate();
+        return rs>0?true:false;
+    }
+    
+    public boolean  updateStatus(int tid, int status){
         try {
-            int insert = ps.executeUpdate();
-            if (insert == 1) {
-                return false;
-            } else {
-                return true;
-            }
-        } catch (Exception e) {
-        };
-
+            String sql = "UPDATE ticket SET status = ? WHERE tId=?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, status);
+            ps.setInt(2, tid);
+            int rs = ps.executeUpdate();
+            
+            return rs>0?true:false;
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return false;
+        
     }
 }
