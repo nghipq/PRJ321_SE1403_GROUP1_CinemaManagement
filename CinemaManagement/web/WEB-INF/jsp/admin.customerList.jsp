@@ -1,15 +1,16 @@
+<%-- 
+    Document   : admin.customerList
+    Created on : Jul 20, 2020, 1:28:32 PM
+    Author     : Admin
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="header.jsp" %>
 <!DOCTYPE html>
-<html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" href="CSS/customerList.css">
-    <title>Customer List</title>
-</head>
-
+<link href="<c:url value="/resources/css/admin.filmList.css"/>" rel="stylesheet"/>
 <body class="d-flex flex-row">
     <nav class="navbar navbar-expand-lg navbar-light bg-dark flex-column p-0" style="width: 20vw; height: 100vh;">
         <img src="image/Capture.PNG (2).png" alt="image-film" style="width: 60%">
@@ -77,54 +78,10 @@
                 <strong>Status</strong>
             </div>
         </div>
-
-
-        <div class="d-flex flex-row justify-content-between align-items-center p-3 w-100 border border-dark rounded-sm m-2  bg-white text-dark">
-            <div>
-                <strong>Name</strong>
-            </div>
-            <div>
-                <strong>Email</strong>
-            </div>
-            <div>
-                <strong>Phone</strong>
-            </div>
-            <div>
-                <strong>Gender</strong>
-            </div>
-            <div>
-                <strong>Level</strong>
-            </div>
-            <div>
-                <strong>Status</strong>
-            </div>
-        </div>
-        <div
-            class="d-flex flex-row justify-content-between align-items-center p-3 w-100 border border-dark rounded-sm m-2  bg-white text-dark">
-            <div>
-                <strong>Name</strong>
-            </div>
-            <div>
-                <strong>Email</strong>
-            </div>
-            <div>
-                <strong>Phone</strong>
-            </div>
-            <div>
-                <strong>Gender</strong>
-            </div>
-            <div>
-                <strong>Level</strong>
-            </div>
-            <div>
-                <strong>Status</strong>
-            </div>
-        </div>
         <div class="container">
             <button type="button" class="btn btn-warning btn-lg"><strong>Change Page</strong></button>
         </div>
         
     </div>
 </body>
-
-</html>
+<%@include file="footer.jsp" %>
