@@ -45,8 +45,8 @@ public class UserController {
         String pass = user.getPassword();
         UserDAO udao = new UserDAO();
         User check = udao.Login(emails, pass);
-        int id = user.getuId();
-        String name = user.getUsername();
+//        int id = user.getuId();
+//        String name = user.getUsername();
         if (check != null) {
             Cookie emailCookie = new Cookie("ID", String.valueOf(check.getuId()));
             emailCookie.setMaxAge(60 * 60 * 24 * 365);
