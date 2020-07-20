@@ -69,10 +69,10 @@ public class UserDAO {
 
     public int getMaxUser() {
         try {
-            String sql = "select max(uId) from user";
+            String sql = "select max(uId) as uId from user";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 return rs.getInt("uId");
             }
         } catch (SQLException ex) {

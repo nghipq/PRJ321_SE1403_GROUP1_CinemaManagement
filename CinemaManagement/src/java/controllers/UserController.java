@@ -78,6 +78,7 @@ public class UserController {
         if (request.getParameter("txtconfirmpass").equals(request.getParameter("txtPass"))) {
             udao.InsertUser(request.getParameter("txtName"), request.getParameter("txtEmail"), request.getParameter("txtPass"), Date.valueOf(request.getParameter("txtDate")), request.getParameter("txtAddress"), request.getParameter("txtPhone"));
             cdao.InsertCustomers();
+            
         }
         return "auth";
 
