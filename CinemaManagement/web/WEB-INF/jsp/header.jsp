@@ -37,7 +37,7 @@
                         <a class="nav-link" href="/cinemaManagement/films.html">Phim</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Danh Sách Hóa Đơn</a>
+                        <a class="nav-link" href="/cinemaManagement/bill/billList.html">Danh Sách Hóa Đơn</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Liên Hệ</a>

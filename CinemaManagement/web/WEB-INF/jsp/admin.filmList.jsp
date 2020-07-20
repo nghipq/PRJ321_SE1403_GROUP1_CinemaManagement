@@ -91,7 +91,7 @@
                     <td class="d-flex flex-row justify-content-start align-items-start"  style="width: 3vw">
                         <strong>${row.getfId()}</strong>
                     </td>
-                    <td class="d-flex flex-row justify-content-between align-items-start"  style="width: 15vw"s>
+                    <td class="d-flex flex-row justify-content-between align-items-start"  style="width: 15vw">
                         <strong>${row.getfName()}</strong>
                     <td>
                     <td class="d-flex flex-row justify-content-between align-items-start w-5" style="width: 8vw">
