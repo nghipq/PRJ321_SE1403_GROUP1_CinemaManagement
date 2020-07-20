@@ -4,6 +4,47 @@
     Author     : GF63 8RD
 --%>
 
-<h1>${name}</h1>
-<h1>${phone}</h1>
-<h1>${total}</h1>
+
+<%@page import="DAO.FilmDAO"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@include file="header.jsp" %>
+<link href="<c:url value="/resources/css/billform.css"/>" rel="stylesheet"/>
+    <div class="bg-white container mt-5">
+        <div class="container">
+             <div class="row">
+        <div class="col-md-4 col-12">
+            <c:set var="fId" value="${film.getfId()}" />
+            <%
+                FilmDAO fd = new FilmDAO();
+                String imgPath = "/resources/image/" + fd.getFilmPoster(Integer.parseInt(pageContext.getAttribute("fId").toString()));
+                pageContext.setAttribute("imgPath", imgPath);
+            %>
+            <img class="w-100" src="<c:url value="${imgPath}"/>" alt="poster"/>
+        </div>
+                <div class="col-md-8 col-12">
+                    <div class="title">${film.getfName()}</div>
+                    <div class="formality">
+                        <label>Loại: ${formality.getFmName()}</label>
+                    </div>
+                    <div class="formality">
+                        <label>Mã hóa đơn: ${bid}</label>
+                    </div>
+                    <div class="formality">
+                        <label>Tên người đặt:</label>
+                        <a>${name}</a>
+                    </div>
+                    <div class="formality">
+                        <label>Số điện thoại:</label>
+                        <a>${phone}</a>
+                    </div>
+                    <div class="formality">
+                        <label>Tổng giá:</label>
+                        <a>${total}</a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<%@include file="footer.jsp" %>
