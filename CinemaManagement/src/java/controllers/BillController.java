@@ -113,4 +113,10 @@ public class BillController {
     public String BillListAction() {
         return "billList";
     }
+    
+    @RequestMapping("/billDetail")
+    public String BillDetailAction(@RequestParam String bId) {
+        
+        return "bill";
+    }
 }
