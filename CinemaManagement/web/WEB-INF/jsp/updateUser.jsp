@@ -24,7 +24,11 @@
                 <input class="p-2" type="text" placeholder="Nationality" style="width: 25vw; height: 5vh">
             </div>
             <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
-                <input class="p-2" type="text" placeholder="Gender" style="width: 25vw; height: 5vh">
+                <p>Gender</p>
+                <input type="radio" id="male" name="gender" value="1">
+                <label for="male">Male</label><br>
+                <input type="radio" id="female" name="gender" value="0">
+                <label for="female">Female</label><br>
             </div>
             <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
                 <input class="p-2" type="text" placeholder="Address" style="width: 25vw; height: 5vh">
