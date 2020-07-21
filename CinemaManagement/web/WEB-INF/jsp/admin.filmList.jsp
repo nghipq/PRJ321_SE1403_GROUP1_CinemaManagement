@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.FilmDAO"%>
 <%@include file="admin.header.jsp" %>
-<link href="<c:url value="/resources/css/admin.filmList.css"/>" rel="stylesheet"/>
+<!--<link href="<c:url value="/resources/css/admin.filmList.css"/>" rel="stylesheet"/>-->
 <!DOCTYPE html>
 <div class="d-flex flex-row">
     <%@include file="dashboard.jsp" %>
@@ -74,6 +74,5 @@
             </div>
         </div>
     </div>
-
 </div>
 <%@include file="admin.footer.jsp" %>

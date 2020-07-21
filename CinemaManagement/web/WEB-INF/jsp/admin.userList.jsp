@@ -11,7 +11,7 @@
 
 <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
       integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">-->
-<link href="<c:url value="/resources/css/admin.filmList.css"/>" rel="stylesheet"/>
+<!--<link href="<c:url value="/resources/css/admin.filmList.css"/>" rel="stylesheet"/>-->
 <div class="d-flex flex-row">
     <%@include file="dashboard.jsp" %>
     <div class="d-flex flex-column justify-content-start align-items-center p-5" style="width: 80vw;">
