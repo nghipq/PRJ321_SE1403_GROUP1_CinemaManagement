@@ -12,6 +12,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Customer;
@@ -80,7 +81,7 @@ public class UserDAO {
         }
         return 0;
     }
-    
+
     public ResultSet getAll() {
         String sql = "SELECT * FROM `user`";
         ResultSet rs = null;
@@ -93,25 +94,24 @@ public class UserDAO {
 
         return rs;
     }
-    
-    public ResultSet getUserByPermission(int per){
+
+    public ResultSet getUserByPermission(int per) {
         try {
             String sql = "SELECT * FROM `user` WHERE `permission` = ?";
             PreparedStatement pst = conn.prepareStatement(sql);
-            
+
             pst.setInt(1, per);
             ResultSet rs = pst.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 return rs;
             }
-            
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    
+
     public User getUserById(int id) throws SQLException {
         String sql = "SELECT * FROM `user` WHERE `uId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -124,11 +124,31 @@ public class UserDAO {
             if (rs.next()) {
                 //films = new Films();
                 user = new User(rs.getInt("uId"), rs.getString("username"), rs.getString("password"), rs.getInt("nId"), rs.getInt("gender"), rs.getDate("birthday"), rs.getString("email"), rs.getString("address"),
-                    rs.getString("phone"), rs.getDate("regisDate"), rs.getInt("permission"));
+                        rs.getString("phone"), rs.getDate("regisDate"), rs.getInt("permission"));
             }
         } catch (Exception e) {
         }
 
         return user;
+    }
+
+    public int UpdateUser(String uId,String username, String email, String Birthday, String gender, String address, String phone, String RegisDate, String Permission) {
+        try {
+            String sql = "UPDATE `user` SET `username`=?,`email`=?,`birthday`=?,`gender`=?,`address`=?,`phone`=?,`regisDate`=?, `permission`=? WHERE uId=?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            pst.setString(1, username);
+            pst.setString(2,email);
+            pst.setDate(3, Date.valueOf(Birthday));
+            pst.setInt(4, Integer.parseInt(gender));
+            pst.setString(5, address);
+            pst.setString(6, phone);
+            pst.setDate(7, Date.valueOf(RegisDate));
+            pst.setInt(8, Integer.parseInt(Permission));
+            pst.setInt(9, Integer.parseInt(uId));
+            return pst.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
     }
 }
