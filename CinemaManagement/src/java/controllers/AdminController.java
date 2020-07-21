@@ -11,11 +11,15 @@ import DAO.PersonDAO;
 import DAO.ScheduleDAO;
 import DAO.TicketDAO;
 import DAO.UserDAO;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import models.Customer;
 import models.Films;
 import models.User;
@@ -88,16 +92,43 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"/updateUser"}, method = RequestMethod.GET)
-    public String userUpdateAction(ModelMap mm, @RequestParam String id) {
+    public String userUpdateAction(ModelMap mm, @RequestParam String id, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
         try {
             UserDAO ud = new UserDAO();
             User user = ud.getUserById(Integer.parseInt(id));
             mm.put("user", user);
+//            UserDAO udao = new UserDAO();
+//            String Uname = request.getParameter("UName");
+//            String Uemail = request.getParameter("UEmail");
+//            String Ubirthday = request.getParameter("UBirthday");
+//            String Ugender = request.getParameter("Ugender");
+//            String Uaddress = request.getParameter("UAddress");
+//            String Uphone = request.getParameter("UPhone");
+//            String Uregis = request.getParameter("URegis");
+//            String Upermission = request.getParameter("UPermission");
+//        udao.UpdateUser(Uname, Uemail, Ubirthday, Ugender, Uaddress, Uphone, Uregis,Upermission);
+            return "updateUser";
 
         } catch (SQLException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
         return "updateUser";
+    }
+
+    @RequestMapping(value = {"/updateUser"}, method = RequestMethod.POST)
+    public String userUpdateActionAction(ModelMap mm, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+        UserDAO udao = new UserDAO();
+        String uId = request.getParameter("uId");
+        String Uname = request.getParameter("UName");
+        String Uemail = request.getParameter("UEmail");
+        String Ubirthday = request.getParameter("UBirthday");
+        String Ugender = request.getParameter("Ugender");
+        String Uaddress = request.getParameter("UAddress");
+        String Uphone = request.getParameter("UPhone");
+        String Uregis = request.getParameter("URegis");
+        String Upermission = request.getParameter("UPermission");
+        udao.UpdateUser(uId, Uname, Uemail, Ubirthday, Ugender, Uaddress, Uphone, Uregis, Upermission);
+        return "redirect:/admins/userList.html";
     }
 
 }
