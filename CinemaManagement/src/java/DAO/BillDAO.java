@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.*;
@@ -70,7 +71,19 @@ public class BillDAO {
 
         return bill;
     }
+    
+    public ResultSet getIdBillByCustomer(int cusId) throws SQLException{
+        String sql = "SELECT  * FROM `bill` WHERE `cusId` = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, cusId);
+        ResultSet rs = ps.executeQuery();
+        
 
+        return rs;
+        
+
+    }
+    
     /**
      * Create new bill
      *

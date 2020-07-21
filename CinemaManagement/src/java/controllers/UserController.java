@@ -10,8 +10,12 @@ import java.sql.ResultSet;
 import javax.servlet.http.HttpSession;
 import models.User;
 import DAO.UserDAO;
+import java.io.IOException;
 import java.sql.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,8 +49,8 @@ public class UserController {
         String pass = user.getPassword();
         UserDAO udao = new UserDAO();
         User check = udao.Login(emails, pass);
-        int id = user.getuId();
-        String name = user.getUsername();
+//        int id = user.getuId();
+//        String name = user.getUsername();
         if (check != null) {
             Cookie emailCookie = new Cookie("ID", String.valueOf(check.getuId()));
             emailCookie.setMaxAge(60 * 60 * 24 * 365);
@@ -58,7 +62,7 @@ public class UserController {
             response.addCookie(nameCookie);
 //            request.getSession().setAttribute("ID", id);
 //            request.getSession().setAttribute("Name", name);
-            
+
             return "redirect:/";
         } else {
             mm.put("message", "Không hợp lệ");
@@ -78,8 +82,30 @@ public class UserController {
         if (request.getParameter("txtconfirmpass").equals(request.getParameter("txtPass"))) {
             udao.InsertUser(request.getParameter("txtName"), request.getParameter("txtEmail"), request.getParameter("txtPass"), Date.valueOf(request.getParameter("txtDate")), request.getParameter("txtAddress"), request.getParameter("txtPhone"));
             cdao.InsertCustomers();
+
         }
         return "auth";
 
+    }
+
+    @RequestMapping(value = {"/logout"}, method = RequestMethod.GET)
+    public String LogoutAction(@ModelAttribute(value = "tk") User user, ModelMap mm, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+
+        Cookie[] list = request.getCookies();
+
+        for (Cookie items : list) {
+            if (items.getName().equals("Name")) {
+                items.setMaxAge(0);
+                items.setPath("/");
+                response.addCookie(items);
+            }
+            if (items.getName().equals("ID")) {
+                items.setMaxAge(0);
+                items.setPath("/");
+                response.addCookie(items);
+            }
+        }
+
+        return "redirect:/";
     }
 }

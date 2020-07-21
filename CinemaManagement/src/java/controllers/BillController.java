@@ -25,13 +25,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 @Controller
 @RequestMapping("/bill")
 public class BillController {
+
     @RequestMapping(value = {""}, method = RequestMethod.GET)
     public String beforeBillAction(@RequestParam String tickets, String ticketNames, String rId, ModelMap mm) throws SQLException {
         mm.put("tickets", tickets);
         String[] ticketList = tickets.split(", ");
         TicketDAO td = new TicketDAO();
-        int tId=Integer.parseInt(ticketList[0]);
-        long totalPrice = td.getTicketPriceById(tId)*ticketList.length;
+        int tId = Integer.parseInt(ticketList[0]);
+        long totalPrice = td.getTicketPriceById(tId) * ticketList.length;
         Ticket ticket = td.getTicketById(tId);
         ScheduleDAO sd = new ScheduleDAO();
         Scheldule schedule = sd.getScheduleById(ticket.getScheId());
@@ -41,7 +42,7 @@ public class BillController {
         Formality formality = fod.getFormalityById(schedule.getFmId());
         SessionDAO sed = new SessionDAO();
         Session session = sed.getSessionById(schedule.getSesId());
-        
+
         mm.put("session", session);
         mm.put("rId", rId);
         mm.put("tickets", tickets);
@@ -51,12 +52,13 @@ public class BillController {
         mm.put("schedule", schedule);
         mm.put("total", totalPrice);
         mm.put("billModel", new Bill());
-        
+
         return "billForm";
     }
-    
+
     @RequestMapping(value = {"/createBill"}, method = RequestMethod.POST)
-    public String billAction(@ModelAttribute(value = "billModel") Bill bill, @RequestParam String tickets, ModelMap mm, HttpServletRequest request) throws SQLException {
+    public String billAction(@ModelAttribute(value = "billModel") Bill bill, @RequestParam String tickets, String ticketNames, String rId, ModelMap mm, HttpServletRequest request) throws SQLException {
+        mm.put("tickets", tickets);
         String[] ticketList = tickets.split(", ");
         String name = request.getParameter("txtName");
         String phone = request.getParameter("txtSDT");
@@ -75,24 +77,38 @@ public class BillController {
                     ID = Integer.parseInt(cookie.getValue());
                     check = bd.createBill(ID, total, phone, name);
                     int bid = bd.maxBill();
-                    for(String ticket: ticketList){
+                    for (String ticket : ticketList) {
                         bdd.createBillDetail(Integer.parseInt(ticket), bid);
                         td.updateStatus(Integer.parseInt(ticket), 1);
                     }
-                    
+
                     break;
                 }
             }
         }
+        
+        int tId = Integer.parseInt(ticketList[0]);
+        long totalPrice = td.getTicketPriceById(tId) * ticketList.length;
+        Ticket ticket = td.getTicketById(tId);
+        ScheduleDAO sd = new ScheduleDAO();
+        Scheldule schedule = sd.getScheduleById(ticket.getScheId());
+        FilmDAO fd = new FilmDAO();
+        Films films = fd.getFilmsById(schedule.getfId());
+        FormalityDAO fod = new FormalityDAO();
+        Formality formality = fod.getFormalityById(schedule.getFmId());
+        int b = bd.maxBill();
 
-       
+        mm.put("formality", formality);
+        mm.put("film", films);
+
+        mm.put("bid", b);
         mm.put("name", name);
         mm.put("phone", phone);
         mm.put("total", total);
-        
+
         return "bill";
     }
-    
+
     @RequestMapping(value = {"/billlist"}, method = RequestMethod.GET)
     public String BillListAction() {
         return "billList";

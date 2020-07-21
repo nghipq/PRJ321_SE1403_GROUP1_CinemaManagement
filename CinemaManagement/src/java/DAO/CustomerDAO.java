@@ -39,7 +39,7 @@ public class CustomerDAO {
             pst.setInt(1, id);
 //            pst.setInt(2, 0);
 //            pst.setInt(3, 0);
-            pst.setTime(4, Time.valueOf("00:00:00"));
+//            pst.setTime(4, Time.valueOf("00:00:00"));
 
             int rs = pst.executeUpdate();
             return rs > 0 ? true : false;
