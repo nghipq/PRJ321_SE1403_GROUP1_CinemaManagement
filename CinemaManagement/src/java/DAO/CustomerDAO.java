@@ -9,6 +9,7 @@ import database.DBConnection;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.logging.Level;
@@ -48,5 +49,17 @@ public class CustomerDAO {
         }
         return false;
     }
+    
+    public ResultSet getAll() {
+        String sql = "SELECT * FROM `customers`";
+        ResultSet rs = null;
 
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+        }
+
+        return rs;
+    }
 }

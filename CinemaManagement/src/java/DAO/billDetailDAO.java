@@ -8,7 +8,11 @@ package DAO;
 import database.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import models.BillDetail;
+import models.Categories;
 
 /**
  *
@@ -66,5 +70,24 @@ public class billDetailDAO {
 
         int rs = ps.executeUpdate();
         return rs > 0 ? true : false;
+    }
+    
+    public ArrayList<BillDetail> getBillDetailByBillId(int bId) throws SQLException{
+        ArrayList<BillDetail> billDetail = new ArrayList<BillDetail>();
+
+        String sql = "SELECT * FROM `billdetail` WHERE `bId` = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, bId);
+
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                billDetail.add(new BillDetail(rs.getInt("tId"), bId));
+            }
+        } catch (Exception e) {
+        };
+
+        return billDetail;
     }
 }

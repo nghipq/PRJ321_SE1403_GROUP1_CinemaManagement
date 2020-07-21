@@ -80,4 +80,17 @@ public class UserDAO {
         }
         return 0;
     }
+    
+    public ResultSet getAll() {
+        String sql = "SELECT * FROM `user`";
+        ResultSet rs = null;
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+        }
+
+        return rs;
+    }
 }

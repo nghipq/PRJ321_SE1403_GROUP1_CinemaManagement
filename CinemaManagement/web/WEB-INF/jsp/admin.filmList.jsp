@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <div class="d-flex flex-row">
     <nav class="navbar navbar-expand-lg navbar-light bg-dark flex-column p-0" style="width: 20vw; height: 100vh;">
-        <img src="image/Capture.PNG (2).png" alt="image-film" style="width: 60%">
+        <img src="<c:url value="/resources/image/Capture.PNG (2).png"/>"style="width: 60%">
         <a class="navbar-brand text-white" href="#">Admin name</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
