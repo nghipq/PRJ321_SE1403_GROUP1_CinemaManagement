@@ -22,7 +22,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
         <div class="container-fluid">
-            <a class="navbar-branch" href="#" onclick="window.location.reload();">
+            <a class="navbar-branch" href="/cinemaManagement/" onclick="window.location.reload();">
                 <img src="<c:url value="/resources/image/Capture.PNG (2).png"/>" height="100">
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -37,7 +37,7 @@
                         <a class="nav-link" href="/cinemaManagement/films.html">Phim</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Lịch Chiếu</a>
+                        <a class="nav-link" href="/cinemaManagement/bill/billList.html">Danh Sách Hóa Đơn</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Liên Hệ</a>
@@ -56,7 +56,7 @@
                                     out.print("<a class='nav-link' href='#'>" + cookie.getValue() + "</a>");
                                     out.print("</li>");
                                     out.print("<li class='nav-item'>");
-                                    out.print("<a class='nav-link' href='/cinemaManagement/auth.html'>Đăng Xuất</a>");
+                                    out.print("<a class='nav-link' href='/cinemaManagement/auth/logout.html'>Đăng Xuất</a>");
                                     out.print("</li>");
                                 }
                             }
