@@ -95,7 +95,13 @@ public class ScheduleDAO {
 
         return ses;
     }
-
+    
+    /**
+     * 
+     * @param fId
+     * @return
+     * @throws SQLException 
+     */
     public HashMap<Integer, Scheldule> getSchedulesDetail(int fId) throws SQLException {
         TicketDAO td = new TicketDAO();
         

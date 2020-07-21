@@ -55,4 +55,15 @@ public class FormalityDAO {
 
         return rs;
     }
+    
+    public Formality getFormalitybyBillId(int id) throws SQLException{
+        billDetailDAO bdDao = new billDetailDAO();
+        TicketDAO tDao = new TicketDAO();
+        ScheduleDAO sDao = new ScheduleDAO();
+        
+        BillDetail billDetail = bdDao.getBillDetailByBillId(id).get(0);
+        Ticket ticket = tDao.getTicketById(billDetail.gettId());
+        Scheldule scheldule = sDao.getScheduleById(ticket.getScheId());
+        return getFormalityById(scheldule.getFmId());
+    }
 }
