@@ -9,12 +9,15 @@ import DAO.FilmDAO;
 import DAO.PersonDAO;
 import DAO.ScheduleDAO;
 import DAO.TicketDAO;
+import DAO.UserDAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Customer;
 import models.Films;
+import models.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -64,5 +67,19 @@ public class AdminController {
 
         return "admin.filmList";
     }
-    
+    @RequestMapping(value = {"/userList"}, method = RequestMethod.GET)
+    public String userListAction(ModelMap mm) throws SQLException {
+        UserDAO ud = new UserDAO();
+        ArrayList<User> users = new ArrayList<>();
+        ResultSet rs = ud.getAll();
+
+        while (rs.next()) {
+            users.add(new User(rs.getInt("uId"), rs.getString("username"), rs.getString("password"), rs.getInt("nId"), rs.getInt("gender"), rs.getDate("birthday"), rs.getString("email"), rs.getString("address"),
+                    rs.getString("phone"), rs.getDate("regisDate"), rs.getInt("permission")));
+        }
+
+        mm.put("user", users);
+
+        return "admin.userList";
+    }
 }
