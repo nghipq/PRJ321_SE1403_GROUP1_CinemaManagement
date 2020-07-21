@@ -64,7 +64,7 @@ public class BillDAO {
         try {
             rs = ps.executeQuery();
             if (rs.next()) {
-                bill = new Bill(id, rs.getInt("cusId"), rs.getInt("sId"), rs.getDate("dateBuy"), rs.getLong("total"), rs.getString("phone"), rs.getString("name"));
+                bill = new Bill(id, rs.getInt("cusId"), rs.getInt("sId"), rs.getDate("dateBuy"), rs.getLong("total"), rs.getString("name"), rs.getString("phone"));
             }
         } catch (Exception e) {
         }

@@ -29,7 +29,7 @@
                         <strong>${row.getbId()}</strong>
                     </td>
                     <td class="d-flex flex-row justify-content-between align-items-start w-5">
-                        <strong><a href="bill/">xem Bill</a></strong>
+                        <strong><a href="billDetail.html?bId=${row.getbId()}">xem Bill</a></strong>
                     </td>
 
                 </tr>

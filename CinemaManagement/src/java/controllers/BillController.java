@@ -89,7 +89,7 @@ public class BillController {
                 }
             }
         }
-        
+
         int tId = Integer.parseInt(ticketList[0]);
         long totalPrice = td.getTicketPriceById(tId) * ticketList.length;
         Ticket ticket = td.getTicketById(tId);
@@ -115,18 +115,33 @@ public class BillController {
         BillDAO bd = new BillDAO();
         ArrayList<Bill> bill = new ArrayList<>();
         ResultSet rs = bd.getAll();
-         while (rs.next()) {
+        while (rs.next()) {
             bill.add(new Bill(rs.getInt("bId"), rs.getInt("cusId"), rs.getInt("sId"), rs.getDate("dateBuy"), rs.getLong("total"), rs.getString("name"), rs.getString("phone")));
-         }
-         
+        }
+
         mm.put("bill", bill);
 
         return "billList";
     }
-    
+
     @RequestMapping("/billDetail")
-    public String BillDetailAction(@RequestParam String bId) {
+    public String BillDetailAction(@RequestParam String bId, ModelMap mm) throws SQLException {
+        BillDAO bd = new BillDAO();
+        FilmDAO fd = new FilmDAO();
+        FormalityDAO fod = new FormalityDAO();
+        billDetailDAO bdd = new billDetailDAO();
+        TicketDAO td = new TicketDAO();
+        System.out.println(bId);
+
+        Bill bill = bd.getBillById(Integer.parseInt(bId));
         
+        mm.put("formality", fod.getFormalitybyBillId(Integer.parseInt(bId)));
+        mm.put("film", fd.getFilmsByBillId(Integer.parseInt(bId)));
+        mm.put("bid", bId);
+        mm.put("name", bill.getName());
+        mm.put("phone", bill.getPhone());
+        mm.put("total", bill.getTotal());
+
         return "bill";
     }
 }
