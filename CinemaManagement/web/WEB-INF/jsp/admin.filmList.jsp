@@ -10,49 +10,7 @@
 <link href="<c:url value="/resources/css/admin.filmList.css"/>" rel="stylesheet"/>
 <!DOCTYPE html>
 <div class="d-flex flex-row">
-    <nav class="navbar navbar-expand-lg navbar-light bg-dark flex-column p-0" style="width: 20vw; height: 100vh;">
-        <img src="<c:url value="/resources/image/Capture.PNG (2).png"/>"style="width: 60%">
-        <a class="navbar-brand text-white" href="#">Admin name</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse flex-column w-100" id="navbarNav">
-            <ul class="navbar-nav flex-column w-100">
-                <li class="nav-item active p-3 pl-4">
-                    <a class="nav-link text-white" href="filmList.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Danh sách phim</span>
-                    </a>
-                </li>
-                <li class="nav-item p-3 pl-4">
-                    <a class="nav-link text-white" href="addFilm.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Thêm phim</span>
-                    </a>
-                </li>
-                <li class="nav-item p-3 pl-4">
-                    <a class="nav-link text-white" href="updateFilm.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Cập nhật phim</span>
-                    </a>
-                </li>
-                <li class="nav-item p-3 pl-4">
-                    <a class="nav-link text-white" href="billList.html">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Danh sách hóa đơn</span>
-                    </a>
-                </li>
-                <li class="nav-item active p-3 pl-4">
-                    <a class="nav-link text-white" href="customerList.html">Danh sách người dùng</a>
-                </li>
-                <li class="nav-item p-3 pl-4">
-                    <a class="nav-link text-white" href="#">Thoát</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
+    <%@include file="dashboard.jsp" %>
     <sql:setDataSource driver="com.mysql.jdbc.Driver"
                        url="jdbc:mysql://localhost/group1"
                        user="root" password=""

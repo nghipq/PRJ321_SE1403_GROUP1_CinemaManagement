@@ -82,4 +82,25 @@ public class AdminController {
 
         return "admin.userList";
     }
+    
+//    @RequestMapping(value = {"/userDetail"}, method = RequestMethod.GET)
+//    public String userDetailAction(@RequestParam String id, ModelMap mm) throws SQLException {
+//        int fId = Integer.parseInt(id);
+//        FilmDAO fd = new FilmDAO();
+//        PersonDAO pd = new PersonDAO();
+//
+//        try {
+//            Films film = fd.getFilmsById(fId);
+//
+//            mm.put("film", film);
+//            mm.put("directors", pd.getPersonNameFilmId(fId, 1));
+//            mm.put("actors", pd.getPersonNameFilmId(fId, 2));
+//            mm.put("categories", fd.getCategorieNamesInFilm(fId));
+//            
+//        } catch (SQLException ex) {
+//            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        return "admin.filmList";
+//    }
 }
