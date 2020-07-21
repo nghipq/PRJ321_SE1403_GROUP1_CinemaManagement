@@ -84,7 +84,7 @@ public class UserController {
             cdao.InsertCustomers();
 
         }
-        return "auth";
+        return "redirect:/";
 
     }
 

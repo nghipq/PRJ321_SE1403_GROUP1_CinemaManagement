@@ -11,8 +11,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import DAO.*;
+import java.sql.ResultSet;
 import models.*;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpRequest;
@@ -70,13 +72,14 @@ public class BillController {
         boolean check;
         // Get an array of Cookies associated with the this domain
         cookies = request.getCookies();
+        int bid = 0;
         int ID;
         if (cookies.length > 1) {
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("ID")) {
                     ID = Integer.parseInt(cookie.getValue());
                     check = bd.createBill(ID, total, phone, name);
-                    int bid = bd.maxBill();
+                    bid = bd.maxBill();
                     for (String ticket : ticketList) {
                         bdd.createBillDetail(Integer.parseInt(ticket), bid);
                         td.updateStatus(Integer.parseInt(ticket), 1);
@@ -96,12 +99,10 @@ public class BillController {
         Films films = fd.getFilmsById(schedule.getfId());
         FormalityDAO fod = new FormalityDAO();
         Formality formality = fod.getFormalityById(schedule.getFmId());
-        int b = bd.maxBill();
 
         mm.put("formality", formality);
         mm.put("film", films);
-
-        mm.put("bid", b);
+        mm.put("bid", bid);
         mm.put("name", name);
         mm.put("phone", phone);
         mm.put("total", total);
@@ -109,8 +110,17 @@ public class BillController {
         return "bill";
     }
 
-    @RequestMapping(value = {"/billlist"}, method = RequestMethod.GET)
-    public String BillListAction() {
+    @RequestMapping(value = {"/billList"}, method = RequestMethod.GET)
+    public String billListAction(ModelMap mm) throws SQLException {
+        BillDAO bd = new BillDAO();
+        ArrayList<Bill> bill = new ArrayList<>();
+        ResultSet rs = bd.getAll();
+         while (rs.next()) {
+            bill.add(new Bill(rs.getInt("bId"), rs.getInt("cusId"), rs.getInt("sId"), rs.getDate("dateBuy"), rs.getLong("total"), rs.getString("name"), rs.getString("phone")));
+         }
+         
+        mm.put("bill", bill);
+
         return "billList";
     }
 }

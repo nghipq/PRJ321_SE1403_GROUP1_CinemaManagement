@@ -27,7 +27,7 @@
                         <label>Loại: ${formality.getFmName()}</label>
                     </div>
                     <div class="formality">
-                        <label>Mã hóa đơn: ${bid}</label>
+                        <label>Mã hóa đơn: #${bid}</label>
                     </div>
                     <div class="formality">
                         <label>Tên người đặt:</label>
