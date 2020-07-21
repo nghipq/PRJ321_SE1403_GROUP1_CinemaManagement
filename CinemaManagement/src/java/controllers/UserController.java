@@ -62,8 +62,15 @@ public class UserController {
             response.addCookie(nameCookie);
 //            request.getSession().setAttribute("ID", id);
 //            request.getSession().setAttribute("Name", name);
-
-            return "redirect:/";
+            //          return "redirect:/";
+            switch (check.getPremission()) {
+                case 0:
+                    return "redirect:/";
+                case 2:
+                    return "admin.filmList";
+                default:
+                    return "redirect:/";
+            }
         } else {
             mm.put("message", "Không hợp lệ");
             return "auth";
@@ -82,9 +89,11 @@ public class UserController {
         if (request.getParameter("txtconfirmpass").equals(request.getParameter("txtPass"))) {
             udao.InsertUser(request.getParameter("txtName"), request.getParameter("txtEmail"), request.getParameter("txtPass"), Date.valueOf(request.getParameter("txtDate")), request.getParameter("txtAddress"), request.getParameter("txtPhone"));
             cdao.InsertCustomers();
-
+            return "redirect:/";
+        } else {
+//        {mm.put("message", "Mật khẩu không hợp lệ");
+            return "auth";
         }
-        return "redirect:/";
 
     }
 
