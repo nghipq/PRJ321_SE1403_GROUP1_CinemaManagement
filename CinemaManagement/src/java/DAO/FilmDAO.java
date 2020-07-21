@@ -230,4 +230,15 @@ public class FilmDAO {
         int rs = ps.executeUpdate();
         return rs > 0 ? true : false;
     }
+    
+    public Films getFilmsByBillId(int id) throws SQLException {
+        billDetailDAO bdDao = new billDetailDAO();
+        TicketDAO tDao = new TicketDAO();
+        ScheduleDAO sDao = new ScheduleDAO();
+        
+        BillDetail billDetail = bdDao.getBillDetailByBillId(id).get(0);
+        Ticket ticket = tDao.getTicketById(billDetail.gettId());
+        Scheldule scheldule = sDao.getScheduleById(ticket.getScheId());
+        return getFilmsById(scheldule.getfId());
+    }
 }
