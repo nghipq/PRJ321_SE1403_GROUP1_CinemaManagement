@@ -6,17 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.FilmDAO"%>
-<%@include file="header.jsp" %>
+<%@include file="admin.header.jsp" %>
 <link href="<c:url value="/resources/css/admin.filmList.css"/>" rel="stylesheet"/>
 <!DOCTYPE html>
 <div class="d-flex flex-row">
     <%@include file="dashboard.jsp" %>
-    <sql:setDataSource driver="com.mysql.jdbc.Driver"
-                       url="jdbc:mysql://localhost/group1"
-                       user="root" password=""
-                       var="conn" scope="session"/>
-
-    <div class="d-block flex-column justify-content-start align-items-center p-5" style="width: 80vw;">
+    <div class="d-block flex-column justify-content-start align-items-center p-5" style="width: 80%;">
         <table class="d-flex flex-column justify-content-start align-items-center w-100">
             <tr class="d-flex flex-row justify-content-start align-items-center p-3 w-100 border border-warning rounded-sm m-2 bg-dark text-warning">
                 <td style="width: 3vw">
@@ -81,4 +76,4 @@
     </div>
 
 </div>
-<%@include file="footer.jsp" %>
+<%@include file="admin.footer.jsp" %>

@@ -67,13 +67,13 @@ public class UserController {
                 case 0:
                     return "redirect:/";
                 case 2:
-                    return "admin.filmList";
+                    return "redirect:/admins/filmList.html";
                 default:
                     return "redirect:/";
             }
         } else {
             mm.put("message", "Không hợp lệ");
-            return "auth";
+            return "redirect:/auth";
         }
     }
 

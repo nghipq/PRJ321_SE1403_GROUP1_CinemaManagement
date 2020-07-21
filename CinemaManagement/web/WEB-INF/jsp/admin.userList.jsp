@@ -6,7 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.UserDAO"%>
-<%@include file="header.jsp" %>
+<%@include file="admin.header.jsp" %>
 <!DOCTYPE html>
 
 <!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
@@ -73,4 +73,4 @@
 
     </div>
 </div>
-<%@include file="footer.jsp" %>
+<%@include file="admin.footer.jsp" %>
