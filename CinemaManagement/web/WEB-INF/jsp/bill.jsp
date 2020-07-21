@@ -38,13 +38,13 @@
                         <a>${phone}</a>
                     </div>
                     <div class="formality">
-                        <label>Tổng giá:</label>
-                        <a>${total}</a>
+                        <label style="font-size: 2rem">Tổng giá:</label>
+                        <b style="font-size: 2rem;" class="text-danger">${total} VND </b>
 
                 </div>
             </div>
         </div>
 
     </div>
-
+</div>
 <%@include file="footer.jsp" %>
