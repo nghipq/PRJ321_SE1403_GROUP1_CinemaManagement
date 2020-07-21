@@ -7,42 +7,39 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="header.jsp" %>
 <!DOCTYPE html>
-<div class="d-flex flex-column justify-content-start align-items-center p-5" style="width: 80vw;">
+<div class="d-flex flex-column justify-content-center align-items-center p-5" style="width: 100vw;">
     <form action="#">
-        <h1>Thêm phim mới</h1>
-        <div class="d-flex flex-column justify-content-between align-items-center p-3 w-100 rounded-sm m-2">
-            <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                <input type="text" placeholder="Username">
+        <div class="d-flex flex-column justify-content-center align-items-center p-5 w-100 rounded-sm m-5 bg-white">
+            <strong class="text-warning" style="font-size: 40px">Cập nhật người dùng</strong>
+            <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
+                <input class="p-2" type="text" placeholder="Username" style="width: 25vw; height: 5vh">
             </div>
-            <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                <input type="text" placeholder="Email">
+            <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
+                <input class="p-2" type="text" placeholder="Email" style="width: 25vw; height: 5vh">
             </div>
-            <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                <input type="text" placeholder="Birthday">
+            <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
+                <input class="p-2" type="text" placeholder="Birthday" style="width: 25vw; height: 5vh">
             </div>
-            <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                <input type="text" placeholder="Gender">
+            <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
+                <input class="p-2" type="text" placeholder="Nationality" style="width: 25vw; height: 5vh">
             </div>
-            <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                <input type="text" placeholder="Address">
+            <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
+                <input class="p-2" type="text" placeholder="Gender" style="width: 25vw; height: 5vh">
             </div>
-            <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                <input type="text" placeholder="Phone">
+            <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
+                <input class="p-2" type="text" placeholder="Address" style="width: 25vw; height: 5vh">
             </div>
-            <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                <input type="textarea" placeholder="">
+            <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
+                <input class="p-2" type="text" placeholder="Phone" style="width: 25vw; height: 5vh">
             </div>
-            <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                <input type="date" placeholder="Ngày phát hành">
+            <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
+                <input class="p-2" type="textarea" placeholder="Register Date" style="width: 25vw; height: 5vh">
             </div>
-            <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                <input type="date" placeholder="Ngày công chiếu">
-            </div>
-            <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                <input type="date" placeholder="Ngày ngừng chiếu">
+            <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
+                <input class="p-2" type="date" placeholder="Permission" style="width: 25vw; height: 5vh">
             </div>
             <div class="d-flex flex-row justify-content-between align-items-center m-2">
-                <button type="button" class="btn btn-warning btn-lg"><strong>Thêm</strong></button>
+                <button type="button" class="btn btn-warning btn-lg"><strong>Cập nhật</strong></button>
             </div>
         </div>
     </form>

@@ -73,7 +73,7 @@
         </table>
 
         <div
-            class="d-flex flex-row justify-content-between align-items-center p-2 mt-4 w-100 border border-white rounded-sm m-2 bg-white text-dark">
+            class="d-flex flex-row justify-content-between align-items-center p-2 mt-4 w-100 rounded-sm m-2">
             <div class="container">
                 <button type="button" class="btn btn-warning btn-lg"><strong>Change Page</strong></button>
             </div>

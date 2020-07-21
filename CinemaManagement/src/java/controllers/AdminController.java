@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import DAO.CustomerDAO;
 import DAO.FilmDAO;
 import DAO.PersonDAO;
 import DAO.ScheduleDAO;
@@ -31,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 @RequestMapping("/admins")
 public class AdminController {
+
     @RequestMapping(value = {"/filmList"}, method = RequestMethod.GET)
     public String filmListAction(ModelMap mm) throws SQLException {
         FilmDAO fd = new FilmDAO();
@@ -47,6 +49,7 @@ public class AdminController {
 
         return "admin.filmList";
     }
+
     @RequestMapping(value = {"/admins"}, method = RequestMethod.GET)
     public String filmAction(@RequestParam String id, ModelMap mm) throws SQLException {
         int fId = Integer.parseInt(id);
@@ -60,13 +63,14 @@ public class AdminController {
             mm.put("directors", pd.getPersonNameFilmId(fId, 1));
             mm.put("actors", pd.getPersonNameFilmId(fId, 2));
             mm.put("categories", fd.getCategorieNamesInFilm(fId));
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return "admin.filmList";
     }
+
     @RequestMapping(value = {"/userList"}, method = RequestMethod.GET)
     public String userListAction(ModelMap mm) throws SQLException {
         UserDAO ud = new UserDAO();
@@ -82,25 +86,18 @@ public class AdminController {
 
         return "admin.userList";
     }
-    
-//    @RequestMapping(value = {"/userDetail"}, method = RequestMethod.GET)
-//    public String userDetailAction(@RequestParam String id, ModelMap mm) throws SQLException {
-//        int fId = Integer.parseInt(id);
-//        FilmDAO fd = new FilmDAO();
-//        PersonDAO pd = new PersonDAO();
-//
-//        try {
-//            Films film = fd.getFilmsById(fId);
-//
-//            mm.put("film", film);
-//            mm.put("directors", pd.getPersonNameFilmId(fId, 1));
-//            mm.put("actors", pd.getPersonNameFilmId(fId, 2));
-//            mm.put("categories", fd.getCategorieNamesInFilm(fId));
-//            
-//        } catch (SQLException ex) {
-//            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        return "admin.filmList";
-//    }
+
+    @RequestMapping(value = {"/updateUser"}, method = RequestMethod.GET)
+    public String userUpdateAction(ModelMap mm, @RequestParam String id) {
+        try {
+            UserDAO ud = new UserDAO();
+            User user = ud.getUserById(Integer.parseInt(id));
+            mm.put("user", user);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "updateUser";
+    }
+
 }

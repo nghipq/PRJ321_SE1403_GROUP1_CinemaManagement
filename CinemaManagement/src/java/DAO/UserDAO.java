@@ -93,4 +93,42 @@ public class UserDAO {
 
         return rs;
     }
+    
+    public ResultSet getUserByPermission(int per){
+        try {
+            String sql = "SELECT * FROM `user` WHERE `permission` = ?";
+            PreparedStatement pst = conn.prepareStatement(sql);
+            
+            pst.setInt(1, per);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                return rs;
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    
+    public User getUserById(int id) throws SQLException {
+        String sql = "SELECT * FROM `user` WHERE `uId` = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+
+        ResultSet rs = null;
+        User user = null;
+        try {
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                //films = new Films();
+                user = new User(rs.getInt("uId"), rs.getString("username"), rs.getString("password"), rs.getInt("nId"), rs.getInt("gender"), rs.getDate("birthday"), rs.getString("email"), rs.getString("address"),
+                    rs.getString("phone"), rs.getDate("regisDate"), rs.getInt("permission"));
+            }
+        } catch (Exception e) {
+        }
+
+        return user;
+    }
 }

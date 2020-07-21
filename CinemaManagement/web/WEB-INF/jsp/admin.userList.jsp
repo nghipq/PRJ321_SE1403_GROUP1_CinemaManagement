@@ -35,6 +35,9 @@
                 <td style="width: 5vw">
                     <strong>Status</strong>
                 </td>
+                <td style="width: 5vw">
+                    <strong></strong>
+                </td>
             </tr>
             <c:forEach var="row" items="${user}">
                 <tr class="d-flex flex-row justify-content-between align-items-center p-3 w-100 border border-dark rounded-sm m-2  bg-white text-dark">
@@ -56,6 +59,9 @@
                     </td>
                     <td style="width: 5vw">
                         <strong>Status</strong>
+                    </td>
+                    <td style="width: 5vw">
+                        <a href="updateUser.html?id=${row.getuId()}">Edit</a>
                     </td>
 
                 </tr>
