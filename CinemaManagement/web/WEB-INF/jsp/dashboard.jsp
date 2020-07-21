@@ -24,18 +24,6 @@
                 <li class="nav-item p-3 pl-4">
                     <a class="nav-link text-white" href="#">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Thêm phim</span>
-                    </a>
-                </li>
-                <li class="nav-item p-3 pl-4">
-                    <a class="nav-link text-white" href="#">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Cập nhật phim</span> 
-                    </a>
-                </li>
-                <li class="nav-item p-3 pl-4">
-                    <a class="nav-link text-white" href="#">
-                        <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Danh sách hóa đơn</span>
                     </a>
                 </li>
@@ -43,6 +31,12 @@
                     <a class="nav-link text-white" href="userList.html">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Danh sách người dùng</span> 
+                    </a>
+                </li>
+                <li class="nav-item p-3 pl-4">
+                    <a class="nav-link text-white" href="#">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Danh sách lịch chiếu</span>
                     </a>
                 </li>
                 <li class="nav-item p-3 pl-4">
