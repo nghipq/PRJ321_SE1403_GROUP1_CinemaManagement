@@ -3,7 +3,7 @@
     Created on : Jul 20, 2020, 3:11:26 PM
     Author     : GF63 8RD
 --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="DAO.FilmDAO"%>
 <%@include file="header.jsp" %>
 

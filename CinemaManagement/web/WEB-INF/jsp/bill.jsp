@@ -6,7 +6,7 @@
 
 
 <%@page import="DAO.FilmDAO"%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="header.jsp" %>
 <link href="<c:url value="/resources/css/billform.css"/>" rel="stylesheet"/>
     <div class="bg-white container mt-5">

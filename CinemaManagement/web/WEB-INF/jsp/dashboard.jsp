@@ -4,11 +4,11 @@
     Author     : Admin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<nav class="navbar navbar-expand-lg navbar-light bg-dark flex-column p-0" style="width: 20vw; height: 100vh;">
+<nav class="navbar navbar-expand-lg navbar-light bg-dark flex-column p-0 sticky-top" style="width: 20vw; height: 100vh;">
     <img src="<c:url value="/resources/image/Capture.PNG (2).png"/>"style="width: 60%">
-         <a class="navbar-brand text-white" href="#">Admin name</a>
+         <a class="navbar-brand text-white" href="#">Admin</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -34,7 +34,7 @@
                 </a>
             </li>
             <li class="nav-item p-3 pl-4">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="scheduleList.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Danh sách lịch chiếu</span>
                 </a>

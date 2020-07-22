@@ -5,53 +5,46 @@
 --%>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@include file="dashboard.jsp" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <%@include file="admin.header.jsp" %>
-<div class="d-flex flex-column justify-content-center align-items-center">
+<%@include file="dashboard.jsp" %>
+<div class="d-flex flex-column justify-content-center align-items-center" style="width: 75vw">
     <div class="text-center bg-dark text-warning p-2 rounded-sm border border-warning m-2" style="width: 35vw">
         <strong style=" font-size: 2rem">Thêm phim mới</strong>
     </div>
-    <form action="updateUser.html" method="POST">
-        <div class="d-flex flex-column justify-content-center align-items-center p-5 rounded-sm m-2 bg-white" style="width: 35vw">
-            <div class="d-flex flex-column justify-content-start align-items-center p-5" style="width: 80vw;">
-                <div
-                    class="d-flex flex-column justify-content-between align-items-center p-3 w-100 rounded-sm m-2">
-                    <div
-                        class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="text" name="fName" placeholder="Tên Phim">
-                    </div>
-                    <div
-                        class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="text" name="fProducer" placeholder="ID nhà sản xuất">
-                    </div>
-                    <div
-                        class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="text" name="fAge" placeholder="Tuổi giới hạn">
-                    </div>
-                    <div
-                        class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="textarea" name="fInfo" placeholder="Thông tin phim">
-                    </div>
-                    <div
-                        class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="date" name="fRelease" placeholder="Ngày phát hành">
-                    </div>
-                    <div
-                        class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="date" name="fStartTime" placeholder="Ngày công chiếu">
-                    </div>
-                    <div
-                        class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="date" name="fEndTime" placeholder="Ngày ngừng chiếu">
-                    </div>
-                    <div class="d-flex flex-row justify-content-between align-items-center m-2">
-                        <input type="submit" class="btn btn-warning btn-lg" value="Do"/>
-                    </div>
-                </div>
-            </div>
+    <form name="filmform" action="insertFilm.html" method="POST" class="d-flex flex-column justify-content-center align-items-center rounded-sm p-3 bg-dark" style="width: 35vw">
+        <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
+            <label class="text-white">Tên Phim:</label>
+            <input type="text" name="fName" placeholder="Tên Phim" class="w-100 p-2 border border-warning rounded">
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
+            <label class="text-white">Nhà Sản Xuất:</label>
+            <input type="text" name="fProducer" placeholder="ID nhà sản xuất" class="w-100 p-2 border border-warning rounded">
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
+            <label class="text-white">Giới Hạn Độ Tuổi:</label>
+            <input type="number" name="fAge" placeholder="Tuổi giới hạn" class="w-100 p-2 border border-warning rounded">
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
+            <label class="text-white">Thông Tin Phim:</label>
+            <input type="text" name="fInfo" class="w-100 p-2 border border-warning rounded" placeholder="Thông tin phim">
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
+            <label class="text-white">Ngày Phát Hành:</label>
+            <input type="date" name="fRelease" placeholder="Ngày phát hành" class="w-100 p-2 border border-warning rounded">
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
+            <label class="text-white">Ngày Công Chiếu:</label>
+            <input type="date" name="fStartTime" placeholder="Ngày công chiếu" class="w-100 p-2 border border-warning rounded">
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
+            <label class="text-white">Ngày Kết Thúc:</label>
+            <input type="date" name="fEndTime" placeholder="Ngày ngừng chiếu" class="w-100 p-2 border border-warning rounded">
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
+            <input type="submit" class="btn btn-warning btn-lg w-100" value="Thêm phim"/>
         </div>
     </form>
 </div>

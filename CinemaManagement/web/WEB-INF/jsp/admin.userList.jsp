@@ -4,7 +4,7 @@
     Author     : Admin
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@page import="DAO.UserDAO"%>
 <%@include file="admin.header.jsp" %>
 <!DOCTYPE html>
@@ -49,7 +49,14 @@
                         <strong>${row.getPhone()}</strong>
                     </td>
                     <td style="width: 5vw">
-                        <strong>${row.getGender()}</strong>
+                        <strong>
+                            <c:if var="item" test="${row.getGender() == 0}">
+                                Female
+                            </c:if>
+                            <c:if var="item" test="${row.getGender() == 1}">
+                                Male
+                            </c:if>
+                        </strong>
                     </td>
                     <td style="width: 6vw">
                         <strong>Status</strong>

@@ -44,6 +44,7 @@ public class SessionDAO {
             return null;
         }
     }
+    
     public Session getSessionByTime(String StartTime, String EndTime){
                 try {
                     String sql = "select * from session where startTime = ? and endTime = ?";
@@ -59,6 +60,7 @@ public class SessionDAO {
                 }
                 return null;
     }
+    
     public Session createSession(String StartTime, String EndTime) throws SQLException{
         String sql = "insert into session(startTime, endTime) values(?, ?)";
         PreparedStatement pst = conn.prepareStatement(sql);

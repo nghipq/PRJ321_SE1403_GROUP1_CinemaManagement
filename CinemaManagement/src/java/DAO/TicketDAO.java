@@ -84,7 +84,8 @@ public class TicketDAO {
     public ArrayList<String> getDetail(int sesId, int scheId) throws SQLException {
         ArrayList<String> details = new ArrayList<>();
         ScheduleDAO sd = new ScheduleDAO();
-        Session ses = sd.getSessionById(sesId);
+        SessionDAO sed = new SessionDAO();
+        Session ses = sed.getSessionById(sesId);
         details.add(ses.getStartTime().toString());
         
         int count = 64;

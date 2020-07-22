@@ -12,14 +12,19 @@ import DAO.ScheduleDAO;
 import DAO.SessionDAO;
 import DAO.TicketDAO;
 import DAO.UserDAO;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.nio.file.Paths;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.Part;
 import models.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -87,6 +92,21 @@ public class AdminController {
         return "admin.billList";
     }
 
+    @RequestMapping(value = {"/scheduleList"}, method = RequestMethod.GET)
+    public String scheduleListAction(ModelMap mm) throws SQLException {
+        ScheduleDAO sched = new ScheduleDAO();
+        ArrayList<Scheldule> schedules = new ArrayList<>();
+
+        ResultSet rs = sched.getAll();
+        while (rs.next()) {
+            schedules.add(new Scheldule(rs.getInt("scheId"), rs.getInt("fId"), rs.getInt("sesId"), rs.getInt("fmId"), rs.getInt("status"), rs.getInt("rId")));
+        }
+
+        mm.put("schedules", schedules);
+
+        return "admin.schedule";
+    }
+
     @RequestMapping(value = {"/updateShowtimes"}, method = RequestMethod.GET)
     public String scheduleAction(ModelMap mm, @RequestParam String id) {
         mm.put("fId", id);
@@ -104,29 +124,27 @@ public class AdminController {
         String rId = request.getParameter("sRoom");
         SessionDAO sed = new SessionDAO();
         ScheduleDAO sched = new ScheduleDAO();
-        
+
         Session session = sed.getSessionByTime(startTime, endTime);
         if (session == null) {
             session = sed.createSession(startTime, endTime);
         }
-        
-        if(sched.createSchedule(session.getSesId(), Integer.parseInt(fmId), 1, Integer.parseInt(rId), Integer.parseInt(sId))) {
+
+        if (sched.createSchedule(session.getSesId(), Integer.parseInt(fmId), 1, Integer.parseInt(rId), Integer.parseInt(sId))) {
             int scheId = sched.getMaxScheId();
             RoomSeatDAO rsd = new RoomSeatDAO();
             TicketDAO td = new TicketDAO();
-            
+
             ResultSet rs = rsd.getSeatByRoomId(Integer.parseInt(rId));
-            while(rs.next()) {
+            while (rs.next()) {
                 td.createTicket(scheId, rs.getInt("seatId"), 0);
             }
-            
+
             return "admin.filmList";
-        }
-        else {
+        } else {
             return "updateShowtimes";
         }
 
-        
     }
 
     @RequestMapping(value = {"/updateUser"}, method = RequestMethod.GET)
@@ -135,16 +153,6 @@ public class AdminController {
             UserDAO ud = new UserDAO();
             User user = ud.getUserById(Integer.parseInt(id));
             mm.put("user", user);
-//            UserDAO udao = new UserDAO();
-//            String Uname = request.getParameter("UName");
-//            String Uemail = request.getParameter("UEmail");
-//            String Ubirthday = request.getParameter("UBirthday");
-//            String Ugender = request.getParameter("Ugender");
-//            String Uaddress = request.getParameter("UAddress");
-//            String Uphone = request.getParameter("UPhone");
-//            String Uregis = request.getParameter("URegis");
-//            String Upermission = request.getParameter("UPermission");
-//        udao.UpdateUser(Uname, Uemail, Ubirthday, Ugender, Uaddress, Uphone, Uregis,Upermission);
             return "updateUser";
 
         } catch (SQLException ex) {
@@ -168,14 +176,19 @@ public class AdminController {
         udao.UpdateUser(uId, Uname, Uemail, Ubirthday, Ugender, Uaddress, Uphone, Uregis, Upermission);
         return "redirect:/admins/userList.html";
     }
+
     @RequestMapping(value = {"/insertFilm"}, method = RequestMethod.GET)
-    public String insertFilmAction(ModelMap mm ){
-        
+    public String insertFilmAction(ModelMap mm) {
+
         return "addFilm";
     }
-        @RequestMapping(value = {"/insertFilm"}, method = RequestMethod.POST)
-    public String insertFilmSuccess(ModelMap mm,HttpServletResponse response, HttpServletRequest request ){
+
+    @RequestMapping(value = {"/insertFilm"}, method = RequestMethod.POST)
+    public String insertFilmSuccess(ModelMap mm, HttpServletResponse response, HttpServletRequest request) throws IOException, ServletException {
         try {
+            Part filePart = request.getPart("fPoster"); // Retrieves <input type="file" name="file">
+            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+
             String fName = request.getParameter("fName");
             String fpro = request.getParameter("fProducer");
             String fage = request.getParameter("fAge");
@@ -192,4 +205,36 @@ public class AdminController {
         }
     }
 
+    @RequestMapping(value = {"/updateFilm"}, method = RequestMethod.GET)
+    public String updateFilmAction(ModelMap mm, @RequestParam String fId) throws SQLException {
+        FilmDAO fd = new FilmDAO();
+        Films film = fd.getFilmsById(Integer.parseInt(fId));
+        mm.put("film", film);
+
+        return "updateFilm";
+    }
+
+    @RequestMapping(value = {"/updateFilm"}, method = RequestMethod.POST)
+    public String updateFilmSuccess(ModelMap mm, HttpServletResponse response, HttpServletRequest request) throws UnsupportedEncodingException {
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("utf-8");
+
+            String fId = request.getParameter("fId");
+            String fName = request.getParameter("fName");
+            String fpro = request.getParameter("fProducer");
+            String fage = request.getParameter("fAge");
+            String fstatus = request.getParameter("fStatus");
+            String finfo = request.getParameter("fInfo");
+            String frelease = request.getParameter("fRelease");
+            String fstarttime = request.getParameter("fStartTime");
+            String fendtime = request.getParameter("fEndTime");
+            FilmDAO fdao = new FilmDAO();
+            fdao.updateFilm(Integer.parseInt(fId), fName, Integer.parseInt(fpro), frelease, 5, Integer.parseInt(fage), 0, fstarttime, fendtime, finfo);
+
+        } catch (SQLException ex) {
+        }
+
+        return "redirect:/admins/filmList.html";
+    }
 }

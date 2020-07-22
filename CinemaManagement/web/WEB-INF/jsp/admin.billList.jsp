@@ -4,7 +4,7 @@
     Author     : phamq
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@include file="admin.header.jsp" %>
 
@@ -34,7 +34,7 @@
             <c:forEach var="row" items="${bills}">
                 <tr class="d-flex flex-row justify-content-start align-items-center p-3 w-100 border border-warning rounded-sm m-2 bg-white text-dark ">
 
-                    <td class="d-flex flex-row justify-content-center align-items-center"  style="width: 5vw">
+                    <td class="d-flex flex-row justify-content-center align-items-center"  style="width: 3vw">
                         <strong>${row.getbId()}</strong>
                     </td>
                     <td class="d-flex flex-row justify-content-center align-items-center"  style="width: 15vw">

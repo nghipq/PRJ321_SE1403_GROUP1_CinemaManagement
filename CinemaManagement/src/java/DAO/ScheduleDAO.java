@@ -28,8 +28,8 @@ public class ScheduleDAO {
     public ScheduleDAO() {
         this.conn = new DBConnection().getDBConnection();
     }
-    
-        public Scheldule getScheduleById(int scheId) throws SQLException {
+
+    public Scheldule getScheduleById(int scheId) throws SQLException {
         String sql = "SELECT * FROM `schedule` WHERE `scheId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, scheId);
@@ -45,6 +45,19 @@ public class ScheduleDAO {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public ResultSet getAll() throws SQLException {
+        String sql = "SELECT * FROM `schedule`";
+        PreparedStatement ps = conn.prepareStatement(sql);
+
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+        }
+
+        return rs;
     }
 
     /**
@@ -68,43 +81,44 @@ public class ScheduleDAO {
         return rs;
     }
 
+//    /**
+//     * get session
+//     *
+//     * @param id
+//     * @return
+//     * @throws SQLException
+//     */
+//    public Session getSessionById(int id) throws SQLException {
+//        Session ses = new Session();
+//        String sql = "SELECT * FROM `session` WHERE `sesId` = ?";
+//        PreparedStatement ps = conn.prepareStatement(sql);
+//        ps.setInt(1, id);
+//
+//        try {
+//            ResultSet rs = ps.executeQuery();
+//            if (rs.next()) {
+//                Time startTime = rs.getTime("startTime");
+//                Time endTime = rs.getTime("endTime");
+//                ses.setSesId(id);
+//                ses.setStartTime(startTime);
+//                ses.setEndTime(endTime);
+//            }
+//        } catch (Exception e) {
+//        };
+//
+//        return ses;
+//    }
+
     /**
-     * get session
      *
-     * @param id
+     * @param fId
      * @return
      * @throws SQLException
      */
-    public Session getSessionById(int id) throws SQLException {
-        Session ses = new Session();
-        String sql = "SELECT * FROM `session` WHERE `sesId` = ?";
-        PreparedStatement ps = conn.prepareStatement(sql);
-        ps.setInt(1, id);
-
-        try {
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                Time startTime = rs.getTime("startTime");
-                Time endTime = rs.getTime("endTime");
-                ses.setSesId(id);
-                ses.setStartTime(startTime);
-                ses.setEndTime(endTime);
-            }
-        } catch (Exception e) {
-        };
-
-        return ses;
-    }
-    
-    /**
-     * 
-     * @param fId
-     * @return
-     * @throws SQLException 
-     */
     public HashMap<Integer, Scheldule> getSchedulesDetail(int fId) throws SQLException {
+        SessionDAO sed = new SessionDAO();
         TicketDAO td = new TicketDAO();
-        
+
         HashMap<Integer, Scheldule> schedules = new HashMap<>();
         ResultSet schedulesList = getScheduleByFilmId(fId);
         Session ses = null;
@@ -112,7 +126,7 @@ public class ScheduleDAO {
 
         ResultSet rs2 = null;
         while (schedulesList.next()) {
-            ses = getSessionById(schedulesList.getInt("sesId"));
+            ses = sed.getSessionById(schedulesList.getInt("sesId"));
 
             rs2 = td.getTicketByCheduleId(schedulesList.getInt("scheId"), 1);
 
@@ -120,23 +134,23 @@ public class ScheduleDAO {
                 count -= 1;
             }
 
-            schedules.put(schedulesList.getInt("scheId"), 
+            schedules.put(schedulesList.getInt("scheId"),
                     new Scheldule(
                             schedulesList.getInt("scheId"),
-                            fId, 
-                            schedulesList.getInt("sesId"), 
-                            schedulesList.getInt("fmId"), 
-                            schedulesList.getInt("status"), 
+                            fId,
+                            schedulesList.getInt("sesId"),
+                            schedulesList.getInt("fmId"),
+                            schedulesList.getInt("status"),
                             schedulesList.getInt("rId")));
 
             count = 64;
         }
-        
+
         return schedules;
     }
-    
-    public boolean createSchedule(int sesId, int fmId,int status, int rId, int fId) throws SQLException {
-         String sql = "INSERT INTO `schedule`(`sesId`, `fmId`, `status`, `rId`, `fId`) values (?, ?, ?, ?, ?)";
+
+    public boolean createSchedule(int sesId, int fmId, int status, int rId, int fId) throws SQLException {
+        String sql = "INSERT INTO `schedule`(`sesId`, `fmId`, `status`, `rId`, `fId`) values (?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, sesId);
         ps.setInt(2, fmId);
@@ -170,9 +184,10 @@ public class ScheduleDAO {
         }
         return 0;
     }
-    public int getSession(){
+
+    public int getSession() {
         String sql = "select * form sc";
-        
+
         return 0;
     }
 }

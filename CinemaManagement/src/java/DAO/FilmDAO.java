@@ -177,21 +177,21 @@ public class FilmDAO {
         String sql = "INSERT INTO `films`(`fname`, `pId`, `releaseDate`, `rating`, `limitAge`, `status`, `airDate`, `endDate`) values (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         //ps.setInt(1, fId);
-        ps.setString(2, fName);
-        ps.setInt(3, pId);
+        ps.setString(1, fName);
+        ps.setInt(2, pId);
+        ps.setDate(3, Date.valueOf(releaseDate));
         ps.setInt(4, 5);
         ps.setInt(5, limitAge);
         ps.setInt(6, 0);
-        ps.setDate(7, Date.valueOf(sdf.format(releaseDate)));
-        ps.setDate(8, Date.valueOf(sdf.format(airDate)));
-        ps.setDate(9, Date.valueOf(sdf.format(endDate)));
+        ps.setDate(7, Date.valueOf(airDate));
+        ps.setDate(8, Date.valueOf(endDate));
 
         try {
             int insert = ps.executeUpdate();
             if (insert == 1) {
-                return false;
-            } else {
                 return true;
+            } else {
+                return false;
             }
         } catch (Exception e) {
         };
@@ -214,18 +214,20 @@ public class FilmDAO {
      * @return
      * @throws SQLException
      */
-    public boolean updateFilm(int fId, String fName, int pId, String releaseDate, double rating, int limitAge, int status, String airDate, String endDate) throws SQLException {
-        String sql = "UPDATE `films` SET `fname` = ? `prId` = ? `rating` = ? `limitAge` = ? `status` = ? `realaseDate` = ? `airDate` = ? `endDate` = ? WHERE `fId` = ?";
+    public boolean updateFilm(int fId, String fName, int pId, String releaseDate, double rating, int limitAge, int status, String airDate, String endDate, String description) throws SQLException {
+        String sql = "UPDATE `films` SET `fName` = ?, `pId` = ?, `rating` = ?, `limitAge` = ?, `status` = ?, `releaseDate` = ?, `airDate` = ?, `endDate` = ?, description = ? WHERE `fId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         //ps.setInt(1, fId);
-        ps.setString(2, fName);
-        ps.setInt(3, pId);
-        ps.setInt(4, (int) rating);
-        ps.setInt(5, limitAge);
-        ps.setInt(6, status);
-        ps.setDate(7, Date.valueOf(sdf.format(releaseDate)));
-        ps.setDate(8, Date.valueOf(sdf.format(airDate)));
-        ps.setDate(9, Date.valueOf(sdf.format(endDate)));
+        ps.setString(1, fName);
+        ps.setInt(2, pId);
+        ps.setInt(3, (int) rating);
+        ps.setInt(4, limitAge);
+        ps.setInt(5, status);
+        ps.setDate(6, Date.valueOf(releaseDate));
+        ps.setDate(7, Date.valueOf(airDate));
+        ps.setDate(8, Date.valueOf(endDate));
+        ps.setString(9, description );
+        ps.setInt(10, fId);
 
         int rs = ps.executeUpdate();
         return rs > 0 ? true : false;
