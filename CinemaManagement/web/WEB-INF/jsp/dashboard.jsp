@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li class="nav-item p-3 pl-4">
-                <a class="nav-link text-white" href="#">
+                <a class="nav-link text-white" href="billList.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Danh sách hóa đơn</span>
                 </a>
@@ -40,7 +40,7 @@
                 </a>
             </li>
             <li class="nav-item p-3 pl-4">
-                <a class="nav-link text-white" href="#">Thoát</a>
+                <a class="nav-link text-white" href="/cinemaManagement/auth/logout.html">Thoát</a>
             </li>
         </ul>
     </div>

@@ -4,10 +4,19 @@
     Author     : Admin
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="dashboard.jsp" %>
 <!DOCTYPE html>
-<div class="d-flex flex-column justify-content-start align-items-center p-5" style="width: 80vw;">
+
+<%@include file="admin.header.jsp" %>
+<div class="d-flex flex-column justify-content-center align-items-center">
+    <div class="text-center bg-dark text-warning p-2 rounded-sm border border-warning m-2" style="width: 35vw">
+        <strong style=" font-size: 2rem">Thêm phim mới</strong>
+    </div>
+    <form action="updateUser.html" method="POST">
+        <div class="d-flex flex-column justify-content-center align-items-center p-5 rounded-sm m-2 bg-white" style="width: 35vw">
+            <div class="d-flex flex-column justify-content-start align-items-center p-5" style="width: 80vw;">
         <form action="#">
             <h1>Thêm phim mới</h1>
             <div class="d-flex flex-column justify-content-between align-items-center p-3 w-100 rounded-sm m-2">
@@ -47,3 +56,8 @@
             </div>
         </form>
     </div>
+        </div>
+    </form>
+</div>
+<%@include file="admin.footer.jsp" %>
+

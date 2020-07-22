@@ -116,7 +116,7 @@ public class BillController {
         ArrayList<Bill> bill = new ArrayList<>();
         ResultSet rs = bd.getAll();
         while (rs.next()) {
-            bill.add(new Bill(rs.getInt("bId"), rs.getInt("cusId"), rs.getInt("sId"), rs.getDate("dateBuy"), rs.getLong("total"), rs.getString("name"), rs.getString("phone")));
+            bill.add(new Bill(rs.getInt("bId"), rs.getInt("cusId"), rs.getInt("sId"), rs.getDate("dateBuy"), rs.getLong("total"), rs.getString("name"), rs.getString("phone"), rs.getInt("status")));
         }
 
         mm.put("bill", bill);

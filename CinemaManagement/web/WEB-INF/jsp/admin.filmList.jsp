@@ -7,7 +7,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.FilmDAO"%>
 <%@include file="admin.header.jsp" %>
-<link href="<c:url value="/resources/css/admin.filmList.css"/>" rel="stylesheet"/>
+<!--<link href="<c:url value="/resources/css/admin.filmList.css"/>" rel="stylesheet"/>-->
 <!DOCTYPE html>
 <div class="d-flex flex-row">
     <%@include file="dashboard.jsp" %>
@@ -26,9 +26,8 @@
                 <td style="width: 8vw">
                     <strong>Trạng thái</strong>
                 </td>
-                <td>
-                    <strong></strong>
-                </td>
+                <td style="width: 5vw"></td>
+                <td style="width: 6vw"></td>
             </tr>
 
 
@@ -47,10 +46,12 @@
                     <td class="d-flex flex-row justify-content-between align-items-start w-5"  style="width: 8vw">
                         <strong>${row.getStatus()}</strong>
                     </td>
-                    <td class="d-flex flex-row justify-content-between align-items-start w-5">
-                        <a href="updateUser.html?id=${row.getuId()}">Edit</a>
+                    <td class="d-flex flex-row justify-content-between align-items-start w-5" style="width: 5vw">
+                        <a href="#">Edit</a>
                     </td>
-
+                    <td class="d-flex flex-row justify-content-between align-items-start w-5" style="width: 6vw">
+                        <a href="#">Lịch chiếu</a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
@@ -62,6 +63,5 @@
             </div>
         </div>
     </div>
-
 </div>
 <%@include file="admin.footer.jsp" %>

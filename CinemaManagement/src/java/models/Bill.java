@@ -19,11 +19,12 @@ public class Bill {
     private long total;
     private String name;
     private String phone;
+    private int status;
 
     public Bill() {
     }
 
-    public Bill(int bId, int cusId, int sId, Date dateBuy, long total, String name, String phone) {
+    public Bill(int bId, int cusId, int sId, Date dateBuy, long total, String name, String phone, int status) {
         this.bId = bId;
         this.cusId = cusId;
         this.sId = sId;
@@ -31,6 +32,7 @@ public class Bill {
         this.total = total;
         this.name = name;
         this.phone = phone;
+        this.status = status;
     }
 
     public int getbId() {
@@ -89,5 +91,12 @@ public class Bill {
         this.phone = phone;
     }
 
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
     
 }

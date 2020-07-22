@@ -64,8 +64,19 @@ public class UserController {
 //            request.getSession().setAttribute("Name", name);
             //          return "redirect:/";
             switch (check.getPremission()) {
-                case 0:
-                    return "redirect:/";
+                case 0: {
+                    try {
+                        String url = request.getParameter("returnURL");
+                        if(url != null) {
+                            return ("redirect:/" + url);
+                        }
+                        else {
+                            return "redirect:/";
+                        }
+                    } catch (Exception e) {
+                        return "redirect:/";
+                    }
+                }
                 case 2:
                     return "redirect:/admins/filmList.html";
                 default:

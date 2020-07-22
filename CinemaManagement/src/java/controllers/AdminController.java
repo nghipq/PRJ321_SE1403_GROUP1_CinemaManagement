@@ -5,6 +5,7 @@
  */
 package controllers;
 
+import DAO.BillDAO;
 import DAO.CustomerDAO;
 import DAO.FilmDAO;
 import DAO.PersonDAO;
@@ -17,6 +18,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import models.Bill;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -54,27 +56,6 @@ public class AdminController {
         return "admin.filmList";
     }
 
-    @RequestMapping(value = {"/admins"}, method = RequestMethod.GET)
-    public String filmAction(@RequestParam String id, ModelMap mm) throws SQLException {
-        int fId = Integer.parseInt(id);
-        FilmDAO fd = new FilmDAO();
-        PersonDAO pd = new PersonDAO();
-
-        try {
-            Films film = fd.getFilmsById(fId);
-
-            mm.put("film", film);
-            mm.put("directors", pd.getPersonNameFilmId(fId, 1));
-            mm.put("actors", pd.getPersonNameFilmId(fId, 2));
-            mm.put("categories", fd.getCategorieNamesInFilm(fId));
-
-        } catch (SQLException ex) {
-            Logger.getLogger(AdminController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-        return "admin.filmList";
-    }
-
     @RequestMapping(value = {"/userList"}, method = RequestMethod.GET)
     public String userListAction(ModelMap mm) throws SQLException {
         UserDAO ud = new UserDAO();
@@ -89,6 +70,22 @@ public class AdminController {
         mm.put("user", users);
 
         return "admin.userList";
+    }
+    
+    @RequestMapping(value = {"/billList"}, method = RequestMethod.GET)
+    public String billListAction(ModelMap mm) throws SQLException {
+        BillDAO bd = new BillDAO();
+        ArrayList<Bill> bills = new ArrayList<>();
+        
+        ResultSet rs = bd.getAll();
+        while(rs.next()) {
+            bills.add(new Bill(rs.getInt("bId"), rs.getInt("cusId"), rs.getInt("sId"), 
+                    rs.getDate("dateBuy"), rs.getLong("total"), rs.getString("name"), rs.getString("phone"), rs.getInt("status")));
+        }
+        
+        mm.put("bills", bills);
+        
+        return "admin.billList";
     }
 
     @RequestMapping(value = {"/updateUser"}, method = RequestMethod.GET)
