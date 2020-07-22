@@ -15,11 +15,14 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <% String url = request.getAttribute("url").toString();
-            if (url == null) {
-                url = "";
+        <% try {
+                String url = request.getAttribute("url").toString();
+                if (url == null) {
+                    url = "";
+                }
+                pageContext.setAttribute("url", url);
+            } catch (Exception e) {
             }
-            pageContext.setAttribute("url", url);
         %>
         <div style="width: 100vw; height: 100vh" class="body">
             <div class="container" id="container" style="text-align: center;">
