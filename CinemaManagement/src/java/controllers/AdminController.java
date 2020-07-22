@@ -168,5 +168,28 @@ public class AdminController {
         udao.UpdateUser(uId, Uname, Uemail, Ubirthday, Ugender, Uaddress, Uphone, Uregis, Upermission);
         return "redirect:/admins/userList.html";
     }
+    @RequestMapping(value = {"/insertFilm"}, method = RequestMethod.GET)
+    public String insertFilmAction(ModelMap mm ){
+        
+        return "addFilm";
+    }
+        @RequestMapping(value = {"/insertFilm"}, method = RequestMethod.POST)
+    public String insertFilmSuccess(ModelMap mm,HttpServletResponse response, HttpServletRequest request ){
+        try {
+            String fName = request.getParameter("fName");
+            String fpro = request.getParameter("fProducer");
+            String fage = request.getParameter("fAge");
+            String fstatus = request.getParameter("fStatus");
+            String finfo = request.getParameter("fInfo");
+            String frelease = request.getParameter("fRelease");
+            String fstarttime = request.getParameter("fStartTime");
+            String fendtime = request.getParameter("fEndTime");
+            FilmDAO fdao = new FilmDAO();
+            fdao.createFilm(fName, Integer.parseInt(fpro), frelease, Integer.parseInt(fage), fstarttime, fendtime);
+            return "redirect:/admins/filmList.html";
+        } catch (SQLException ex) {
+            return "redirect:/admins/insertFilm.html";
+        }
+    }
 
 }

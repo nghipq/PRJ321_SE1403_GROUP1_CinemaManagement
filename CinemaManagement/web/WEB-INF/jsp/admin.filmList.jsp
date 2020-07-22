@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="DAO.FilmDAO"%>
+<a href="admin.filmList.jsp"></a>
 <%@include file="admin.header.jsp" %>
 <!--<link href="<c:url value="/resources/css/admin.filmList.css"/>" rel="stylesheet"/>-->
 <!DOCTYPE html>
@@ -59,7 +60,7 @@
         <div
             class="d-flex flex-row justify-content-between align-items-center p-2 mt-4 w-100 rounded-sm m-2">
             <div class="container">
-                <button type="button" class="btn btn-warning btn-lg"><strong>Thêm phim</strong></button>
+                <a href="insertFilm.html" class="btn btn-warning btn-lg"></a>
             </div>
         </div>
     </div>

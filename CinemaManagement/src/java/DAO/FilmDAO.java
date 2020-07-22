@@ -173,15 +173,15 @@ public class FilmDAO {
          * @return
          * @throws SQLException
          */
-    public boolean createFilm(int fId, String fName, int pId, String releaseDate, double rating, int limitAge, int status, String airDate, String endDate) throws SQLException {
-        String sql = "INSERT INTO `films`(`fId`, `fname`, `pId`, `releaseDate`, `rating`, `limitAge`, `status`, `airDate`, `endDate`) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    public boolean createFilm(String fName, int pId, String releaseDate, int limitAge, String airDate, String endDate) throws SQLException {
+        String sql = "INSERT INTO `films`(`fname`, `pId`, `releaseDate`, `rating`, `limitAge`, `status`, `airDate`, `endDate`) values (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         //ps.setInt(1, fId);
         ps.setString(2, fName);
         ps.setInt(3, pId);
-        ps.setInt(4, (int) rating);
+        ps.setInt(4, 5);
         ps.setInt(5, limitAge);
-        ps.setInt(6, status);
+        ps.setInt(6, 0);
         ps.setDate(7, Date.valueOf(sdf.format(releaseDate)));
         ps.setDate(8, Date.valueOf(sdf.format(airDate)));
         ps.setDate(9, Date.valueOf(sdf.format(endDate)));

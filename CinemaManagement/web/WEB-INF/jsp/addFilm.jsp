@@ -21,42 +21,34 @@
                     class="d-flex flex-column justify-content-between align-items-center p-3 w-100 rounded-sm m-2">
                     <div
                         class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="text" placeholder="Tên Phim">
+                        <input type="text" name="fName" placeholder="Tên Phim">
                     </div>
                     <div
                         class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="text" placeholder="ID nhà sản xuất">
+                        <input type="text" name="fProducer" placeholder="ID nhà sản xuất">
                     </div>
                     <div
                         class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="text" placeholder="Tuổi giới hạn">
+                        <input type="text" name="fAge" placeholder="Tuổi giới hạn">
                     </div>
                     <div
                         class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="text" placeholder="Trạng thái phim">
+                        <input type="textarea" name="fInfo" placeholder="Thông tin phim">
                     </div>
                     <div
                         class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="text" placeholder="Poster">
+                        <input type="date" name="fRelease" placeholder="Ngày phát hành">
                     </div>
                     <div
                         class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="textarea" placeholder="Thông tin phim">
+                        <input type="date" name="fStartTime" placeholder="Ngày công chiếu">
                     </div>
                     <div
                         class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="date" placeholder="Ngày phát hành">
-                    </div>
-                    <div
-                        class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="date" placeholder="Ngày công chiếu">
-                    </div>
-                    <div
-                        class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                        <input type="date" placeholder="Ngày ngừng chiếu">
+                        <input type="date" name="fEndTime" placeholder="Ngày ngừng chiếu">
                     </div>
                     <div class="d-flex flex-row justify-content-between align-items-center m-2">
-                        <button type="button" class="btn btn-warning btn-lg"><strong>Thêm</strong></button>
+                        <input type="submit" class="btn btn-warning btn-lg" value="Do"/>
                     </div>
                 </div>
             </div>
