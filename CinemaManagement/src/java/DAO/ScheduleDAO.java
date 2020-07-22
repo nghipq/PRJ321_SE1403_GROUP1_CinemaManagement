@@ -135,20 +135,21 @@ public class ScheduleDAO {
         return schedules;
     }
     
-    public boolean createSchedule(int sesId, int fmId, int status, int rId) throws SQLException {
-        String sql = "INSERT INTO `schedule`(`sesId`, `fmId`, `status`, `rId`) values (?, ?, ?, ?)";
+    public boolean createSchedule(int sesId, int fmId,int status, int rId, int fId) throws SQLException {
+         String sql = "INSERT INTO `schedule`(`sesId`, `fmId`, `status`, `rId`, `fId`) values (?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, sesId);
         ps.setInt(2, fmId);
         ps.setInt(3, status);
         ps.setInt(4, rId);
+        ps.setInt(5, fId);
 
         try {
             int insert = ps.executeUpdate();
             if (insert == 1) {
-                return false;
-            } else {
                 return true;
+            } else {
+                return false;
             }
         } catch (Exception e) {
         };
@@ -158,7 +159,7 @@ public class ScheduleDAO {
 
     public int getMaxScheId() {
         try {
-            String sql = "select max(scheId) from schedule";
+            String sql = "select max(scheId) as scheId from schedule";
             PreparedStatement pst = conn.prepareStatement(sql);
             ResultSet rs = pst.executeQuery();
             if (rs.next()) {
@@ -167,6 +168,11 @@ public class ScheduleDAO {
         } catch (SQLException ex) {
             Logger.getLogger(ScheduleDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return 0;
+    }
+    public int getSession(){
+        String sql = "select * form sc";
+        
         return 0;
     }
 }

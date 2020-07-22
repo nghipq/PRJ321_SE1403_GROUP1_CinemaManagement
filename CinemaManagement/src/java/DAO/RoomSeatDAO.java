@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import database.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -17,8 +18,8 @@ import java.sql.SQLException;
 public class RoomSeatDAO {
     private Connection conn;
 
-    public RoomSeatDAO(Connection conn) {
-        this.conn = conn;
+    public RoomSeatDAO() {
+        this.conn = new DBConnection().getDBConnection();
     }
     
     /**

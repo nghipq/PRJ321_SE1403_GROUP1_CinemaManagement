@@ -50,7 +50,7 @@
                         <a href="#">Edit</a>
                     </td>
                     <td class="d-flex flex-row justify-content-between align-items-start w-5" style="width: 6vw">
-                        <a href="#">Lịch chiếu</a>
+                        <a href="updateShowtimes.html?id=${row.getfId()}">Lịch chiếu</a>
                     </td>
                 </tr>
             </c:forEach>
