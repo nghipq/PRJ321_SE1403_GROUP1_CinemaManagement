@@ -48,7 +48,7 @@
                         <strong>${row.getStatus()}</strong>
                     </td>
                     <td class="d-flex flex-row justify-content-between align-items-start w-5">
-                        <strong>Edit</strong>
+                        <a href="updateUser.html?id=${row.getuId()}">Edit</a>
                     </td>
 
                 </tr>
