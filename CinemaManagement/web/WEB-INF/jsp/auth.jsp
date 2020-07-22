@@ -15,6 +15,12 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <% String url = request.getAttribute("url").toString();
+            if (url == null) {
+                url = "";
+            }
+            pageContext.setAttribute("url", url);
+        %>
         <div style="width: 100vw; height: 100vh" class="body">
             <div class="container" id="container" style="text-align: center;">
                 <div class="form-container sign-up-container">
@@ -38,13 +44,14 @@
                                         <button>Đăng nhập</button>
                                     </form>-->
 
-                    <spring:form method = "POST" commandName="tk" action="auth/login.html">
+                    <spring:form method = "POST" commandName="tk" action="auth/login.html${url}">
                         <h1>Đăng Nhập</h1>
+                        <input name="returnURL" value="${url}" type="hidden"/>
                         <spring:input path="email" /><br>
                         <spring:password path="password"/><br>
                         <h3 style="color: red">${message}</h3>
                         <button>Đăng nhập</button>
-                        
+
                     </spring:form>
 
                 </div>

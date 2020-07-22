@@ -33,7 +33,7 @@ public class UserDAO {
 
     public boolean InsertUser(String Username, String Email, String Password, Date Birthday, String Address, String Phone) {
         try {
-            String sql = "insert into user(username, email, password, birthday, gender, address, phone, permission) values (?,?,?,?,?,?,?,?)";
+            String sql = "insert into user(username, email, password, birthday, gender, address, phone, permission) values (?,?,md5(?),?,?,?,?,?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, Username);
             pst.setString(2, Email);
@@ -52,7 +52,7 @@ public class UserDAO {
 
     public User Login(String emails, String pass) {
         try {
-            String sql = "Select * from user where email = ? and password = ?";
+            String sql = "Select * from user where email = ? and password = md5(?)";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, emails);
             pst.setString(2, pass);

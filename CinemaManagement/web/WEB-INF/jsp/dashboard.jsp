@@ -40,7 +40,7 @@
                 </a>
             </li>
             <li class="nav-item p-3 pl-4">
-                <a class="nav-link text-white" href="#">Thoát</a>
+                <a class="nav-link text-white" href="/cinemaManagement/auth/logout.html">Thoát</a>
             </li>
         </ul>
     </div>

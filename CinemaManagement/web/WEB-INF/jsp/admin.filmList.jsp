@@ -26,9 +26,8 @@
                 <td style="width: 8vw">
                     <strong>Trạng thái</strong>
                 </td>
-                <td>
-                    <strong></strong>
-                </td>
+                <td style="width: 5vw"></td>
+                <td style="width: 6vw"></td>
             </tr>
 
 
@@ -47,10 +46,12 @@
                     <td class="d-flex flex-row justify-content-between align-items-start w-5"  style="width: 8vw">
                         <strong>${row.getStatus()}</strong>
                     </td>
-                    <td class="d-flex flex-row justify-content-between align-items-start w-5">
-                        <strong>Edit</strong>
+                    <td class="d-flex flex-row justify-content-between align-items-start w-5" style="width: 5vw">
+                        <a href="#">Edit</a>
                     </td>
-
+                    <td class="d-flex flex-row justify-content-between align-items-start w-5" style="width: 6vw">
+                        <a href="#">Lịch chiếu</a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>
