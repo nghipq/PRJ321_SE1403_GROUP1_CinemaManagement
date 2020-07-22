@@ -29,9 +29,6 @@
                 <td style="width: 5vw">
                     <strong>Gender</strong>
                 </td>
-                <td style="width:5vw">
-                    <strong>Level</strong>
-                </td>
                 <td style="width: 5vw">
                     <strong>Status</strong>
                 </td>
@@ -54,10 +51,7 @@
                     <td style="width: 5vw">
                         <strong>${row.getGender()}</strong>
                     </td>
-                    <td style="width: 5vw">
-                        <strong>0</strong>
-                    </td>
-                    <td style="width: 5vw">
+                    <td style="width: 6vw">
                         <strong>Status</strong>
                     </td>
                     <td style="width: 5vw">
@@ -67,10 +61,6 @@
                 </tr>
             </c:forEach>
         </table>
-        <div class="container">
-            <button type="button" class="btn btn-warning btn-lg"><strong>Change Page</strong></button>
-        </div>
-
     </div>
 </div>
 <%@include file="admin.footer.jsp" %>

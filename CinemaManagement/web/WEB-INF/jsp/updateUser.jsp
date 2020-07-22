@@ -26,25 +26,24 @@
             </div>
 
             <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
-                <div class="d-flex flex-row justify-content-start">gender</div>
-                <!--                <input class="pl-4" type="radio" id="male" name="Ugender" value="1">
-                                <label for="male">Male</label>
-                                <input type="radio" id="female" name="Ugender" value="0">
-                                <label for="female">Female</label><br>-->
-                <c:choose>
-                    <c:when test="${user.getGender() == 0}">
-                        <input class="pl-4" type="radio" id="male" name="Ugender" value="1">
-                        <label for="male">Male</label>
-                        <input type="radio" id="female" name="Ugender" value="0" checked>
-                        <label for="female">Female</label><br>
-                    </c:when>
-                    <c:otherwise>
-                        <input class="pl-4" type="radio" id="male" name="Ugender" value="1" checked>
-                        <label for="male">Male</label>
-                        <input type="radio" id="female" name="Ugender" value="0">
-                        <label for="female">Female</label><br>
-                    </c:otherwise>
-                </c:choose>
+                <div class="d-flex flex-row justify-content-start pr-5">Gender:</div>
+                <div class="pr-3">
+                    <c:choose>
+                        <c:when test="${user.getGender() == 0}">
+                            <input class="pl-4" type="radio" id="male" name="Ugender" value="1">
+                            <label for="male">Male</label>
+                            <input type="radio" id="female" name="Ugender" value="0" checked>
+                            <label for="female">Female</label><br>
+                        </c:when>
+
+                        <c:otherwise>
+                            <input class="pl-4" type="radio" id="male" name="Ugender" value="1" checked>
+                            <label for="male">Male</label>
+                            <input type="radio" id="female" name="Ugender" value="0">
+                            <label for="female">Female</label><br>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
             <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
                 <input class="p-2" type="text" placeholder="Address" name="UAddress" value="${user.getAddress()}" style="width: 25vw; height: 5vh">
@@ -56,23 +55,24 @@
                 <input class="p-2" type="date" placeholder="Register Date" name="URegis" value="${user.getRegisDate()}" style="width: 25vw; height: 5vh">
             </div>
             <div class="d-flex flex-row justify-content-center align-items-center w-100 rounded-sm m-2">
-                <div class="d-flex flex-row justify-content-start w-45">Permission</div>
-                <c:choose>
-                    <c:when test="${user.getPremission() == 0}">
-                        <input type="radio" id="User" name="UPermission" value="0" checked>
-                        <label for="User">User</label>
-                        <input type="radio" id="Staff" name="UPermission" value="1">
-                        <label for="Staff">Staff</label><br>
-                    </c:when>
+                <div class="d-flex flex-row justify-content-start w-45 pr-5">Permission:</div>
+                <div class="pr-3">
+                    <c:choose>
+                        <c:when test="${user.getPremission() == 0}">
+                            <input type="radio" id="User" name="UPermission" value="0" checked>
+                            <label for="User">User</label>
+                            <input type="radio" id="Staff" name="UPermission" value="1">
+                            <label for="Staff">Staff</label><br>
+                        </c:when>
 
-                    <c:otherwise>
-                        <input type="radio" id="User" name="UPermission" value="0">
-                        <label for="User">User</label>
-                        <input type="radio" id="Staff" name="UPermission" value="1" checked>
-                        <label for="Staff">Staff</label><br/>
-                    </c:otherwise>
-                </c:choose>
-
+                        <c:otherwise>
+                            <input type="radio" id="User" name="UPermission" value="0">
+                            <label for="User">User</label>
+                            <input type="radio" id="Staff" name="UPermission" value="1" checked>
+                            <label for="Staff">Staff</label><br/>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
             </div>
 
             <div class="d-flex flex-row justify-content-between align-items-center m-2 w-100">
