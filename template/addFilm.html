@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="CSS/customerList.css">
     <title>Add Film</title>
 </head>
+
 <body class="d-flex flex-row">
     <nav class="navbar navbar-expand-lg navbar-light bg-dark flex-column p-0" style="width: 20vw; height: 100vh;">
         <img src="image/Capture.PNG (2).png" alt="image-film" style="width: 60%">
@@ -33,7 +35,7 @@
                 <li class="nav-item p-3 pl-4">
                     <a class="nav-link text-white" href="updateFilm.html">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
-                        <span>Cập nhật phim</span> 
+                        <span>Cập nhật phim</span>
                     </a>
                 </li>
                 <li class="nav-item p-3 pl-4">
@@ -54,47 +56,63 @@
             </ul>
         </div>
     </nav>
-    
+
     <div class="d-flex flex-column justify-content-start align-items-center p-5" style="width: 80vw;">
-        <form action="#">
-            <h1>Thêm phim mới</h1>
-            <div class="d-flex flex-column justify-content-between align-items-center p-3 w-100 rounded-sm m-2">
-                <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                    <input type="text" placeholder="Tên Phim">
-                </div>
-                <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                    <input type="text" placeholder="ID nhà sản xuất">
-                </div>
-                <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                    <input type="text" placeholder="Đánh giá phim">
-                </div>
-                <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                    <input type="text" placeholder="Tuổi giới hạn">
-                </div>
-                <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                    <input type="text" placeholder="Trạng thái phim">
-                </div>
-                <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                    <input type="text" placeholder="Poster">
-                </div>
-                <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                    <input type="textarea" placeholder="Thông tin phim">
-                </div>
-                <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                    <input type="date" placeholder="Ngày phát hành">
-                </div>
-                <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                    <input type="date" placeholder="Ngày công chiếu">
-                </div>
-                <div class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
-                    <input type="date" placeholder="Ngày ngừng chiếu">
-                </div>
-                <div class="d-flex flex-row justify-content-between align-items-center m-2">
-                    <button type="button" class="btn btn-warning btn-lg"><strong>Thêm</strong></button>
+        <form action="" method="POST">
+            <div class="d-flex flex-column justify-content-center align-items-center p-5 rounded-sm m-2 bg-white" style="width: 35vw">
+                <div class="d-flex flex-column justify-content-start align-items-center p-5" style="width: 80vw;">
+    
+                    <div
+                        class="d-flex flex-column justify-content-between align-items-center p-3 w-100 rounded-sm m-2">
+                        <div
+                            class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
+                            <input type="text" placeholder="Tên Phim">
+                        </div>
+                        <div
+                            class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
+                            <input type="text" placeholder="ID nhà sản xuất">
+                        </div>
+                        <div
+                            class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
+                            <input type="text" placeholder="Đánh giá phim">
+                        </div>
+                        <div
+                            class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
+                            <input type="text" placeholder="Tuổi giới hạn">
+                        </div>
+                        <div
+                            class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
+                            <input type="text" placeholder="Trạng thái phim">
+                        </div>
+                        <div
+                            class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
+                            <input type="text" placeholder="Poster">
+                        </div>
+                        <div
+                            class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
+                            <input type="textarea" placeholder="Thông tin phim">
+                        </div>
+                        <div
+                            class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
+                            <input type="date" placeholder="Ngày phát hành">
+                        </div>
+                        <div
+                            class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
+                            <input type="date" placeholder="Ngày công chiếu">
+                        </div>
+                        <div
+                            class="d-flex flex-row justify-content-between align-items-center w-100 rounded-sm m-2">
+                            <input type="date" placeholder="Ngày ngừng chiếu">
+                        </div>
+                        <div class="d-flex flex-row justify-content-between align-items-center m-2">
+                            <button type="button" class="btn btn-warning btn-lg"><strong>Thêm</strong></button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </form>
     </div>
 
 </body>
+
 </html>
