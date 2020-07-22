@@ -63,6 +63,9 @@ public class AdminController {
         ResultSet rs = ud.getAll();
 
         while (rs.next()) {
+            if(rs.getInt("permission") == 2) {
+                continue;
+            }
             users.add(new User(rs.getInt("uId"), rs.getString("username"), rs.getString("password"), rs.getInt("nId"), rs.getInt("gender"), rs.getDate("birthday"), rs.getString("email"), rs.getString("address"),
                     rs.getString("phone"), rs.getDate("regisDate"), rs.getInt("permission")));
         }
