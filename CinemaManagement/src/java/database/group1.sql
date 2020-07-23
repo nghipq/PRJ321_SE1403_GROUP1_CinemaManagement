@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 13, 2020 at 03:47 AM
+-- Generation Time: Jul 23, 2020 at 04:50 PM
 -- Server version: 10.1.38-MariaDB
 -- PHP Version: 5.6.40
 
@@ -31,13 +31,20 @@ SET time_zone = "+00:00";
 CREATE TABLE `bill` (
   `bId` int(11) NOT NULL,
   `cusId` int(11) DEFAULT NULL,
-  `sId` int(11) DEFAULT '-1',
+  `sId` int(11) DEFAULT '1',
   `dateBuy` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `total` int(11) NOT NULL,
   `status` int(11) DEFAULT '0',
   `phone` varchar(15) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `name` varchar(50) COLLATE utf8_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `bill`
+--
+
+INSERT INTO `bill` (`bId`, `cusId`, `sId`, `dateBuy`, `total`, `status`, `phone`, `name`) VALUES
+(5, 2, 1, '2020-07-21 10:07:42', 270000, 1, '1234567890', 'nghi');
 
 -- --------------------------------------------------------
 
@@ -49,6 +56,15 @@ CREATE TABLE `billdetail` (
   `tId` int(11) DEFAULT NULL,
   `bId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `billdetail`
+--
+
+INSERT INTO `billdetail` (`tId`, `bId`) VALUES
+(56, 5),
+(21, 5),
+(22, 5);
 
 -- --------------------------------------------------------
 
@@ -107,6 +123,14 @@ CREATE TABLE `customers` (
   `totalTime` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`cusId`, `levelAccount`, `totalPrice`, `totalTime`) VALUES
+(2, 0, 0, '0000-00-00 00:00:00'),
+(3, 0, 0, '0000-00-00 00:00:00');
+
 -- --------------------------------------------------------
 
 --
@@ -115,7 +139,7 @@ CREATE TABLE `customers` (
 
 CREATE TABLE `films` (
   `fId` int(11) NOT NULL,
-  `fName` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
+  `fName` varchar(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL,
   `pId` int(11) DEFAULT NULL,
   `rating` int(11) NOT NULL,
   `limitAge` int(11) DEFAULT NULL,
@@ -123,7 +147,7 @@ CREATE TABLE `films` (
   `releaseDate` datetime NOT NULL,
   `airDate` datetime NOT NULL,
   `endDate` datetime NOT NULL,
-  `description` varchar(500) COLLATE utf8_vietnamese_ci DEFAULT NULL
+  `description` varchar(500) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
@@ -131,11 +155,12 @@ CREATE TABLE `films` (
 --
 
 INSERT INTO `films` (`fId`, `fName`, `pId`, `rating`, `limitAge`, `status`, `releaseDate`, `airDate`, `endDate`, `description`) VALUES
-(1, 'NGÔI ĐỀN KỲ QUÁI 2', 3, 10, 16, 0, '2020-07-03 07:00:00', '2020-07-06 07:00:00', '2020-08-06 23:59:00', NULL),
-(2, 'KẺ XÂM NHẬP\r\n', 1, 10, 16, 1, '2020-06-26 07:00:00', '2020-07-01 07:00:00', '2020-08-01 23:59:00', NULL),
-(3, 'PHI VỤ BÃO TỐ', 2, 10, 16, 1, '2020-07-03 07:00:00', '2020-07-06 07:00:00', '2020-08-06 23:59:00', NULL),
+(1, 'NGÔI ??N K? QUÁI 2', 2, 5, 16, 0, '2020-07-03 00:00:00', '2020-07-06 00:00:00', '2020-08-06 00:00:00', 'B? ?ôi kh?u nghi?p ?ã hoàn t?c quay l?i con ???ng t?o nghi?p nh?ng không may qu? báo ??n s?m, c?p ?ôi tr?i ?ánh suýt ch?t nhi?u l?n b?i l?i nguy?n bí ?n. H? ?ã ph?i quay l?i ??n tìm Nhong ?? tr? giúp phá gi?i l?i nguy?n. Li?u h? s? tìm ???c cách phá gi?i l?i nguy?n hay khi?n cho m?i th? tr? nên t?i t? h?n.'),
+(2, 'K? XÂM NH?P', 1, 5, 16, 1, '2020-06-26 00:00:00', '2020-07-01 00:00:00', '2020-08-01 00:00:00', NULL),
+(3, 'PHI V? BÃO T?', 3, 5, 16, 0, '2020-07-03 00:00:00', '2020-07-06 00:00:00', '2020-08-06 00:00:00', ''),
 (4, 'ANH THỢ SỬA ỐNG NƯỚC', 2, 10, 18, 1, '2020-07-03 07:00:00', '2020-07-06 07:00:00', '2020-08-06 23:59:00', NULL),
-(5, 'EM CHƯA 18', 1, 10, 18, 2, '2019-07-03 07:00:00', '2019-07-06 07:00:00', '2019-08-06 23:59:00', NULL);
+(5, 'EM CH?A 18', 1, 5, 18, 2, '2019-07-03 00:00:00', '2019-07-06 00:00:00', '2019-08-06 00:00:00', NULL),
+(6, 'Konosuba', 1, 5, 15, 0, '2020-07-25 00:00:00', '2020-07-28 00:00:00', '2020-08-31 00:00:00', NULL);
 
 -- --------------------------------------------------------
 
@@ -167,20 +192,22 @@ INSERT INTO `formality` (`fmId`, `fmName`, `description`, `ticketPrice`) VALUES
 CREATE TABLE `graphic` (
   `gId` int(11) NOT NULL,
   `fId` int(11) DEFAULT NULL,
-  `dateUpdate` datetime NOT NULL,
-  `path` varchar(100) COLLATE utf8_vietnamese_ci NOT NULL
+  `dateUpdate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `path` varchar(100) COLLATE utf8_vietnamese_ci NOT NULL,
+  `type` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Dumping data for table `graphic`
 --
 
-INSERT INTO `graphic` (`gId`, `fId`, `dateUpdate`, `path`) VALUES
-(1, 1, '2020-07-04 22:02:39', 'Ngoi_den_ki_quai.jpg'),
-(2, 2, '2020-07-04 22:02:39', 'Ke_xam_nhap.jpg'),
-(3, 3, '2020-07-04 22:02:39', 'phi_vu_bao_to.jpg'),
-(4, 4, '2020-07-04 22:02:39', 'sua-ong-nuoc.jpg'),
-(5, 5, '2020-07-04 22:02:39', 'Em_chưa_18.jpg');
+INSERT INTO `graphic` (`gId`, `fId`, `dateUpdate`, `path`, `type`) VALUES
+(1, 1, '2020-07-04 22:02:39', 'Ngoi_den_ki_quai.jpg', 1),
+(2, 2, '2020-07-04 22:02:39', 'Ke_xam_nhap.jpg', 1),
+(3, 3, '2020-07-04 22:02:39', 'phi_vu_bao_to.jpg', 1),
+(4, 4, '2020-07-04 22:02:39', 'sua-ong-nuoc.jpg', 1),
+(5, 5, '2020-07-04 22:02:39', 'Em_chưa_18.jpg', 1),
+(6, 6, '2020-07-23 21:30:49', '919Or1PT32L.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -217,7 +244,7 @@ CREATE TABLE `person` (
   `nId` int(11) DEFAULT NULL,
   `gender` int(11) NOT NULL,
   `birthday` datetime NOT NULL,
-  `description` varchar(1000) COLLATE utf8_vietnamese_ci DEFAULT NULL,
+  `description` varchar(1000) COLLATE utf8_vietnamese_ci NOT NULL,
   `rId` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
@@ -486,19 +513,20 @@ CREATE TABLE `schedule` (
   `fmId` int(11) DEFAULT NULL,
   `status` int(11) NOT NULL,
   `fId` int(11) DEFAULT NULL,
-  `rId` int(11) DEFAULT NULL
+  `rId` int(11) DEFAULT NULL,
+  `sDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
 
 --
 -- Dumping data for table `schedule`
 --
 
-INSERT INTO `schedule` (`scheId`, `sesId`, `fmId`, `status`, `fId`, `rId`) VALUES
-(1, 1, 1, 1, 3, 1),
-(2, 2, 2, 1, 1, 2),
-(3, 3, 1, 1, 5, 1),
-(4, 4, 2, 1, 2, 2),
-(5, 5, 1, 1, 4, 2);
+INSERT INTO `schedule` (`scheId`, `sesId`, `fmId`, `status`, `fId`, `rId`, `sDate`) VALUES
+(1, 6, 1, 1, 3, 1, '2020-07-24'),
+(2, 2, 2, 1, 1, 2, '2020-07-24'),
+(3, 3, 1, 1, 5, 1, '2020-07-25'),
+(4, 4, 2, 1, 2, 2, '2020-07-26'),
+(5, 5, 1, 1, 4, 2, '2020-07-27');
 
 -- --------------------------------------------------------
 
@@ -521,7 +549,8 @@ INSERT INTO `session` (`sesId`, `startTime`, `endTime`) VALUES
 (2, '15:50:00', '17:50:00'),
 (3, '18:15:00', '20:15:00'),
 (4, '20:30:00', '22:30:00'),
-(5, '22:45:00', '00:45:00');
+(5, '22:45:00', '00:45:00'),
+(6, '08:30:00', '10:30:00');
 
 -- --------------------------------------------------------
 
@@ -534,6 +563,13 @@ CREATE TABLE `staff` (
   `levelStaff` int(11) NOT NULL,
   `CMND` varchar(15) COLLATE utf8_vietnamese_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `staff`
+--
+
+INSERT INTO `staff` (`sId`, `levelStaff`, `CMND`) VALUES
+(1, 1, '');
 
 -- --------------------------------------------------------
 
@@ -553,7 +589,7 @@ CREATE TABLE `ticket` (
 --
 
 INSERT INTO `ticket` (`tId`, `scheId`, `seatId`, `status`) VALUES
-(1, 1, 1, 1),
+(1, 1, 1, 0),
 (2, 1, 2, 0),
 (3, 1, 3, 0),
 (4, 1, 4, 0),
@@ -573,8 +609,8 @@ INSERT INTO `ticket` (`tId`, `scheId`, `seatId`, `status`) VALUES
 (18, 1, 18, 0),
 (19, 1, 19, 0),
 (20, 1, 20, 0),
-(21, 1, 21, 0),
-(22, 1, 22, 0),
+(21, 1, 21, 1),
+(22, 1, 22, 1),
 (23, 1, 23, 0),
 (24, 1, 24, 0),
 (25, 1, 25, 0),
@@ -608,7 +644,7 @@ INSERT INTO `ticket` (`tId`, `scheId`, `seatId`, `status`) VALUES
 (53, 1, 53, 0),
 (54, 1, 54, 0),
 (55, 1, 55, 0),
-(56, 1, 56, 0),
+(56, 1, 56, 1),
 (57, 1, 57, 0),
 (58, 1, 58, 0),
 (59, 1, 59, 0),
@@ -705,15 +741,26 @@ CREATE TABLE `user` (
   `uId` int(11) NOT NULL,
   `username` varchar(25) COLLATE utf8_vietnamese_ci NOT NULL,
   `email` varchar(50) COLLATE utf8_vietnamese_ci NOT NULL,
-  `password` varchar(15) COLLATE utf8_vietnamese_ci NOT NULL,
+  `password` varchar(100) COLLATE utf8_vietnamese_ci NOT NULL,
   `birthday` datetime NOT NULL,
   `nId` int(11) DEFAULT NULL,
   `gender` int(11) NOT NULL,
   `address` varchar(500) COLLATE utf8_vietnamese_ci DEFAULT NULL,
   `phone` varchar(15) COLLATE utf8_vietnamese_ci NOT NULL,
   `regisDate` datetime DEFAULT CURRENT_TIMESTAMP,
-  `permission` int(11) DEFAULT NULL
+  `permission` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_vietnamese_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`uId`, `username`, `email`, `password`, `birthday`, `nId`, `gender`, `address`, `phone`, `regisDate`, `permission`, `status`) VALUES
+(1, 'staff', 'staff@gmail.com', '123', '2020-07-23 00:00:00', NULL, 0, 'can tho', '0832629473', '2020-07-21 00:00:00', 1, 1),
+(2, 'nghi', 'nghipq@gmail.com', '202cb962ac59075b964b07152d234b70', '2020-07-23 00:00:00', NULL, 1, 'can tho', '0832629473', '2020-07-21 00:00:00', 0, 1),
+(3, 'admin', 'admin@123', '202cb962ac59075b964b07152d234b70', '2020-07-22 00:00:00', NULL, 0, 'can tho', '0832629473', '2020-07-21 15:01:34', 2, 1),
+(6, 'com', 'com@gmail.com', '202cb962ac59075b964b07152d234b70', '2020-07-23 00:00:00', NULL, 0, 'can tho', '0832629473', '2020-07-21 09:48:51', 1, 1);
 
 --
 -- Indexes for dumped tables
@@ -872,7 +919,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bill`
 --
 ALTER TABLE `bill`
-  MODIFY `bId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `bId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `categories`
@@ -884,7 +931,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `films`
 --
 ALTER TABLE `films`
-  MODIFY `fId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `fId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `formality`
@@ -896,7 +943,7 @@ ALTER TABLE `formality`
 -- AUTO_INCREMENT for table `graphic`
 --
 ALTER TABLE `graphic`
-  MODIFY `gId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `gId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `nationality`
@@ -944,7 +991,7 @@ ALTER TABLE `schedule`
 -- AUTO_INCREMENT for table `session`
 --
 ALTER TABLE `session`
-  MODIFY `sesId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `sesId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `ticket`
@@ -962,7 +1009,7 @@ ALTER TABLE `updatehistory`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `uId` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `uId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- Constraints for dumped tables
@@ -980,7 +1027,7 @@ ALTER TABLE `bill`
 --
 ALTER TABLE `billdetail`
   ADD CONSTRAINT `billdetail_ibfk_1` FOREIGN KEY (`tId`) REFERENCES `ticket` (`tId`),
-  ADD CONSTRAINT `billdetail_ibfk_2` FOREIGN KEY (`bId`) REFERENCES `staff` (`sId`);
+  ADD CONSTRAINT `billdetail_ibfk_2` FOREIGN KEY (`bId`) REFERENCES `bill` (`bId`);
 
 --
 -- Constraints for table `categoryinfilm`
