@@ -151,4 +151,13 @@ public class UserDAO {
         }
         return 0;
     }
+    
+    public boolean updateStatusUser(String uId, int status) throws SQLException {
+        String sql = "update user set status = ? where uId = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, status);
+        pst.setInt(2, Integer.parseInt(uId));
+        
+        return pst.executeUpdate() > 0 ? true : false;
+    }
 }

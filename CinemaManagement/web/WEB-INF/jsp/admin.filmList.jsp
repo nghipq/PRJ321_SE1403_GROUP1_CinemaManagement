@@ -36,7 +36,6 @@
                 <td style="width: 8vw" class="text-center">
                     <strong>Trạng thái</strong>
                 </td>
-                <td style="width: 5vw"></td>
                 <td style="width: 6vw"></td>
             </tr>
 
@@ -75,11 +74,16 @@
                             </c:if>
                         </strong>
                     </td>
-                    <td class="text-center" style="width: 5vw">
-                        <a href="updateFilm.html?fId=${row.getfId()}">Edit</a>
-                    </td>
-                    <td class="text-center" style="width: 6vw">
-                        <a href="updateShowtimes.html?id=${row.getfId()}">Lịch chiếu</a>
+                    <td class="d-flex flex-column justify-content-center align-items-center text-center" style="width: 6vw">
+                        <a href="updateFilm.html?fId=${row.getfId()}" class="p-1">
+                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/pencil-alt-solid.svg"/>" alt="Cập nhật" class="w-100"/>
+                        </a>
+                        <a href="deleteFilm.html?fId=${row.getfId()}" class="p-1">
+                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/trash-alt-solid.svg"/>" alt="Xóa" class="w-100"/>
+                        </a>
+                        <a href="updateShowtimes.html?id=${row.getfId()}" class="p-1">
+                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/calendar-regular.svg"/>" alt="Xóa" class="w-100"/>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>

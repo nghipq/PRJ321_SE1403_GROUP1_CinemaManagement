@@ -23,14 +23,11 @@
                 <td style="width: 15vw">
                     <strong>Email</strong>
                 </td>
-                <td style="width: 10vw">
+                <td style="width: 14vw">
                     <strong>Phone</strong>
                 </td>
                 <td style="width: 5vw">
                     <strong>Gender</strong>
-                </td>
-                <td style="width: 5vw">
-                    <strong>Status</strong>
                 </td>
                 <td style="width: 5vw">
                     <strong></strong>
@@ -58,11 +55,13 @@
                             </c:if>
                         </strong>
                     </td>
-                    <td style="width: 6vw">
-                        <strong>Status</strong>
-                    </td>
                     <td style="width: 5vw">
-                        <a href="updateUser.html?id=${row.getuId()}">Edit</a>
+                        <a href="updateUser.html?id=${row.getuId()}">
+                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/pencil-alt-solid.svg"/>" alt="update" class="w-100"/>
+                        </a>
+                        <a href="deleteUser.html?uId=${row.getuId()}">
+                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/trash-alt-solid.svg"/>" alt="update" class="w-100"/>
+                        </a>
                     </td>
 
                 </tr>

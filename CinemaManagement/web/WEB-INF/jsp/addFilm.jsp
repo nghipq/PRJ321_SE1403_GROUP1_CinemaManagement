@@ -14,10 +14,14 @@
     <div class="text-center bg-dark text-warning p-2 rounded-sm border border-warning m-2" style="width: 35vw">
         <strong style=" font-size: 2rem">Thêm phim mới</strong>
     </div>
-    <form name="filmform" action="insertFilm.html" method="POST" class="d-flex flex-column justify-content-center align-items-center rounded-sm p-3 bg-dark" style="width: 35vw">
+    <form name="filmform" enctype="multipart/form-data" action="insertFilm.html" method="POST" class="d-flex flex-column justify-content-center align-items-center rounded-sm p-3 bg-dark" style="width: 35vw">
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Tên Phim:</label>
             <input type="text" name="fName" placeholder="Tên Phim" class="w-100 p-2 border border-warning rounded">
+        </div>
+        <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
+            <label class="text-white">POSTER:</label>
+            <input type="file" name="file" placeholder="Tên Phim" class="w-100 p-2 border border-warning rounded bg-white">
         </div>
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Nhà Sản Xuất:</label>

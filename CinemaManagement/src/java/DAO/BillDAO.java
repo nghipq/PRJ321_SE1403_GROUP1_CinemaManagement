@@ -71,19 +71,17 @@ public class BillDAO {
 
         return bill;
     }
-    
-    public ResultSet getIdBillByCustomer(int cusId) throws SQLException{
+
+    public ResultSet getIdBillByCustomer(int cusId) throws SQLException {
         String sql = "SELECT  * FROM `bill` WHERE `cusId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, cusId);
         ResultSet rs = ps.executeQuery();
-        
 
         return rs;
-        
 
     }
-    
+
     /**
      * Create new bill
      *
@@ -127,10 +125,21 @@ public class BillDAO {
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, sId);
         ps.setLong(2, total);
-        ps.setInt(3, bId);
-        ps.setInt(4, status);
-        ps.setString(5, phone);
-        ps.setString(6, name);
+        ps.setInt(3, status);
+        ps.setString(4, phone);
+        ps.setString(5, name);
+        ps.setInt(6, bId);
+
+        int rs = ps.executeUpdate();
+        return rs > 0 ? true : false;
+    }
+
+    public boolean updateBillStatus(int bId, int status) throws SQLException {
+        String sql = "UPDATE `bill` SET `status` = ? WHERE `bId` = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+
+        ps.setInt(1, status);
+        ps.setInt(2, bId);
 
         int rs = ps.executeUpdate();
         return rs > 0 ? true : false;

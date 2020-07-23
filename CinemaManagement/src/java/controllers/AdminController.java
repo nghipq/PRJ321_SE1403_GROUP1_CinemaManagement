@@ -7,11 +7,13 @@ package controllers;
 
 import DAO.BillDAO;
 import DAO.FilmDAO;
+import DAO.GraphicsDAO;
 import DAO.RoomSeatDAO;
 import DAO.ScheduleDAO;
 import DAO.SessionDAO;
 import DAO.TicketDAO;
 import DAO.UserDAO;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Paths;
@@ -31,6 +33,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  *
@@ -47,6 +50,9 @@ public class AdminController {
         ResultSet rs = fd.getAll();
 
         while (rs.next()) {
+            if (rs.getInt("status") == 2) {
+                continue;
+            }
             films.add(new Films(rs.getInt("fId"), rs.getString("fName"), rs.getString("description"), rs.getInt("pId"),
                     rs.getDate("releaseDate"), rs.getInt("rating"),
                     rs.getInt("limitAge"), rs.getInt("status"), rs.getDate("airDate"), rs.getDate("endDate")));
@@ -67,6 +73,11 @@ public class AdminController {
             if (rs.getInt("permission") == 2) {
                 continue;
             }
+
+            if (rs.getInt("status") == 0) {
+                continue;
+            }
+
             users.add(new User(rs.getInt("uId"), rs.getString("username"), rs.getString("password"), rs.getInt("nId"), rs.getInt("gender"), rs.getDate("birthday"), rs.getString("email"), rs.getString("address"),
                     rs.getString("phone"), rs.getDate("regisDate"), rs.getInt("permission")));
         }
@@ -83,6 +94,9 @@ public class AdminController {
 
         ResultSet rs = bd.getAll();
         while (rs.next()) {
+            if(rs.getInt("status") == 2) {
+                continue;
+            }
             bills.add(new Bill(rs.getInt("bId"), rs.getInt("cusId"), rs.getInt("sId"),
                     rs.getDate("dateBuy"), rs.getLong("total"), rs.getString("name"), rs.getString("phone"), rs.getInt("status")));
         }
@@ -99,6 +113,9 @@ public class AdminController {
 
         ResultSet rs = sched.getAll();
         while (rs.next()) {
+            if (rs.getInt("status") == 0) {
+                continue;
+            }
             schedules.add(new Scheldule(rs.getInt("scheId"), rs.getInt("fId"), rs.getInt("sesId"), rs.getInt("fmId"), rs.getInt("status"), rs.getInt("rId")));
         }
 
@@ -184,21 +201,22 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"/insertFilm"}, method = RequestMethod.POST)
-    public String insertFilmSuccess(ModelMap mm, HttpServletResponse response, HttpServletRequest request) throws IOException, ServletException {
+    public String insertFilmSuccess(ModelMap mm, @RequestParam("file") MultipartFile file, String fName, String fProducer, String fAge, String fStatus,
+            String fInfo, String fRelease, String fStartTime, String fEndTime, HttpServletRequest request) throws IOException, ServletException {
         try {
-            Part filePart = request.getPart("fPoster"); // Retrieves <input type="file" name="file">
-            String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-
-            String fName = request.getParameter("fName");
-            String fpro = request.getParameter("fProducer");
-            String fage = request.getParameter("fAge");
-            String fstatus = request.getParameter("fStatus");
-            String finfo = request.getParameter("fInfo");
-            String frelease = request.getParameter("fRelease");
-            String fstarttime = request.getParameter("fStartTime");
-            String fendtime = request.getParameter("fEndTime");
             FilmDAO fdao = new FilmDAO();
-            fdao.createFilm(fName, Integer.parseInt(fpro), frelease, Integer.parseInt(fage), fstarttime, fendtime);
+            fdao.createFilm(fName, Integer.parseInt(fProducer), fRelease, Integer.parseInt(fAge), fStartTime, fEndTime);
+            int fId = fdao.maxFilm();
+            
+            GraphicsDAO gd = new GraphicsDAO();
+            String path = request.getSession().getServletContext().getRealPath("/") + "resources/image/";
+            String filePath = path + file.getOriginalFilename();
+            File upload = new File(filePath);
+            file.transferTo(upload);
+            
+            gd.insertFilmGraphics(fId, file.getOriginalFilename(), 1);
+            
+            
             return "redirect:/admins/filmList.html";
         } catch (SQLException ex) {
             return "redirect:/admins/insertFilm.html";
@@ -236,5 +254,59 @@ public class AdminController {
         }
 
         return "redirect:/admins/filmList.html";
+    }
+
+    @RequestMapping(value = {"/deleteFilm"}, method = RequestMethod.GET)
+    public String deleteFilmSuccess(ModelMap mm, @RequestParam String fId) throws UnsupportedEncodingException {
+        try {
+            FilmDAO fdao = new FilmDAO();
+            Films film = fdao.getFilmsById(Integer.parseInt(fId));
+
+            String fName = film.getfName();
+            int fpro = film.getpId();
+            int fage = film.getLimitAge();
+            String finfo = film.getDescription();
+            String frelease = film.getReleaseDate().toString();
+            String fstarttime = film.getAirDate().toString();
+            String fendtime = film.getEndDate().toString();
+
+            fdao.updateFilm(Integer.parseInt(fId), fName, fpro, frelease, 5, fage, 2, fstarttime, fendtime, finfo);
+
+        } catch (SQLException ex) {
+        }
+
+        return "redirect:/admins/filmList.html";
+    }
+
+    @RequestMapping(value = {"/deleteUser"}, method = RequestMethod.GET)
+    public String deleteUserSuccess(ModelMap mm, @RequestParam String uId) throws SQLException {
+        UserDAO ud = new UserDAO();
+        ud.updateStatusUser(uId, 0);
+        return "redirect:/admins/filmList.html";
+    }
+
+    @RequestMapping(value = {"updateBill"}, method = RequestMethod.GET)
+    public String updateBillAction(ModelMap mm, @RequestParam String bId) throws SQLException {
+        BillDAO bd = new BillDAO();
+        Bill bill = bd.getBillById(Integer.parseInt(bId));
+
+        mm.put("bill", bill);
+        return "updateBill";
+    }
+
+    @RequestMapping(value = {"updateBill"}, method = RequestMethod.POST)
+    public String updateBillSuccess(ModelMap mm, @RequestParam String bId, String bName, String bPhone, String bTotal, String bStatus) throws SQLException {
+        BillDAO bd = new BillDAO();
+        
+        bd.updateBill(Integer.parseInt(bId), 1, Long.parseLong(bTotal), Integer.parseInt(bStatus), bPhone, bName);
+        return "redirect:/admins/billList.html";
+    }
+    
+        @RequestMapping(value = {"/deleteBill"}, method = RequestMethod.GET)
+    public String deleteBillSuccess(ModelMap mm, @RequestParam String bId) throws SQLException {
+        BillDAO bd = new BillDAO();
+        bd.updateBillStatus(Integer.parseInt(bId), 2);
+        
+        return "redirect:/admins/billList.html";
     }
 }

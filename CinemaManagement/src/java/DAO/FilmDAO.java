@@ -13,6 +13,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import models.*;
 import org.springframework.messaging.tcp.reactor.ReactorNettyTcpClient;
 
@@ -53,7 +55,7 @@ public class FilmDAO {
      * @return
      */
     public String getFilmPoster(int id) throws SQLException {
-        String sql = "SELECT * FROM `graphic` WHERE `fId` = ?";
+        String sql = "SELECT * FROM `graphic` WHERE `fId` = ? and `type` = 1";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, id);
 
@@ -62,7 +64,7 @@ public class FilmDAO {
 
         try {
             rs = ps.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 imgPath = rs.getString("path");
             }
         } catch (Exception e) {};
@@ -197,6 +199,23 @@ public class FilmDAO {
         };
 
         return false;
+    }
+    
+        public int maxFilm() {
+        String sql = "Select max(fId) as fId from films";
+
+        PreparedStatement st;
+        try {
+            st = conn.prepareStatement(sql);
+            ResultSet rs = st.executeQuery();
+            if (rs.next()) {
+                return rs.getInt("fId");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(FilmDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return 0;
     }
 
     /**

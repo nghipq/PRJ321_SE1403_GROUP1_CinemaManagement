@@ -25,8 +25,10 @@
                 <td class="d-flex flex-row justify-content-center align-items-center" style="width: 15vw; text-align: center">
                     <strong>Ngày đặt</strong>
                 </td>
-                <td class="d-flex flex-row justify-content-center align-items-center" style="width: 8vw; text-align: center">
+                <td class="d-flex flex-row justify-content-center align-items-center" style="width: 10vw; text-align: center">
                     <strong>Trạng thái</strong>
+                </td>
+                <td class="d-flex flex-row justify-content-center align-items-center" style="width: 5vw; text-align: center">
                 </td>
             </tr>
 
@@ -46,10 +48,23 @@
                     <td class="d-flex flex-row justify-content-center align-items-center w-5" style="width: 15vw">
                         <strong>${row.getDateBuy()}</strong>
                     </td>
-                    <td class="d-flex flex-row justify-content-center align-items-center w-5" style="width: 8vw">
-                        <strong>${row.getStatus()}</strong>
+                    <td class="d-flex flex-row justify-content-center align-items-center w-5" style="width: 10vw">
+                        
+                            <c:if test="${row.getStatus() == 0}">
+                                <strong class="text-danger">Chưa thanh toán</strong>
+                            </c:if>
+                            <c:if test="${row.getStatus() == 1}">
+                                <strong class="text-success">Đã thanh toán</strong>
+                            </c:if>
                     </td>
-
+                    <td class="d-flex flex-column justify-content-center align-items-center text-center" style="width: 6vw">
+                        <a href="updateBill.html?bId=${row.getbId()}" class="p-1">
+                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/pencil-alt-solid.svg"/>" alt="Cập nhật" class="w-100"/>
+                        </a>
+                        <a href="deleteBill.html?bId=${row.getbId()}" class="p-1">
+                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/trash-alt-solid.svg"/>" alt="Xóa" class="w-100"/>
+                        </a>
+                    </td>
                 </tr>
             </c:forEach>
         </table>

@@ -17,7 +17,7 @@ import models.*;
  * @author GF63 8RD
  */
 public class FormalityDAO {
-        private Connection conn;
+    private Connection conn;
 
     public FormalityDAO() {
         this.conn = new DBConnection().getDBConnection();

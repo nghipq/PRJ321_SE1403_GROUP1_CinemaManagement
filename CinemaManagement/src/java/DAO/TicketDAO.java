@@ -94,7 +94,7 @@ public class TicketDAO {
             count -= 1;
         }
         
-        details.add(count + " ghế trống");
+        details.add(count + "/64");
         
         return details;
     }

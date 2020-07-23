@@ -30,7 +30,7 @@
                 <td class="d-flex flex-row justify-content-center align-items-center" style="width: 15vw; text-align: center">
                     <strong>Ngày Chiếu</strong>
                 </td>
-                <td class="d-flex flex-row justify-content-center align-items-center" style="width: 15vw; text-align: center">
+                <td class="d-flex flex-row justify-content-center align-items-center" style="width: 10vw; text-align: center">
                     <strong>Số Ghế Trống</strong>
                 </td>
             </tr>
@@ -57,7 +57,7 @@
                     <td class="d-flex flex-row justify-content-center align-items-center w-5" style="width: 15vw">
                         <strong>0</strong>
                     </td>
-                    <td class="d-flex flex-row justify-content-center align-items-center w-5" style="width: 15vw">
+                    <td class="d-flex flex-row justify-content-center align-items-center w-5" style="width: 10vw">
                         <strong>${details.get(1)}</strong>
                     </td>
                 </tr>

@@ -6,28 +6,18 @@
 package controllers;
 
 import DAO.CustomerDAO;
-import java.sql.ResultSet;
 import javax.servlet.http.HttpSession;
-import models.User;
-import DAO.UserDAO;
-import java.io.IOException;
+import models.*;
+import DAO.*;
 import java.sql.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.request;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.request;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -84,7 +74,7 @@ public class UserController {
             }
         } else {
             mm.put("message", "Không hợp lệ");
-            return "redirect:/auth";
+            return "redirect:/auth.html";
         }
     }
 
