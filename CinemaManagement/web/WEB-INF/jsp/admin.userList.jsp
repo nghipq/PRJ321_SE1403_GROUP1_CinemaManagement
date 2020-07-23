@@ -17,35 +17,52 @@
     <div class="d-flex flex-column justify-content-start align-items-center p-5" style="width: 80vw;">
         <table>
             <tr class="d-flex flex-row justify-content-between align-items-center p-3 w-100 border border-warning rounded-sm m-2 bg-dark text-warning">
-                <td style="width: 12vw">
+                <td class="text-center" style="width: 12vw">
                     <strong>Name</strong>
                 </td>
-                <td style="width: 15vw">
+                <td class="text-center" style="width: 5vw">
+                    <strong>Role</strong>
+                </td>
+                <td class="text-center" style="width: 15vw">
                     <strong>Email</strong>
                 </td>
-                <td style="width: 14vw">
+                <td class="text-center" style="width: 10vw">
                     <strong>Phone</strong>
                 </td>
-                <td style="width: 5vw">
+                <td class="text-center" style="width: 14vw">
+                    <strong>Address</strong>
+                </td>
+                <td class="text-center" style="width: 5vw">
                     <strong>Gender</strong>
                 </td>
-                <td style="width: 5vw">
+                <td class="text-center" style="width: 5vw">
                     <strong></strong>
                 </td>
             </tr>
             <c:forEach var="row" items="${user}">
                 <tr class="d-flex flex-row justify-content-between align-items-center p-3 w-100 border border-dark rounded-sm m-2  bg-white text-dark">
 
-                    <td style="width: 12vw">
+                    <td class="text-center" style="width: 12vw">
                         <strong>${row.getUsername()}</strong>
                     </td>
-                    <td style="width: 15vw">
+                    <td class="text-center" style="width: 5vw">
+                        <c:if test="${row.getPremission() == 0}">
+                            <strong class="text-success">Customer</strong>
+                        </c:if>
+                        <c:if test="${row.getPremission() == 1}">
+                            <strong class="text-primary">Staff</strong>
+                        </c:if>
+                    </td>
+                    <td class="text-center" style="width: 15vw">
                         <strong>${row.getEmail()}</strong>
                     </td>
-                    <td style="width: 14vw">
+                    <td class="text-center" style="width: 10vw">
                         <strong>${row.getPhone()}</strong>
                     </td>
-                    <td style="width: 5vw">
+                    <td class="text-center" style="width: 14vw">
+                        <strong>${row.getAddress()}</strong>
+                    </td>
+                    <td class="text-center" style="width: 5vw">
                         <strong>
                             <c:if var="item" test="${row.getGender() == 0}">
                                 Female
@@ -55,7 +72,7 @@
                             </c:if>
                         </strong>
                     </td>
-                    <td style="width: 5vw">
+                    <td class="text-center" style="width: 5vw">
                         <a href="updateUser.html?id=${row.getuId()}">
                             <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/pencil-alt-solid.svg"/>" alt="update" class="w-100"/>
                         </a>

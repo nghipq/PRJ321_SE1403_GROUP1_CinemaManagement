@@ -38,7 +38,7 @@
                 <tr class="d-flex flex-row justify-content-start align-items-center p-3 w-100 border border-warning rounded-sm m-2 bg-white text-dark "> 
                     <c:set var="scheId" value="${row.getScheId()}"/>
                     <c:set var="fId" value="${row.getfId()}"/>
-                    <c:set var="sesId" value="${row.getfId()}"/>
+                    <c:set var="sesId" value="${row.getSesId()}"/>
                     <c:set var="rId" value="${row.getrId()}"/>
                     <%
                         String filmName = fd.getFilmsById(Integer.parseInt(pageContext.getAttribute("fId").toString())).getfName();
@@ -55,10 +55,18 @@
                         <strong>${details.get(0)}</strong>
                     <td>
                     <td class="d-flex flex-row justify-content-center align-items-center w-5" style="width: 15vw">
-                        <strong>0</strong>
+                        <strong>${row.getsDate().toString()}</strong>
                     </td>
                     <td class="d-flex flex-row justify-content-center align-items-center w-5" style="width: 10vw">
                         <strong>${details.get(1)}</strong>
+                    </td>
+                    <td class="text-center" style="width: 5vw">
+                        <a href="updateSchedule.html?scheId=${row.getScheId()}">
+                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/pencil-alt-solid.svg"/>" alt="update" class="w-100"/>
+                        </a>
+                        <a href="deleteSchedule.html?scheId=${row.getScheId()}">
+                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/trash-alt-solid.svg"/>" alt="update" class="w-100"/>
+                        </a>
                     </td>
                 </tr>
             </c:forEach>

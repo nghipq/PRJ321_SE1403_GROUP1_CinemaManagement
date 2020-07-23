@@ -7,9 +7,11 @@ package DAO;
 
 import database.DBConnection;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +40,7 @@ public class ScheduleDAO {
         try {
             rs = ps.executeQuery();
             if (rs.next()) {
-                return new Scheldule(scheId, rs.getInt("fId"), rs.getInt("sesId"), rs.getInt("fmId"), rs.getInt("status"), rs.getInt("rId"));
+                return new Scheldule(scheId, rs.getInt("fId"), rs.getInt("sesId"), rs.getInt("fmId"), rs.getInt("status"), rs.getInt("rId"), rs.getDate("sDate"));
             } else {
                 return null;
             }
@@ -48,7 +50,7 @@ public class ScheduleDAO {
     }
 
     public ResultSet getAll() throws SQLException {
-        String sql = "SELECT * FROM `schedule`";
+        String sql = "SELECT * FROM schedule JOIN session on schedule.sesId = session.sesId ORDER BY session.startTime ASC, schedule.sDate ASC";
         PreparedStatement ps = conn.prepareStatement(sql);
 
         ResultSet rs = null;
@@ -72,6 +74,21 @@ public class ScheduleDAO {
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, id);
 
+        ResultSet rs = null;
+        try {
+            rs = ps.executeQuery();
+        } catch (Exception e) {
+        }
+
+        return rs;
+    }
+    
+        public ResultSet getScheduleByFilmIdandDate(int id, String sDate) throws SQLException {
+        String sql = "SELECT * FROM `schedule` WHERE `fId` = ? and sDate = ?";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setInt(1, id);
+        ps.setDate(2, Date.valueOf(sDate));
+        
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
@@ -115,12 +132,12 @@ public class ScheduleDAO {
      * @return
      * @throws SQLException
      */
-    public HashMap<Integer, Scheldule> getSchedulesDetail(int fId) throws SQLException {
+    public HashMap<Integer, Scheldule> getSchedulesDetail(int fId, String sDate) throws SQLException {
         SessionDAO sed = new SessionDAO();
         TicketDAO td = new TicketDAO();
 
         HashMap<Integer, Scheldule> schedules = new HashMap<>();
-        ResultSet schedulesList = getScheduleByFilmId(fId);
+        ResultSet schedulesList = getScheduleByFilmIdandDate(fId, sDate);
         Session ses = null;
         int count = 64;
 
@@ -141,7 +158,8 @@ public class ScheduleDAO {
                             schedulesList.getInt("sesId"),
                             schedulesList.getInt("fmId"),
                             schedulesList.getInt("status"),
-                            schedulesList.getInt("rId")));
+                            schedulesList.getInt("rId"),
+                            schedulesList.getDate("sDate")));
 
             count = 64;
         }
@@ -149,14 +167,15 @@ public class ScheduleDAO {
         return schedules;
     }
 
-    public boolean createSchedule(int sesId, int fmId, int status, int rId, int fId) throws SQLException {
-        String sql = "INSERT INTO `schedule`(`sesId`, `fmId`, `status`, `rId`, `fId`) values (?, ?, ?, ?, ?)";
+    public boolean createSchedule(int sesId, int fmId, int status, int rId, int fId, String sDate) throws SQLException {
+        String sql = "INSERT INTO `schedule`(`sesId`, `fmId`, `status`, `rId`, `fId`, `sDate`) values (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, sesId);
         ps.setInt(2, fmId);
         ps.setInt(3, status);
         ps.setInt(4, rId);
         ps.setInt(5, fId);
+        ps.setDate(6, Date.valueOf(sDate));
 
         try {
             int insert = ps.executeUpdate();
@@ -184,10 +203,10 @@ public class ScheduleDAO {
         }
         return 0;
     }
-
-    public int getSession() {
-        String sql = "select * form sc";
-
-        return 0;
+    
+    public void autoUpdateSchedule() throws SQLException {
+        String sql = "update schedule set status = 0 where sDate < CURRENT_DATE";
+        Statement st = conn.createStatement();
+        st.execute(sql);
     }
 }

@@ -4,6 +4,10 @@
     Author     : phamq
 --%>
 
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="DAO.TicketDAO"%>
 <%@page import="DAO.ScheduleDAO"%>
@@ -15,7 +19,10 @@
 
 <%@include file="header.jsp" %>
 <link href="<c:url value="/resources/css/film.css"/>" rel="stylesheet"/>
-
+<%
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat eFormat = new SimpleDateFormat("E");
+%>
 <div class="container">
     <div class="col bg-white mt-2 mb-2">
         <div class="border-bottom mb-3">
@@ -25,8 +32,7 @@
             <c:forEach var="film" items="${films}">
                 <div class="item" style="width: 10rem; height: 15rem;">
                     <c:set var="fId" value="${film.getfId()}"/>
-                    <%
-                        int fId = Integer.parseInt(pageContext.getAttribute("fId").toString());
+                    <%                        int fId = Integer.parseInt(pageContext.getAttribute("fId").toString());
                         String imgPath = "/resources/image/" + new FilmDAO().getFilmPoster(fId);
                         pageContext.setAttribute("imgPath", imgPath);
                     %>
@@ -46,23 +52,39 @@
         </div>
         <nav aria-label="Page navigation example">
             <ul class="pagination justify-content-start">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">T2</a></li>
-                <li class="page-item"><a class="page-link" href="#">T3</a></li>
-                <li class="page-item"><a class="page-link" href="#">T4</a></li>
-                <li class="page-item"><a class="page-link" href="#">T5</a></li>
-                <li class="page-item"><a class="page-link" href="#">T6</a></li>
-                <li class="page-item"><a class="page-link" href="#">T7</a></li>
-                <li class="page-item"><a class="page-link" href="#">CN</a></li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
+                <%
+                    Calendar eCal = Calendar.getInstance();
+                    eCal.setTime(new Date());
+                %>
+                <li class="page-item"><a class="page-link" href="?date=0"><%=eFormat.format(eCal.getTime())%></a></li>
+                <%
+                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                %>
+                <li class="page-item"><a class="page-link" href="?date=1"><%=eFormat.format(eCal.getTime())%></a></li>
+                <%
+                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                %>
+                <li class="page-item"><a class="page-link" href="?date=2"><%=eFormat.format(eCal.getTime())%></a></li>
+                <%
+                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                %>
+                <li class="page-item"><a class="page-link" href="?date=3"><%=eFormat.format(eCal.getTime())%></a></li>
+                <%
+                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                %>
+                <li class="page-item"><a class="page-link" href="?date=4"><%=eFormat.format(eCal.getTime())%></a></li>
+                <%
+                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                %>
+                <li class="page-item"><a class="page-link" href="?date=5"><%=eFormat.format(eCal.getTime())%></a></li>
+                <%
+                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                %>
+                <li class="page-item"><a class="page-link" href="?date=6"><%=eFormat.format(eCal.getTime())%></a></li>
             </ul>
         </nav>
         <div class="col">
-            <c:forEach var="film" items="${films}">
+            <c:forEach var="film" items="${filmsNow}">
                 <div class="row border bg-white rounded m-3">
                     <div class="d-flex flex-column justify-content-center align-items-center col-md-2 col-12">
                         <c:set var="fId" value="${film.getfId()}"/>
@@ -83,8 +105,21 @@
                             <div class="border row p-2">
                                 <%
                                     ScheduleDAO sd = new ScheduleDAO();
-                                    HashMap<Integer, Scheldule> schedules = sd.getSchedulesDetail(Integer.parseInt(pageContext.getAttribute("fId").toString()));
-                                    pageContext.setAttribute("schedules", schedules);
+                                    if(request.getParameter("date") == null) {
+      
+                                        HashMap<Integer, Scheldule> schedules = sd.getSchedulesDetail(Integer.parseInt(pageContext.getAttribute("fId").toString()), format.format(new Date()));
+                                        pageContext.setAttribute("schedules", schedules);
+                                    } else {
+                                        int changeDate = Integer.parseInt(request.getParameter("date"));
+                                        Calendar cal = Calendar.getInstance();
+                                        cal.setTime(new Date());
+                                        cal.add(GregorianCalendar.DAY_OF_MONTH, changeDate);
+                                        
+                                        HashMap<Integer, Scheldule> schedules = sd.getSchedulesDetail(Integer.parseInt(pageContext.getAttribute("fId").toString()), format.format(cal.getTime()));
+                                        pageContext.setAttribute("schedules", schedules);
+                                    }
+                                    
+                                    
                                 %>
                                 <c:forEach var="schedule" items="${schedules}">
                                     <a href="/cinemaManagement/room.html?rId=${schedule.value.getrId()}&scheId=${schedule.key}&fId=${schedule.value.getfId()}">
@@ -119,11 +154,11 @@
                     <a href="#"  style="color: #635423;">VIỄN TƯỞNG</a>
                 </h6>
                 <div class="d-flex flex-row justify-content-between align-items-center">
-                    <h5 class="p-3" style="color: #635423;">TÊN PHIM</h5>
-                    <h5 class="p-3" style="color: #635423;">NGÀY RA MẮT: 0/0/0</h5>
+                    <h5 class="p-3" id="film-name" style="color: #635423;">TÊN PHIM</h5>
+                    <h5 class="p-3" id="film-date" style="color: #635423;">NGÀY RA MẮT: 0/0/0</h5>
                 </div>
                 <div>
-                    <p class="p-3" style="color: #635423;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt itaque unde veniam aliquam error et vel! Perferendis nam vero itaque ullam rem placeat ut nesciunt repellat quod, fuga dicta unde?</p>
+                    <p class="p-3" id="film-info" style="color: #635423;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt itaque unde veniam aliquam error et vel! Perferendis nam vero itaque ullam rem placeat ut nesciunt repellat quod, fuga dicta unde?</p>
                 </div>
             </div>
             <div class="col-12 col-md-6 text-center">
@@ -136,28 +171,44 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-lg-3 col-md-4 col-6 d-flex flex-column justify-content-center align-items-center p-4">
-                <a href="#">
-                    <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6 d-flex flex-column justify-content-center align-items-center p-4">
-                <a href="#">
-                    <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6 d-flex flex-column justify-content-center align-items-center p-4">
-                <a href="#">
-                    <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                </a>
-            </div>
-            <div class="col-lg-3 col-md-4 col-6 d-flex flex-column justify-content-center align-items-center p-4">
-                <a href="#">
-                    <img src="<c:url value="/resources/image/Em_chưa_18.jpg"/>" alt="poster" class="w-100" />
-                </a>
-            </div>
+        <div class="owl-carousel px-5 owl-theme mt-3">
+            <c:forEach var="film" items="${filmsNew}">
+                <div class="item" style="width: 14rem; height: 20rem;" onclick='changeFilm(${film.getfId()})'>
+                    <c:set var="fId2" value="${film.getfId()}"/>
+                    <%  int fId2 = Integer.parseInt(pageContext.getAttribute("fId2").toString());
+                        String imgPath2 = "/resources/image/" + new FilmDAO().getFilmPoster(fId2);
+                        pageContext.setAttribute("imgPath2", imgPath2);
+                    %>
+                    <img src="<c:url value="${imgPath2}"/>" alt="${film.getfName()}" class="w-100 h-100"/>
+                </div>
+            </c:forEach>
         </div>
     </div>
 </div>
+<script>
+    var filmsJSON = ${filmsJSON}
+
+    var arr = [];
+
+    for (var x in filmsJSON) {
+        arr.push(filmsJSON[x]);
+    }
+
+    var filmName = document.getElementById("film-name")
+    var filmDate = document.getElementById("film-date")
+    var filmInfo = document.getElementById("film-info")
+
+    console.log(arr[0])
+
+    filmName.textContent = arr[0]["fName"]
+    filmDate.textContent = arr[0]["airDate"]
+    filmInfo.textContent = arr[0]["description"]
+
+    function changeFilm(fId) {
+        var film = arr.filter(x => x["fId"] == parseInt(fId) )
+        filmName.textContent = film[0]["fName"]
+        filmDate.textContent = film[0]["airDate"]
+        filmInfo.textContent = film[0]["description"]
+    }
+</script>
 <%@include file="footer.jsp" %>

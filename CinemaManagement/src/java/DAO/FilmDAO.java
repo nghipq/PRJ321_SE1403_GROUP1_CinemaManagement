@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -261,5 +262,14 @@ public class FilmDAO {
         Ticket ticket = tDao.getTicketById(billDetail.gettId());
         Scheldule scheldule = sDao.getScheduleById(ticket.getScheId());
         return getFilmsById(scheldule.getfId());
+    }
+    
+    public void autoUpdateFilm() throws SQLException {
+        String sql = "update films set status = 1 where airDate <= CURRENT_DATE and endDate >= CURRENT_DATE";
+        Statement st = conn.createStatement();
+        st.execute(sql);
+        
+        sql = "update films set status = 2 where endDate < CURRENT_DATE";
+        st.execute(sql);
     }
 }

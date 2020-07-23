@@ -4,6 +4,10 @@
     Author     : phamq
 --%>
 
+<%@page import="java.util.GregorianCalendar"%>
+<%@page import="java.util.Date"%>
+<%@page import="java.util.Calendar"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="models.Scheldule"%>
 <%@page import="org.springframework.scheduling.annotation.Scheduled"%>
 <%@page import="java.util.ArrayList"%>
@@ -16,10 +20,12 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-12">
-                <%
+                <%                    
                     FilmDAO fd = new FilmDAO();
                     String imgPath = "/resources/image/" + fd.getFilmPoster(Integer.parseInt(request.getParameter("id")));
                     pageContext.setAttribute("imgPath", imgPath);
+                    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                    SimpleDateFormat eFormat = new SimpleDateFormat("E");
                 %>
                 <img class="w-100" src="<c:url value="${imgPath}"/>" alt="poster"/>
             </div>
@@ -37,14 +43,6 @@
                     <label>Thể Loại:</label>
                     <a>${categories}</a>
                 </div>
-                <!--                <div class="formality">
-                                    <label>Độ dài:</label>
-                                    <a>115 phút</a>
-                                </div>-->
-                <!--                <div class="formality">
-                                    <label>Ngôn ngữ:</label>
-                                    <a>Phụ đề tiếng Việt</a>
-                                </div>-->
                 <div class="formality">
                     <label>Ban Age:</label>
                     <a>${film.getLimitAge()}+ - Phim cấm khán giả dưới ${film.getLimitAge()} tuổi</a>
@@ -68,19 +66,35 @@
                 <div class="days row">
                     <nav aria-label="Page navigation example">
                         <ul class="pagination justify-content-start">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" tabindex="-1">Previous</a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">T2</a></li>
-                            <li class="page-item"><a class="page-link" href="#">T3</a></li>
-                            <li class="page-item"><a class="page-link" href="#">T4</a></li>
-                            <li class="page-item"><a class="page-link" href="#">T5</a></li>
-                            <li class="page-item"><a class="page-link" href="#">T6</a></li>
-                            <li class="page-item"><a class="page-link" href="#">T7</a></li>
-                            <li class="page-item"><a class="page-link" href="#">CN</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#">Next</a>
-                            </li>
+                            <%
+                                Calendar eCal = Calendar.getInstance();
+                                eCal.setTime(new Date());
+                            %>
+                            <li class="page-item"><a class="page-link" href="?date=0&id=${film.getfId()}"><%=eFormat.format(eCal.getTime())%></a></li>
+                                <%
+                                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                                %>
+                            <li class="page-item"><a class="page-link" href="?date=1&id=${film.getfId()}"><%=eFormat.format(eCal.getTime())%></a></li>
+                                <%
+                                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                                %>
+                            <li class="page-item"><a class="page-link" href="?date=2&id=${film.getfId()}"><%=eFormat.format(eCal.getTime())%></a></li>
+                                <%
+                                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                                %>
+                            <li class="page-item"><a class="page-link" href="?date=3&id=${film.getfId()}"><%=eFormat.format(eCal.getTime())%></a></li>
+                                <%
+                                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                                %>
+                            <li class="page-item"><a class="page-link" href="?date=4&id=${film.getfId()}"><%=eFormat.format(eCal.getTime())%></a></li>
+                                <%
+                                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                                %>
+                            <li class="page-item"><a class="page-link" href="?date=5&id=${film.getfId()}"><%=eFormat.format(eCal.getTime())%></a></li>
+                                <%
+                                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                                %>
+                            <li class="page-item"><a class="page-link" href="?date=6&id=${film.getfId()}"><%=eFormat.format(eCal.getTime())%></a></li>
                         </ul>
                     </nav>
                 </div>

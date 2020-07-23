@@ -94,7 +94,7 @@ public class AdminController {
 
         ResultSet rs = bd.getAll();
         while (rs.next()) {
-            if(rs.getInt("status") == 2) {
+            if (rs.getInt("status") == 2) {
                 continue;
             }
             bills.add(new Bill(rs.getInt("bId"), rs.getInt("cusId"), rs.getInt("sId"),
@@ -116,7 +116,7 @@ public class AdminController {
             if (rs.getInt("status") == 0) {
                 continue;
             }
-            schedules.add(new Scheldule(rs.getInt("scheId"), rs.getInt("fId"), rs.getInt("sesId"), rs.getInt("fmId"), rs.getInt("status"), rs.getInt("rId")));
+            schedules.add(new Scheldule(rs.getInt("scheId"), rs.getInt("fId"), rs.getInt("sesId"), rs.getInt("fmId"), rs.getInt("status"), rs.getInt("rId"), rs.getDate("sDate")));
         }
 
         mm.put("schedules", schedules);
@@ -147,7 +147,7 @@ public class AdminController {
             session = sed.createSession(startTime, endTime);
         }
 
-        if (sched.createSchedule(session.getSesId(), Integer.parseInt(fmId), 1, Integer.parseInt(rId), Integer.parseInt(sId))) {
+        if (sched.createSchedule(session.getSesId(), Integer.parseInt(fmId), 1, Integer.parseInt(rId), Integer.parseInt(sId), dateRealease)) {
             int scheId = sched.getMaxScheId();
             RoomSeatDAO rsd = new RoomSeatDAO();
             TicketDAO td = new TicketDAO();
@@ -207,16 +207,15 @@ public class AdminController {
             FilmDAO fdao = new FilmDAO();
             fdao.createFilm(fName, Integer.parseInt(fProducer), fRelease, Integer.parseInt(fAge), fStartTime, fEndTime);
             int fId = fdao.maxFilm();
-            
+
             GraphicsDAO gd = new GraphicsDAO();
             String path = request.getSession().getServletContext().getRealPath("/") + "resources/image/";
             String filePath = path + file.getOriginalFilename();
             File upload = new File(filePath);
             file.transferTo(upload);
-            
+
             gd.insertFilmGraphics(fId, file.getOriginalFilename(), 1);
-            
-            
+
             return "redirect:/admins/filmList.html";
         } catch (SQLException ex) {
             return "redirect:/admins/insertFilm.html";
@@ -294,19 +293,32 @@ public class AdminController {
         return "updateBill";
     }
 
+    @RequestMapping(value = {"updateSchedule"}, method = RequestMethod.GET)
+    public String updateScheduleAction(ModelMap mm, @RequestParam String scheId) throws SQLException {
+        ScheduleDAO sched = new ScheduleDAO();
+        SessionDAO sed = new SessionDAO();
+        Scheldule scheldule = sched.getScheduleById(Integer.parseInt(scheId));
+        Session session = sed.getSessionById(scheldule.getSesId());
+        
+        mm.put("schedule", scheldule);
+        mm.put("session", session);
+        
+        return "updateSchedule";
+    }
+
     @RequestMapping(value = {"updateBill"}, method = RequestMethod.POST)
     public String updateBillSuccess(ModelMap mm, @RequestParam String bId, String bName, String bPhone, String bTotal, String bStatus) throws SQLException {
         BillDAO bd = new BillDAO();
-        
+
         bd.updateBill(Integer.parseInt(bId), 1, Long.parseLong(bTotal), Integer.parseInt(bStatus), bPhone, bName);
         return "redirect:/admins/billList.html";
     }
-    
-        @RequestMapping(value = {"/deleteBill"}, method = RequestMethod.GET)
+
+    @RequestMapping(value = {"/deleteBill"}, method = RequestMethod.GET)
     public String deleteBillSuccess(ModelMap mm, @RequestParam String bId) throws SQLException {
         BillDAO bd = new BillDAO();
         bd.updateBillStatus(Integer.parseInt(bId), 2);
-        
+
         return "redirect:/admins/billList.html";
     }
 }

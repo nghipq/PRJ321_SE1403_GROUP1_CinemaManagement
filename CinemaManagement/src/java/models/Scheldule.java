@@ -5,6 +5,8 @@
  */
 package models;
 
+import java.sql.Date;
+
 /**
  *
  * @author Admin
@@ -16,17 +18,19 @@ public class Scheldule {
     private int fmId;
     private int status;
     private int rId;
+    private Date sDate;
 
-    public Scheldule(int scheId, int fId, int sesId, int fmId, int status, int rId) {
+    public Scheldule() {
+    }
+
+    public Scheldule(int scheId, int fId, int sesId, int fmId, int status, int rId, Date sDate) {
         this.scheId = scheId;
         this.fId = fId;
         this.sesId = sesId;
         this.fmId = fmId;
         this.status = status;
         this.rId = rId;
-    }
-
-    public Scheldule() {
+        this.sDate = sDate;
     }
 
     public int getScheId() {
@@ -77,7 +81,13 @@ public class Scheldule {
         this.rId = rId;
     }
 
-    
+    public Date getsDate() {
+        return sDate;
+    }
+
+    public void setsDate(Date sDate) {
+        this.sDate = sDate;
+    }
 
     
 
