@@ -48,7 +48,31 @@ public class ScheduleDAO {
             return null;
         }
     }
-
+    
+    public boolean updateSchedule(int scheId, int sesId, int fmId, int status, int rId, String sDate) throws SQLException {
+        String sql = "update schedule set sesId=?, fmId=?, status=?, rId=?, sDate=? where scheId = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, sesId);
+        pst.setInt(2, fmId);
+        pst.setInt(3, status);
+        pst.setInt(4, rId);
+        pst.setDate(5, Date.valueOf(sDate));
+        pst.setInt(6, scheId);
+        
+        int rs = pst.executeUpdate();
+        return rs > 0 ? true : false;
+    }
+    
+    public boolean updateStatusSchedule(int scheId, int status) throws SQLException {
+        String sql = "update schedule set status=? where scheId = ?";
+        PreparedStatement pst = conn.prepareStatement(sql);
+        pst.setInt(1, status);
+        pst.setInt(2, scheId);
+        
+        int rs = pst.executeUpdate();
+        return rs > 0 ? true : false;
+    }
+    
     public ResultSet getAll() throws SQLException {
         String sql = "SELECT * FROM schedule JOIN session on schedule.sesId = session.sesId ORDER BY session.startTime ASC, schedule.sDate ASC";
         PreparedStatement ps = conn.prepareStatement(sql);

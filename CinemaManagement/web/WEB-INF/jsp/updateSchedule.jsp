@@ -12,6 +12,7 @@
         <strong style=" font-size: 2rem">Cập Nhật Lịch Chiếu</strong>
     </div>
     <form action="updateSchedule.html" method="POST" class="d-flex flex-column justify-content-center align-items-center rounded-sm p-3 bg-dark" style="width: 35vw">
+        <input type="hidden" name ="scheId" value="${schedule.getScheId()}"/>
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Rạp:</label>
             <input type="number" placeholder="Rạp" name="sRoom" class="w-100 p-2 border border-warning rounded" value="${schedule.getrId()}">

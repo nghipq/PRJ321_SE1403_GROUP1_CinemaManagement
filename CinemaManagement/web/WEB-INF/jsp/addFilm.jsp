@@ -25,7 +25,11 @@
         </div>
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Nhà Sản Xuất:</label>
-            <input type="text" name="fProducer" placeholder="ID nhà sản xuất" class="w-100 p-2 border border-warning rounded">
+            <select name="fProducer" class="w-100 p-2 border border-warning rounded">
+                <c:forEach var="row" items="${producers}">
+                    <option value="${row.getPrId()}">${row.getPrName()}</option>
+                </c:forEach>
+            </select>
         </div>
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Giới Hạn Độ Tuổi:</label>

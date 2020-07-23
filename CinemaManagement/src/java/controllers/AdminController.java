@@ -8,6 +8,7 @@ package controllers;
 import DAO.BillDAO;
 import DAO.FilmDAO;
 import DAO.GraphicsDAO;
+import DAO.ProducerDAO;
 import DAO.RoomSeatDAO;
 import DAO.ScheduleDAO;
 import DAO.SessionDAO;
@@ -195,8 +196,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = {"/insertFilm"}, method = RequestMethod.GET)
-    public String insertFilmAction(ModelMap mm) {
-
+    public String insertFilmAction(ModelMap mm) throws SQLException {
+        ProducerDAO prd = new ProducerDAO();
+        mm.put("producers", prd.getAll());
         return "addFilm";
     }
 
@@ -226,6 +228,8 @@ public class AdminController {
     public String updateFilmAction(ModelMap mm, @RequestParam String fId) throws SQLException {
         FilmDAO fd = new FilmDAO();
         Films film = fd.getFilmsById(Integer.parseInt(fId));
+        ProducerDAO prd = new ProducerDAO();
+        mm.put("producers", prd.getAll());
         mm.put("film", film);
 
         return "updateFilm";
@@ -299,11 +303,42 @@ public class AdminController {
         SessionDAO sed = new SessionDAO();
         Scheldule scheldule = sched.getScheduleById(Integer.parseInt(scheId));
         Session session = sed.getSessionById(scheldule.getSesId());
-        
+
         mm.put("schedule", scheldule);
         mm.put("session", session);
-        
+
         return "updateSchedule";
+    }
+
+    @RequestMapping(value = {"updateSchedule"}, method = RequestMethod.POST)
+    public String updateScheduleSuccess(ModelMap mm, HttpServletRequest request) throws SQLException {
+        ScheduleDAO sched = new ScheduleDAO();
+        SessionDAO sed = new SessionDAO();
+
+        String scheId = request.getParameter("scheId");
+        String dateRealease = request.getParameter("sDate");
+        String startTime = request.getParameter("sStart") + ":00";
+        String endTime = request.getParameter("sEnd") + ":00";
+        String sId = request.getParameter("sId");
+        String fmId = request.getParameter("fmName");
+        String rId = request.getParameter("sRoom");
+
+        Session session = sed.getSessionByTime(startTime, endTime);
+        if (session == null) {
+            session = sed.createSession(startTime, endTime);
+        }
+
+        sched.updateSchedule(Integer.parseInt(scheId), session.getSesId(), Integer.parseInt(fmId), 1, Integer.parseInt(rId), dateRealease);
+
+        return "redirect:/admins/scheduleList.html";
+    }
+
+    @RequestMapping(value = {"/deleteSchedule"}, method = RequestMethod.GET)
+    public String deleteScheduleSuccess(ModelMap mm, @RequestParam String scheId) throws SQLException {
+        ScheduleDAO sched = new ScheduleDAO();
+        sched.updateStatusSchedule(Integer.parseInt(scheId), 0);
+
+        return "redirect:/admins/scheduleList.html";
     }
 
     @RequestMapping(value = {"updateBill"}, method = RequestMethod.POST)
