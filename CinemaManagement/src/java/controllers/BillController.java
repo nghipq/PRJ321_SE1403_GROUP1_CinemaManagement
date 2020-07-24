@@ -22,29 +22,39 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 /**
  *
- * @author phamq
+ * @author Group 1
  */
 @Controller
 @RequestMapping("/bill")
 public class BillController {
 
+    /**
+     * get all infomation and fill into bill form controller of bill form
+     *
+     * @param tickets
+     * @param ticketNames
+     * @param rId
+     * @param mm
+     * @return
+     * @throws SQLException
+     */
     @RequestMapping(value = {""}, method = RequestMethod.GET)
     public String beforeBillAction(@RequestParam String tickets, String ticketNames, String rId, ModelMap mm) throws SQLException {
         mm.put("tickets", tickets);
         String[] ticketList = tickets.split(", ");
-        TicketDAO td = new TicketDAO();
+        TicketDAO td = new TicketDAO(); //recall class ticketDao
         int tId = Integer.parseInt(ticketList[0]);
         long totalPrice = td.getTicketPriceById(tId) * ticketList.length;
-        Ticket ticket = td.getTicketById(tId);
-        ScheduleDAO sd = new ScheduleDAO();
-        Scheldule schedule = sd.getScheduleById(ticket.getScheId());
-        FilmDAO fd = new FilmDAO();
-        Films films = fd.getFilmsById(schedule.getfId());
-        FormalityDAO fod = new FormalityDAO();
-        Formality formality = fod.getFormalityById(schedule.getFmId());
-        SessionDAO sed = new SessionDAO();
-        Session session = sed.getSessionById(schedule.getSesId());
-
+        Ticket ticket = td.getTicketById(tId);//recall funtion get ticker id
+        ScheduleDAO sd = new ScheduleDAO(); // recall class scheduleDao
+        Scheldule schedule = sd.getScheduleById(ticket.getScheId());// recall funtion get schedule by id
+        FilmDAO fd = new FilmDAO();//recall class filmDao
+        Films films = fd.getFilmsById(schedule.getfId());//recall funtion films by id 
+        FormalityDAO fod = new FormalityDAO();//recall class formalityDao
+        Formality formality = fod.getFormalityById(schedule.getFmId()); // recall funtion  get formality by id
+        SessionDAO sed = new SessionDAO();// recall class SessionDao
+        Session session = sed.getSessionById(schedule.getSesId());//recall funtion get sess by id
+        //assign properties to jsp callback
         mm.put("session", session);
         mm.put("rId", rId);
         mm.put("tickets", tickets);
@@ -58,23 +68,35 @@ public class BillController {
         return "billForm";
     }
 
+    /**
+     * get all infomation and fill into bill controller of bill
+     *
+     * @param bill
+     * @param tickets
+     * @param ticketNames
+     * @param rId
+     * @param mm
+     * @param request
+     * @return
+     * @throws SQLException
+     */
     @RequestMapping(value = {"/createBill"}, method = RequestMethod.POST)
     public String billAction(@ModelAttribute(value = "billModel") Bill bill, @RequestParam String tickets, String ticketNames, String rId, ModelMap mm, HttpServletRequest request) throws SQLException {
         mm.put("tickets", tickets);
         String[] ticketList = tickets.split(", ");
-        String name = request.getParameter("txtName");
+        String name = request.getParameter("txtName");//get parameter input of user in bill form page
         String phone = request.getParameter("txtSDT");
         long total = Long.parseLong(request.getParameter("txtTotal"));
-        BillDAO bd = new BillDAO();
-        billDetailDAO bdd = new billDetailDAO();
-        TicketDAO td = new TicketDAO();
+        BillDAO bd = new BillDAO();//recall class billDao
+        billDetailDAO bdd = new billDetailDAO();//recall class billdetailDao
+        TicketDAO td = new TicketDAO();//recall class ticketDao
         Cookie[] cookies = null;
         boolean check;
         // Get an array of Cookies associated with the this domain
         cookies = request.getCookies();
         int bid = 0;
         int ID;
-        if (cookies.length > 1) {
+        if (cookies.length > 1) { // get cookie and add into database
             for (Cookie cookie : cookies) {
                 if (cookie.getName().equals("ID")) {
                     ID = Integer.parseInt(cookie.getValue());
@@ -92,14 +114,14 @@ public class BillController {
 
         int tId = Integer.parseInt(ticketList[0]);
         long totalPrice = td.getTicketPriceById(tId) * ticketList.length;
-        Ticket ticket = td.getTicketById(tId);
-        ScheduleDAO sd = new ScheduleDAO();
-        Scheldule schedule = sd.getScheduleById(ticket.getScheId());
-        FilmDAO fd = new FilmDAO();
-        Films films = fd.getFilmsById(schedule.getfId());
+        Ticket ticket = td.getTicketById(tId);//recall funtion gettickketbyid
+        ScheduleDAO sd = new ScheduleDAO();// recall class scheduleDao
+        Scheldule schedule = sd.getScheduleById(ticket.getScheId());//recall funtion get schedulebyid
+        FilmDAO fd = new FilmDAO();//recall class filmDao
+        Films films = fd.getFilmsById(schedule.getfId());//recall funtion get filmbyid
         FormalityDAO fod = new FormalityDAO();
         Formality formality = fod.getFormalityById(schedule.getFmId());
-
+        //assign properties to jsp callback
         mm.put("formality", formality);
         mm.put("film", films);
         mm.put("bid", bid);
@@ -110,20 +132,35 @@ public class BillController {
         return "bill";
     }
 
+    /**
+     * get all infomation and fill into billlist controller of bill list
+     *
+     * @param mm
+     * @return
+     * @throws SQLException
+     */
     @RequestMapping(value = {"/billList"}, method = RequestMethod.GET)
     public String billListAction(ModelMap mm) throws SQLException {
-        BillDAO bd = new BillDAO();
-        ArrayList<Bill> bill = new ArrayList<>();
-        ResultSet rs = bd.getAll();
+        BillDAO bd = new BillDAO();//recall class BillDao
+        ArrayList<Bill> bill = new ArrayList<>();//create array list to get all infomation
+        ResultSet rs = bd.getAll();//recall funtion getAll of billDao
         while (rs.next()) {
             bill.add(new Bill(rs.getInt("bId"), rs.getInt("cusId"), rs.getInt("sId"), rs.getDate("dateBuy"), rs.getLong("total"), rs.getString("name"), rs.getString("phone"), rs.getInt("status")));
         }
-
+        //assign properties to jsp callback
         mm.put("bill", bill);
 
         return "billList";
     }
 
+    /**
+     * get all infomation and fill into bill(when click view bill click)
+     *
+     * @param bId
+     * @param mm
+     * @return
+     * @throws SQLException
+     */
     @RequestMapping("/billDetail")
     public String BillDetailAction(@RequestParam String bId, ModelMap mm) throws SQLException {
         BillDAO bd = new BillDAO();
@@ -134,7 +171,7 @@ public class BillController {
         System.out.println(bId);
 
         Bill bill = bd.getBillById(Integer.parseInt(bId));
-        
+        //assign properties to jsp callback
         mm.put("formality", fod.getFormalitybyBillId(Integer.parseInt(bId)));
         mm.put("film", fd.getFilmsByBillId(Integer.parseInt(bId)));
         mm.put("bid", bId);

@@ -30,26 +30,33 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * @author phamq
+ * @author Group 1
  */
 @Controller
 @RequestMapping("/films")
 public class FilmController {
-    
+
+    /**
+     * Controller of film list
+     *
+     * @param mm
+     * @return
+     * @throws SQLException
+     */
     @RequestMapping(value = {""}, method = RequestMethod.GET)
     public String filmListAction(ModelMap mm) throws SQLException {
-        FilmDAO fd = new FilmDAO();
-        fd.autoUpdateFilm();
+        FilmDAO fd = new FilmDAO();//recall class filmDao
+        fd.autoUpdateFilm(); // recall funtion autoUpdateFilm in FilmDao
         ScheduleDAO sched = new ScheduleDAO();
-        sched.autoUpdateSchedule();
+        sched.autoUpdateSchedule();// recall funtion autoUpdateSchedule in scheduleDao
         Gson gson = new Gson();
-        ArrayList<Films> films = new ArrayList<>();
+        ArrayList<Films> films = new ArrayList<>();//create arraylist and set name is films
         ArrayList<Films> filmsNow = new ArrayList<>();
         ArrayList<Films> filmsNew = new ArrayList<>();
-        HashMap<Integer, Films> filmsJSON = new HashMap<>();
-        ResultSet rs = fd.getAll();
-        
-        while (rs.next()) {
+        HashMap<Integer, Films> filmsJSON = new HashMap<>();//create HashMap and set name is filmsJSON
+        ResultSet rs = fd.getAll();//recall funtion getAll in FilmDao
+
+        while (rs.next()) {//insert into arraylist
             Films film = new Films(rs.getInt("fId"), rs.getString("fName"), rs.getString("description"), rs.getInt("pId"),
                     rs.getDate("releaseDate"), rs.getInt("rating"),
                     rs.getInt("limitAge"), rs.getInt("status"), rs.getDate("airDate"), rs.getDate("endDate"));
@@ -61,27 +68,36 @@ public class FilmController {
                 filmsJSON.put(film.getfId(), film);
             }
         }
-        
+        //assign properties to jsp callback
         mm.put("films", films);
         mm.put("filmsNow", filmsNow);
         mm.put("filmsNew", filmsNew);
         mm.put("filmsJSON", gson.toJson((Map) filmsJSON));
-        
+
         return "filmList";
     }
-    
+
+    /**
+     * Controller of filmDetail
+     *
+     * @param id
+     * @param mm
+     * @param request
+     * @return
+     * @throws SQLException
+     */
     @RequestMapping(value = {"/film"}, method = RequestMethod.GET)
     public String filmAction(@RequestParam String id, ModelMap mm, HttpServletRequest request) throws SQLException {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd"); // set format date
         int fId = Integer.parseInt(id);
         FilmDAO fd = new FilmDAO();
         PersonDAO pd = new PersonDAO();
         ScheduleDAO sd = new ScheduleDAO();
         TicketDAO td = new TicketDAO();
-        
-        fd.autoUpdateFilm();
-        sd.autoUpdateSchedule();
-        
+
+        fd.autoUpdateFilm();//recall calss autoUpdateFilm in filmDao
+        sd.autoUpdateSchedule();//recall class autoUpdateSchedule in scheduleDao
+
         try {
             Films film = fd.getFilmsById(fId);
             String date = java.sql.Date.valueOf(format.format(new Date())).toString();
@@ -91,17 +107,17 @@ public class FilmController {
                 cal.add(GregorianCalendar.DAY_OF_MONTH, Integer.parseInt(request.getParameter("date")));
                 date = format.format(cal.getTime());
             }
-            
+            //assign properties to jsp callback
             mm.put("film", film);
             mm.put("directors", pd.getPersonNameFilmId(fId, 1));
             mm.put("actors", pd.getPersonNameFilmId(fId, 2));
             mm.put("categories", fd.getCategorieNamesInFilm(fId));
             mm.put("schedules", sd.getSchedulesDetail(fId, date));
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(FilmController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         return "filmDetail";
     }
 }

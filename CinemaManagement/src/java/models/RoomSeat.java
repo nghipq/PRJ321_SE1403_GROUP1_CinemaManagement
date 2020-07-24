@@ -7,7 +7,7 @@ package models;
 
 /**
  *
- * @author Admin
+ * @author Group 1
  */
 public class RoomSeat {
 

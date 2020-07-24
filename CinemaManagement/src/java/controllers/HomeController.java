@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  *
- * @author phamq
+ * @author Group 1
  */
 @Controller
 @RequestMapping("/")
@@ -26,17 +26,17 @@ public class HomeController {
 
     @RequestMapping(value = {"index.html"}, method = RequestMethod.GET)
     public String homeAction(ModelMap mm) throws SQLException {
-        FilmDAO fd = new FilmDAO();
-        fd.autoUpdateFilm();
-        ArrayList<Films> films = new ArrayList<>();
-        ResultSet rs = fd.getAll();
+        FilmDAO fd = new FilmDAO();//recall class filmDao
+        fd.autoUpdateFilm();// recall funtion autoUpdateFilm in FilmDao
+        ArrayList<Films> films = new ArrayList<>();//create arraylist and set name is films
+        ResultSet rs = fd.getAll();//recall funtion getAll in FilmDao
 
-        while (rs.next()) {
+        while (rs.next()) {//insert into arraylist
             films.add(new Films(rs.getInt("fId"), rs.getString("fName"), rs.getString("description"), rs.getInt("pId"),
                     rs.getDate("releaseDate"), rs.getInt("rating"),
                     rs.getInt("limitAge"), rs.getInt("status"), rs.getDate("airDate"), rs.getDate("endDate")));
         }
-
+        //assign properties to jsp callback
         mm.put("films", films);
         return "index";
     }

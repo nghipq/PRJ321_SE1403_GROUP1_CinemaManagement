@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author GF63 8RD
+ * @author Group 1
  */
 public class User {
 
