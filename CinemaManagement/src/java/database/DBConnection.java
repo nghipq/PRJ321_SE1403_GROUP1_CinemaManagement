@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author phamq
+ * @author Group 1
  */
 public class DBConnection {
     private Connection conn;

@@ -17,7 +17,7 @@ import models.*;
 
 /**
  *
- * @author phamq
+ * @author Group 1
  */
 public class BillDAO {
 

@@ -19,7 +19,7 @@ import models.User;
 
 /**
  *
- * @author Admin
+ * @author Group 1
  */
 public class CustomerDAO {
 
@@ -30,6 +30,11 @@ public class CustomerDAO {
         this.conn = db.getDBConnection();
     }
 
+    /**
+     * Insert Customers
+     *
+     * @return
+     */
     public boolean InsertCustomers() {
         UserDAO udao = new UserDAO();
         int id = udao.getMaxUser();
@@ -49,7 +54,12 @@ public class CustomerDAO {
         }
         return false;
     }
-    
+
+    /**
+     * Get All customers
+     *
+     * @return
+     */
     public ResultSet getAll() {
         String sql = "SELECT * FROM `customers`";
         ResultSet rs = null;
