@@ -17,38 +17,47 @@ import models.*;
 
 /**
  *
- * @author phamq
+ * @author Group 1
  */
 public class PersonDAO {
+
     private Connection conn;
 
     public PersonDAO() {
         conn = new DBConnection().getDBConnection();
     }
-    
+
+    /**
+     * get name of person in film id
+     *
+     * @param fId
+     * @param rId
+     * @return
+     * @throws SQLException
+     */
     public String getPersonNameFilmId(int fId, int rId) throws SQLException {
         String list = "";
-        
+
         String sql = "SELECT * FROM `personinfilm` WHERE `fId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, fId);
-        
+
         ResultSet rs = ps.executeQuery();
         ResultSet rs1 = null;
-        
+
         Statement st = conn.createStatement();
         int pId;
-        while(rs.next()) {
+        while (rs.next()) {
             pId = rs.getInt("pId");
             sql = "SELECT * FROM `person` WHERE `pId` = " + rs.getInt("pId");
             rs1 = st.executeQuery(sql);
-            if(rs1.next()) {
-                if(rs1.getInt("rID") == rId) {
+            if (rs1.next()) {
+                if (rs1.getInt("rID") == rId) {
                     list += rs1.getString("pName") + " ";
                 }
             }
         }
-        
+
         return list;
     }
 }

@@ -14,15 +14,23 @@ import models.*;
 
 /**
  *
- * @author GF63 8RD
+ * @author Group 1
  */
 public class FormalityDAO {
+
     private Connection conn;
 
     public FormalityDAO() {
         this.conn = new DBConnection().getDBConnection();
     }
-    
+
+    /**
+     * Get formality by id
+     *
+     * @param fmId
+     * @return
+     * @throws SQLException
+     */
     public Formality getFormalityById(int fmId) throws SQLException {
         String sql = "SELECT * FROM formality WHERE fmId = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -41,8 +49,15 @@ public class FormalityDAO {
             return null;
         }
     }
-    
-    public ResultSet getFormalityByScheduleId(int id) throws SQLException{
+
+    /**
+     * get formality by schedule id
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    public ResultSet getFormalityByScheduleId(int id) throws SQLException {
         String sql = "SELECT * FROM formality WHERE `fmId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(2, id);
@@ -55,12 +70,19 @@ public class FormalityDAO {
 
         return rs;
     }
-    
-    public Formality getFormalitybyBillId(int id) throws SQLException{
+
+    /**
+     * get formality by bill id
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+    public Formality getFormalitybyBillId(int id) throws SQLException {
         billDetailDAO bdDao = new billDetailDAO();
         TicketDAO tDao = new TicketDAO();
         ScheduleDAO sDao = new ScheduleDAO();
-        
+
         BillDetail billDetail = bdDao.getBillDetailByBillId(id).get(0);
         Ticket ticket = tDao.getTicketById(billDetail.gettId());
         Scheldule scheldule = sDao.getScheduleById(ticket.getScheId());

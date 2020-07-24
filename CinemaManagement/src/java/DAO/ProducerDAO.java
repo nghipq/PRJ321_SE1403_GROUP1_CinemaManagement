@@ -12,31 +12,39 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import models.*;
+
 /**
  *
- * @author phamq
+ * @author Group 1
  */
 public class ProducerDAO {
+
     private Connection conn;
 
     public ProducerDAO() {
         this.conn = new DBConnection().getDBConnection();
     }
-    
+
+    /**
+     * get all producer
+     *
+     * @return
+     * @throws SQLException
+     */
     public ArrayList<Producer> getAll() throws SQLException {
         String sql = "select * from producers";
         Statement st = (Statement) conn.createStatement();
-        
+
         ResultSet rs = st.executeQuery(sql);
         ArrayList<Producer> producers = new ArrayList<>();
-        
-        while(rs.next()) {
-            producers.add(new Producer(rs.getInt("pId"), rs.getString("pName"), 
-                    rs.getInt("nId"), rs.getString("description"), rs.getDate("birthday"), 
-                    rs.getString("address"), rs.getString("phoneNumber"), 
+
+        while (rs.next()) {
+            producers.add(new Producer(rs.getInt("pId"), rs.getString("pName"),
+                    rs.getInt("nId"), rs.getString("description"), rs.getDate("birthday"),
+                    rs.getString("address"), rs.getString("phoneNumber"),
                     rs.getString("email")));
         }
-        
+
         return producers;
     }
 }

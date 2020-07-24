@@ -1,7 +1,7 @@
 <%-- 
-    Document   : admin.filmList
-    Created on : Jul 16, 2020, 1:22:07 PM
-    Author     : Admin
+    Document   : admin.deletedFilms
+    Created on : Jul 24, 2020, 10:13:28 AM
+    Author     : phamq
 --%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -83,12 +83,6 @@
                         <a href="updateFilm.html?fId=${row.getfId()}" class="p-1">
                             <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/pencil-alt-solid.svg"/>" alt="Cập nhật" class="w-100"/>
                         </a>
-                        <a href="deleteFilm.html?fId=${row.getfId()}" class="p-1">
-                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/trash-alt-solid.svg"/>" alt="Xóa" class="w-100"/>
-                        </a>
-                        <a href="updateShowtimes.html?id=${row.getfId()}" class="p-1">
-                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/calendar-regular.svg"/>" alt="Xóa" class="w-100"/>
-                        </a>
                     </td>
                 </tr>
             </c:forEach>
@@ -96,3 +90,4 @@
     </div>
 </div>
 <%@include file="admin.footer.jsp" %>
+                      

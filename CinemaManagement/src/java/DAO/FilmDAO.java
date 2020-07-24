@@ -14,14 +14,18 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.*;
+import DAO.*;
 import org.springframework.messaging.tcp.reactor.ReactorNettyTcpClient;
+import until.*;
 
 /**
  *
- * @author phamq
+ * @author Group 1
  */
 public class FilmDAO {
 
@@ -53,7 +57,9 @@ public class FilmDAO {
     /**
      * Get film's poster by film's id
      *
+     * @param id
      * @return
+     * @throws java.sql.SQLException
      */
     public String getFilmPoster(int id) throws SQLException {
         String sql = "SELECT * FROM `graphic` WHERE `fId` = ? and `type` = 1";
@@ -68,8 +74,9 @@ public class FilmDAO {
             while (rs.next()) {
                 imgPath = rs.getString("path");
             }
-        } catch (Exception e) {};
-        
+        } catch (Exception e) {
+        };
+
         return imgPath;
     }
 
@@ -106,8 +113,11 @@ public class FilmDAO {
 
         return categories;
     }
+
     /*
      * Get categories of film
+    /**
+     * Get categories name of film by film's id
      *
      * @param id
      * @return
@@ -141,7 +151,13 @@ public class FilmDAO {
     }
 
     /**
+     * Get films by film' s id
      *
+     * @param id
+     * @return
+     * @return
+     * @throws java.sql.SQLException
+     * @throws SQLException
      */
     public Films getFilmsById(int id) throws SQLException {
         String sql = "SELECT * FROM `films` WHERE `fId` = ?";
@@ -154,28 +170,25 @@ public class FilmDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 //films = new Films();
-                films = new Films(id, rs.getString("fName"), rs.getString("description"),rs.getInt("pId"), rs.getDate("releaseDate"), rs.getDouble("rating"), rs.getInt("limitAge"), rs.getInt("status"), rs.getDate("airDate"), rs.getDate("endDate"));
+                films = new Films(id, rs.getString("fName"), rs.getString("description"), rs.getInt("pId"), rs.getDate("releaseDate"), rs.getDouble("rating"), rs.getInt("limitAge"), rs.getInt("status"), rs.getDate("airDate"), rs.getDate("endDate"));
             }
         } catch (Exception e) {
         }
 
         return films;
     }
-        /**
-         * create new film into database
-         *
-         * @param fId
-         * @param fName
-         * @param pId
-         * @param releaseDate
-         * @param rating
-         * @param limitAge
-         * @param status
-         * @param airDate
-         * @param endDate
-         * @return
-         * @throws SQLException
-         */
+
+    /**
+     * create new film into database
+     * @param fName
+     * @param pId
+     * @param releaseDate
+     * @param limitAge
+     * @param airDate
+     * @param endDate
+     * @return
+     * @throws SQLException
+     */
     public boolean createFilm(String fName, int pId, String releaseDate, int limitAge, String airDate, String endDate) throws SQLException {
         String sql = "INSERT INTO `films`(`fname`, `pId`, `releaseDate`, `rating`, `limitAge`, `status`, `airDate`, `endDate`) values (?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -201,8 +214,12 @@ public class FilmDAO {
 
         return false;
     }
-    
-        public int maxFilm() {
+    /**
+     * Get max film id
+     *
+     * @return
+     */
+    public int maxFilm() {
         String sql = "Select max(fId) as fId from films";
 
         PreparedStatement st;
@@ -231,6 +248,7 @@ public class FilmDAO {
      * @param status
      * @param airDate
      * @param endDate
+     * @param description
      * @return
      * @throws SQLException
      */
@@ -246,30 +264,72 @@ public class FilmDAO {
         ps.setDate(6, Date.valueOf(releaseDate));
         ps.setDate(7, Date.valueOf(airDate));
         ps.setDate(8, Date.valueOf(endDate));
-        ps.setString(9, description );
+        ps.setString(9, description);
         ps.setInt(10, fId);
 
         int rs = ps.executeUpdate();
         return rs > 0 ? true : false;
     }
-    
+
+    /**
+     * get film by bill's id
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+
     public Films getFilmsByBillId(int id) throws SQLException {
         billDetailDAO bdDao = new billDetailDAO();
         TicketDAO tDao = new TicketDAO();
         ScheduleDAO sDao = new ScheduleDAO();
-        
+
         BillDetail billDetail = bdDao.getBillDetailByBillId(id).get(0);
         Ticket ticket = tDao.getTicketById(billDetail.gettId());
         Scheldule scheldule = sDao.getScheduleById(ticket.getScheId());
         return getFilmsById(scheldule.getfId());
     }
-    
+    /**
+     * auto update film
+     *
+     * @throws SQLException
+     */
     public void autoUpdateFilm() throws SQLException {
         String sql = "update films set status = 1 where airDate <= CURRENT_DATE and endDate >= CURRENT_DATE";
         Statement st = conn.createStatement();
         st.execute(sql);
-        
+
         sql = "update films set status = 2 where endDate < CURRENT_DATE";
         st.execute(sql);
+    }
+
+    public HashMap<Integer, Long> findTop10InWeek() throws SQLException {
+        HashMap<Integer, Long> filmsList = new HashMap<>();
+
+        BillDAO bd = new BillDAO();
+        billDetailDAO bdd = new billDetailDAO();
+        TicketDAO td = new TicketDAO();
+        ScheduleDAO sched = new ScheduleDAO();
+        SortMap sm = new SortMap();
+
+        ResultSet rs = bd.getAll();
+        Long totalPrice;
+        int bId;
+        int fId;
+
+        while (rs.next()) {
+            totalPrice = rs.getLong("total");
+            bId = rs.getInt("bId");
+            fId = getFilmsByBillId(bId).getfId();
+
+            if (filmsList.get(fId) != null) {
+                totalPrice += filmsList.get(fId);
+            }
+
+            filmsList.put(fId, totalPrice);
+        }
+
+        HashMap<Integer, Long> films = sm.sortHashMapByValues(filmsList);
+        return films;
     }
 }

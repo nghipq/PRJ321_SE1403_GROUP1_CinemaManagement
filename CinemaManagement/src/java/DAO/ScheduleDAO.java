@@ -31,6 +31,13 @@ public class ScheduleDAO {
         this.conn = new DBConnection().getDBConnection();
     }
 
+    /**
+     * get Schedule by scheId
+     *
+     * @param scheId
+     * @return
+     * @throws SQLException
+     */
     public Scheldule getScheduleById(int scheId) throws SQLException {
         String sql = "SELECT * FROM `schedule` WHERE `scheId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -48,7 +55,19 @@ public class ScheduleDAO {
             return null;
         }
     }
-    
+
+    /**
+     * Update Schedule
+     *
+     * @param scheId
+     * @param sesId
+     * @param fmId
+     * @param status
+     * @param rId
+     * @param sDate
+     * @return
+     * @throws SQLException
+     */
     public boolean updateSchedule(int scheId, int sesId, int fmId, int status, int rId, String sDate) throws SQLException {
         String sql = "update schedule set sesId=?, fmId=?, status=?, rId=?, sDate=? where scheId = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
@@ -58,21 +77,35 @@ public class ScheduleDAO {
         pst.setInt(4, rId);
         pst.setDate(5, Date.valueOf(sDate));
         pst.setInt(6, scheId);
-        
+
         int rs = pst.executeUpdate();
         return rs > 0 ? true : false;
     }
-    
+
+    /**
+     * update status of schedule
+     *
+     * @param scheId
+     * @param status
+     * @return
+     * @throws SQLException
+     */
     public boolean updateStatusSchedule(int scheId, int status) throws SQLException {
         String sql = "update schedule set status=? where scheId = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setInt(1, status);
         pst.setInt(2, scheId);
-        
+
         int rs = pst.executeUpdate();
         return rs > 0 ? true : false;
     }
-    
+
+    /**
+     * get all of schedule
+     *
+     * @return
+     * @throws SQLException
+     */
     public ResultSet getAll() throws SQLException {
         String sql = "SELECT * FROM schedule JOIN session on schedule.sesId = session.sesId ORDER BY session.startTime ASC, schedule.sDate ASC";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -106,13 +139,21 @@ public class ScheduleDAO {
 
         return rs;
     }
-    
-        public ResultSet getScheduleByFilmIdandDate(int id, String sDate) throws SQLException {
+
+    /**
+     * get all schedule by fId and sDate
+     *
+     * @param id
+     * @param sDate
+     * @return
+     * @throws SQLException
+     */
+    public ResultSet getScheduleByFilmIdandDate(int id, String sDate) throws SQLException {
         String sql = "SELECT * FROM `schedule` WHERE `fId` = ? and sDate = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, id);
         ps.setDate(2, Date.valueOf(sDate));
-        
+
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
@@ -149,8 +190,8 @@ public class ScheduleDAO {
 //
 //        return ses;
 //    }
-
     /**
+     * get Schedule Detail
      *
      * @param fId
      * @return
@@ -191,6 +232,18 @@ public class ScheduleDAO {
         return schedules;
     }
 
+    /**
+     * create new Schedule
+     *
+     * @param sesId
+     * @param fmId
+     * @param status
+     * @param rId
+     * @param fId
+     * @param sDate
+     * @return
+     * @throws SQLException
+     */
     public boolean createSchedule(int sesId, int fmId, int status, int rId, int fId, String sDate) throws SQLException {
         String sql = "INSERT INTO `schedule`(`sesId`, `fmId`, `status`, `rId`, `fId`, `sDate`) values (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -214,6 +267,11 @@ public class ScheduleDAO {
         return false;
     }
 
+    /**
+     * get max scheId
+     *
+     * @return
+     */
     public int getMaxScheId() {
         try {
             String sql = "select max(scheId) as scheId from schedule";
@@ -227,7 +285,12 @@ public class ScheduleDAO {
         }
         return 0;
     }
-    
+
+    /**
+     * auto update schedule
+     *
+     * @throws SQLException
+     */
     public void autoUpdateSchedule() throws SQLException {
         String sql = "update schedule set status = 0 where sDate < CURRENT_DATE";
         Statement st = conn.createStatement();
