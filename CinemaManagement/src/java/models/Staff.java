@@ -7,7 +7,7 @@ package models;
 
 /**
  *
- * @author GF63 8RD
+ * @author Group 1
  */
 public class Staff {
     // create variable

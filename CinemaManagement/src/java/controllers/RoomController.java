@@ -19,7 +19,7 @@ import models.Ticket;
 
 /**
  *
- * @author phamq
+ * @author Group 1
  */
 @Controller
 @RequestMapping("/room")
@@ -30,7 +30,7 @@ public class RoomController {
         TicketDAO td = new TicketDAO();
         Map<String, String> tickets = (Map) td.getSeatAndTicketByScheduleId(Integer.parseInt(scheId));
         String jobj = gson.toJson(tickets);
-        
+        //assign properties to jsp callback
         mm.put("fId", fId);
         mm.put("rId", rId);
         mm.put("tickets", jobj);

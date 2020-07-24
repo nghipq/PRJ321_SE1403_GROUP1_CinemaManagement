@@ -9,7 +9,7 @@ import java.sql.Time;
 
 /**
  *
- * @author Admin
+ * @author Group 1
  */
 public class Session {
 

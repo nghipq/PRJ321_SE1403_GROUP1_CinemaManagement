@@ -9,7 +9,7 @@ import java.sql.Date;
 
 /**
  *
- * @author Admin
+ * @author Group 1
  */
 public class Scheldule {
 
