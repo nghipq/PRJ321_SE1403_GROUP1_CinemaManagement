@@ -25,7 +25,7 @@ import until.*;
 
 /**
  *
- * @author phamq
+ * @author Group 1
  */
 public class FilmDAO {
 
@@ -57,7 +57,9 @@ public class FilmDAO {
     /**
      * Get film's poster by film's id
      *
+     * @param id
      * @return
+     * @throws java.sql.SQLException
      */
     public String getFilmPoster(int id) throws SQLException {
         String sql = "SELECT * FROM `graphic` WHERE `fId` = ? and `type` = 1";
@@ -114,6 +116,8 @@ public class FilmDAO {
 
     /*
      * Get categories of film
+    /**
+     * Get categories name of film by film's id
      *
      * @param id
      * @return
@@ -147,7 +151,13 @@ public class FilmDAO {
     }
 
     /**
+     * Get films by film' s id
      *
+     * @param id
+     * @return
+     * @return
+     * @throws java.sql.SQLException
+     * @throws SQLException
      */
     public Films getFilmsById(int id) throws SQLException {
         String sql = "SELECT * FROM `films` WHERE `fId` = ?";
@@ -170,14 +180,10 @@ public class FilmDAO {
 
     /**
      * create new film into database
-     *
-     * @param fId
      * @param fName
      * @param pId
      * @param releaseDate
-     * @param rating
      * @param limitAge
-     * @param status
      * @param airDate
      * @param endDate
      * @return
@@ -208,7 +214,11 @@ public class FilmDAO {
 
         return false;
     }
-
+    /**
+     * Get max film id
+     *
+     * @return
+     */
     public int maxFilm() {
         String sql = "Select max(fId) as fId from films";
 
@@ -238,6 +248,7 @@ public class FilmDAO {
      * @param status
      * @param airDate
      * @param endDate
+     * @param description
      * @return
      * @throws SQLException
      */
@@ -260,6 +271,14 @@ public class FilmDAO {
         return rs > 0 ? true : false;
     }
 
+    /**
+     * get film by bill's id
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
+
     public Films getFilmsByBillId(int id) throws SQLException {
         billDetailDAO bdDao = new billDetailDAO();
         TicketDAO tDao = new TicketDAO();
@@ -270,7 +289,11 @@ public class FilmDAO {
         Scheldule scheldule = sDao.getScheduleById(ticket.getScheId());
         return getFilmsById(scheldule.getfId());
     }
-
+    /**
+     * auto update film
+     *
+     * @throws SQLException
+     */
     public void autoUpdateFilm() throws SQLException {
         String sql = "update films set status = 1 where airDate <= CURRENT_DATE and endDate >= CURRENT_DATE";
         Statement st = conn.createStatement();

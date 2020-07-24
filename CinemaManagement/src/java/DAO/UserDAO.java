@@ -31,6 +31,17 @@ public class UserDAO {
         this.conn = db.getDBConnection();
     }
 
+    /**
+     * InsertUser from user
+     *
+     * @param Username
+     * @param Email
+     * @param Password
+     * @param Birthday
+     * @param Address
+     * @param Phone
+     * @return
+     */
     public boolean InsertUser(String Username, String Email, String Password, Date Birthday, String Address, String Phone) {
         try {
             String sql = "insert into user(username, email, password, birthday, gender, address, phone, permission) values (?,?,md5(?),?,?,?,?,?)";
@@ -50,6 +61,13 @@ public class UserDAO {
         return false;
     }
 
+    /**
+     * Select user where email = ? and password = ?
+     *
+     * @param emails
+     * @param pass
+     * @return
+     */
     public User Login(String emails, String pass) {
         try {
             String sql = "Select * from user where email = ? and password = md5(?)";
@@ -68,6 +86,11 @@ public class UserDAO {
 
     }
 
+    /**
+     * get max uId of user
+     *
+     * @return
+     */
     public int getMaxUser() {
         try {
             String sql = "select max(uId) as uId from user";
@@ -82,6 +105,11 @@ public class UserDAO {
         return 0;
     }
 
+    /**
+     * get All user
+     *
+     * @return
+     */
     public ResultSet getAll() {
         String sql = "SELECT * FROM `user`";
         ResultSet rs = null;
@@ -95,6 +123,12 @@ public class UserDAO {
         return rs;
     }
 
+    /**
+     * get all user wher permission = ?
+     *
+     * @param per
+     * @return
+     */
     public ResultSet getUserByPermission(int per) {
         try {
             String sql = "SELECT * FROM `user` WHERE `permission` = ?";
@@ -112,6 +146,13 @@ public class UserDAO {
         return null;
     }
 
+    /**
+     * get all user where uId =?
+     *
+     * @param id
+     * @return
+     * @throws SQLException
+     */
     public User getUserById(int id) throws SQLException {
         String sql = "SELECT * FROM `user` WHERE `uId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
@@ -132,12 +173,26 @@ public class UserDAO {
         return user;
     }
 
-    public int UpdateUser(String uId,String username, String email, String Birthday, String gender, String address, String phone, String RegisDate, String Permission) {
+    /**
+     * Update user
+     *
+     * @param uId
+     * @param username
+     * @param email
+     * @param Birthday
+     * @param gender
+     * @param address
+     * @param phone
+     * @param RegisDate
+     * @param Permission
+     * @return
+     */
+    public int UpdateUser(String uId, String username, String email, String Birthday, String gender, String address, String phone, String RegisDate, String Permission) {
         try {
             String sql = "UPDATE `user` SET `username`=?,`email`=?,`birthday`=?,`gender`=?,`address`=?,`phone`=?,`regisDate`=?, `permission`=? WHERE uId=?";
             PreparedStatement pst = conn.prepareStatement(sql);
             pst.setString(1, username);
-            pst.setString(2,email);
+            pst.setString(2, email);
             pst.setDate(3, Date.valueOf(Birthday));
             pst.setInt(4, Integer.parseInt(gender));
             pst.setString(5, address);
@@ -151,13 +206,21 @@ public class UserDAO {
         }
         return 0;
     }
-    
+
+    /**
+     * Update status of user by uId
+     *
+     * @param uId
+     * @param status
+     * @return
+     * @throws SQLException
+     */
     public boolean updateStatusUser(String uId, int status) throws SQLException {
         String sql = "update user set status = ? where uId = ?";
         PreparedStatement pst = conn.prepareStatement(sql);
         pst.setInt(1, status);
         pst.setInt(2, Integer.parseInt(uId));
-        
+
         return pst.executeUpdate() > 0 ? true : false;
     }
 }
