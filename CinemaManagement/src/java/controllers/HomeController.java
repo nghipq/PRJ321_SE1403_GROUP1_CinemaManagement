@@ -27,6 +27,7 @@ public class HomeController {
     @RequestMapping(value = {"index.html"}, method = RequestMethod.GET)
     public String homeAction(ModelMap mm) throws SQLException {
         FilmDAO fd = new FilmDAO();
+        fd.autoUpdateFilm();
         ArrayList<Films> films = new ArrayList<>();
         ResultSet rs = fd.getAll();
 

@@ -22,12 +22,3 @@ $(document).ready(function() {
         }
     })   
 });
-
-window.onload = function() {
-    Particles.init({
-      selector: '.background',
-      color:'red',
-      speed: 1,
-      connectParticles: false
-    });
-  };  

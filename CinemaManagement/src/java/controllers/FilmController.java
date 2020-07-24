@@ -39,6 +39,9 @@ public class FilmController {
     @RequestMapping(value = {""}, method = RequestMethod.GET)
     public String filmListAction(ModelMap mm) throws SQLException {
         FilmDAO fd = new FilmDAO();
+        fd.autoUpdateFilm();
+        ScheduleDAO sched = new ScheduleDAO();
+        sched.autoUpdateSchedule();
         Gson gson = new Gson();
         ArrayList<Films> films = new ArrayList<>();
         ArrayList<Films> filmsNow = new ArrayList<>();
@@ -75,6 +78,9 @@ public class FilmController {
         PersonDAO pd = new PersonDAO();
         ScheduleDAO sd = new ScheduleDAO();
         TicketDAO td = new TicketDAO();
+        
+        fd.autoUpdateFilm();
+        sd.autoUpdateSchedule();
         
         try {
             Films film = fd.getFilmsById(fId);

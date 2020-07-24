@@ -17,8 +17,7 @@
     </div>
     <div class="bg-white col-12 row p-3 rounded mb-2">
         <div class="col-md-4 col-2 d-none d-lg-flex">
-            <%
-                FilmDAO fd = new FilmDAO();
+            <%                FilmDAO fd = new FilmDAO();
                 String imgPath = "/resources/image/" + fd.getFilmPoster(Integer.parseInt(request.getParameter("fId")));
                 pageContext.setAttribute("imgPath", imgPath);
             %>
@@ -30,9 +29,9 @@
         </div>
     </div>
     <div class="bg-dark col-12 row rounded p-3">
-        <button class="col-2 btn btn-warning" onclick="function() {
-                                window.history.back();
-                            }">QUAY LẠI</button>
+        <button class="col-2 btn btn-warning" onclick="function () {
+                    window.history.back();
+                }">QUAY LẠI</button>
         <form class="row col-8" action="bill.html" method="post">
             <input class="col-12 w-100 text-center" type="text" value="" id="seats" name="txtSeats" disabled/>
             <input class="d-none" type="text" value="" id="ticketIds" name="txtTickets" disabled/>
@@ -43,7 +42,22 @@
 <script>
     var tickets = ${tickets}
     var rId = ${rId}
-    console.log(rId)
+
+    var sortable = [];
+
+    for (var key in tickets) {
+        sortable.push([key, tickets[key]]);
+    }
+
+    sortable.sort()
+
+    var tickets = {}
+    sortable.forEach(function (item) {
+        tickets[item[0]] = item[1]
+    })
+    
+    console.log(tickets)
+
 </script>
 <script src="<c:url value="/resources/JS/booking.js"/>"></script>
 <%@include file="footer.jsp" %>
