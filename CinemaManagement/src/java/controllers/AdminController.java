@@ -445,7 +445,7 @@ public class AdminController {
         ArrayList<String> categories = new ArrayList<>();
 
         String path = request.getSession().getServletContext().getRealPath("/") + "resources\\image\\";
-        String filePath = path + "1.csv";
+        String filePath = path + "Top10Films.csv";
         File upload = new File(filePath);
         upload.createNewFile();
 

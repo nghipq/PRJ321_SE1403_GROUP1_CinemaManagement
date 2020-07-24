@@ -98,6 +98,9 @@
                 </tr>
             </c:forEach>
         </table>
+        <div class="d-flex flex-row justify-content-center align-items-center p-2 w-100 rounded-sm m-2">
+            <a href="ExportTop10Films.html" class="btn btn-warning btn-md m-1"><strong>SAVE</strong></a>
+        </div>
     </div>
 </div>
 <%@include file="admin.footer.jsp" %>

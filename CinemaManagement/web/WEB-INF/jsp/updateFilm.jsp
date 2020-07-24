@@ -29,7 +29,7 @@
             <div class="d-flex flex-column justify-content-center align-items-center bg-white p-4" style="width: 25vw">
                 <img src="<c:url value="${imgPath}"/>" alt="${film.getfName()}" class="w-100"/>
             </div>
-            <form action="/cinemaManagement/files/uploadFile.html" enctype="multipart/form-data" method="POST" class="d-flex flex-column justify-content-center align-items-center rounded-sm p-3 bg-dark" style="width: 25vw">
+            <form action="/files/uploadFile.html" enctype="multipart/form-data" method="POST" class="d-flex flex-column justify-content-center align-items-center rounded-sm p-3 bg-dark" style="width: 25vw">
                 <input type="hidden" name="fId" value="${film.getfId()}"/>
                 <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
                     <label class="text-white">Cập nhật hình ảnh:</label>

@@ -37,7 +37,7 @@
                         pageContext.setAttribute("imgPath", imgPath);
                     %>
                     <img src="<c:url value="${imgPath}"/>" alt="${film.getfName()}" class="w-100 h-100"/>
-                    <a href="/cinemaManagement/films/film.html?id=${film.getfId()}">
+                    <a href="/films/film.html?id=${film.getfId()}">
                         <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
                             <p class="detail">Chi Tiết</p>
                         </div>
@@ -122,7 +122,7 @@
                                     
                                 %>
                                 <c:forEach var="schedule" items="${schedules}">
-                                    <a href="/cinemaManagement/room.html?rId=${schedule.value.getrId()}&scheId=${schedule.key}&fId=${schedule.value.getfId()}">
+                                    <a href="/room.html?rId=${schedule.value.getrId()}&scheId=${schedule.key}&fId=${schedule.value.getfId()}">
                                         <button type="button" class="btn btn-secondary">                            
                                             <c:set var="sesId" value="${schedule.value.getSesId()}"/>
                                             <c:set var="scheId" value="${schedule.value.getScheId()}"/>
