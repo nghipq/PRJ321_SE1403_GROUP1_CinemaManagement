@@ -296,4 +296,13 @@ public class ScheduleDAO {
         Statement st = conn.createStatement();
         st.execute(sql);
     }
+
+    /**
+     * Close db connection
+     *
+     * @throws SQLException
+     */
+    public void closeConnect() throws SQLException {
+        this.conn.close();
+    }
 }

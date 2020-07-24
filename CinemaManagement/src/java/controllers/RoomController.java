@@ -34,6 +34,8 @@ public class RoomController {
         mm.put("fId", fId);
         mm.put("rId", rId);
         mm.put("tickets", jobj);
+        
+        td.closeConnect();
         return "room";
     }
 }

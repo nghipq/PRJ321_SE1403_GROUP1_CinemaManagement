@@ -60,4 +60,13 @@ public class PersonDAO {
 
         return list;
     }
+
+    /**
+     * Close db connection
+     *
+     * @throws SQLException
+     */
+    public void closeConnect() throws SQLException {
+        this.conn.close();
+    }
 }

@@ -38,6 +38,8 @@ public class HomeController {
         }
         //assign properties to jsp callback
         mm.put("films", films);
+        fd.closeConnect();
+        
         return "index";
     }
 }

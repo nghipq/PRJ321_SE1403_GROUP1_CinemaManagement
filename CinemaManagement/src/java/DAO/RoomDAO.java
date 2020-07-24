@@ -56,4 +56,13 @@ public class RoomDAO {
 
         return rs > 0 ? true : false;
     }
+
+    /**
+     * Close db connection
+     *
+     * @throws SQLException
+     */
+    public void closeConnect() throws SQLException {
+        this.conn.close();
+    }
 }

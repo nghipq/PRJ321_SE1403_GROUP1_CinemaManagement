@@ -19,9 +19,9 @@ import models.Categories;
  * @author phamq
  */
 public class billDetailDAO {
-    
+
     private Connection conn;
-    
+
     public billDetailDAO() {
         DBConnection db = new DBConnection();
         this.conn = db.getDBConnection();
@@ -40,7 +40,7 @@ public class billDetailDAO {
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, tId);
         ps.setInt(2, bId);
-        
+
         try {
             int insert = ps.executeUpdate();
             if (insert == 1) {
@@ -50,7 +50,7 @@ public class billDetailDAO {
             }
         } catch (Exception e) {
         };
-        
+
         return false;
     }
 
@@ -67,7 +67,7 @@ public class billDetailDAO {
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, tId);
         ps.setInt(2, bId);
-        
+
         int rs = ps.executeUpdate();
         return rs > 0 ? true : false;
     }
@@ -79,14 +79,13 @@ public class billDetailDAO {
      * @return
      * @throws SQLException
      */
-
     public ArrayList<BillDetail> getBillDetailByBillId(int bId) throws SQLException {
         ArrayList<BillDetail> billDetail = new ArrayList<BillDetail>();
-        
+
         String sql = "SELECT * FROM `billdetail` WHERE `bId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, bId);
-        
+
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
@@ -95,16 +94,16 @@ public class billDetailDAO {
             }
         } catch (Exception e) {
         };
-        
+
         return billDetail;
     }
-    
+
     public ArrayList<BillDetail> getAllBillDetail() throws SQLException {
         ArrayList<BillDetail> billDetail = new ArrayList<BillDetail>();
-        
+
         String sql = "SELECT * FROM `billdetail`";
         PreparedStatement ps = conn.prepareStatement(sql);
-        
+
         ResultSet rs = null;
         try {
             rs = ps.executeQuery();
@@ -113,7 +112,16 @@ public class billDetailDAO {
             }
         } catch (Exception e) {
         };
-        
+
         return billDetail;
+    }
+
+    /**
+     * Close db connection
+     *
+     * @throws SQLException
+     */
+    public void closeConnect() throws SQLException {
+        this.conn.close();
     }
 }

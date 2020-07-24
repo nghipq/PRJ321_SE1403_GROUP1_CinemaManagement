@@ -94,4 +94,13 @@ public class SessionDAO {
 
         return getSessionByTime(StartTime, EndTime);
     }
+
+    /**
+     * Close db connection
+     *
+     * @throws SQLException
+     */
+    public void closeConnect() throws SQLException {
+        this.conn.close();
+    }
 }

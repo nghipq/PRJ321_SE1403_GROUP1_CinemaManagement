@@ -238,4 +238,13 @@ public class TicketDAO {
         return false;
 
     }
+
+    /**
+     * Close db connection
+     *
+     * @throws SQLException
+     */
+    public void closeConnect() throws SQLException {
+        this.conn.close();
+    }
 }

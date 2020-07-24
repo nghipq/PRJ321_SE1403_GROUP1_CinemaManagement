@@ -180,6 +180,7 @@ public class FilmDAO {
 
     /**
      * create new film into database
+     *
      * @param fName
      * @param pId
      * @param releaseDate
@@ -214,6 +215,7 @@ public class FilmDAO {
 
         return false;
     }
+
     /**
      * Get max film id
      *
@@ -278,7 +280,6 @@ public class FilmDAO {
      * @return
      * @throws SQLException
      */
-
     public Films getFilmsByBillId(int id) throws SQLException {
         billDetailDAO bdDao = new billDetailDAO();
         TicketDAO tDao = new TicketDAO();
@@ -289,6 +290,7 @@ public class FilmDAO {
         Scheldule scheldule = sDao.getScheduleById(ticket.getScheId());
         return getFilmsById(scheldule.getfId());
     }
+
     /**
      * auto update film
      *
@@ -331,5 +333,14 @@ public class FilmDAO {
 
         HashMap<Integer, Long> films = sm.sortHashMapByValues(filmsList);
         return films;
+    }
+
+    /**
+     * Close db connection
+     *
+     * @throws SQLException
+     */
+    public void closeConnect() throws SQLException {
+        this.conn.close();
     }
 }

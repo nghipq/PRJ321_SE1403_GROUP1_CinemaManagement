@@ -5,6 +5,8 @@
     "http://www.w3.org/TR/html4/loose.dtd">
 
 <%@include file="header.jsp" %>
+<%    FilmDAO fd = new FilmDAO();
+%>
 <link href="<c:url value="/resources/css/home.css"/>" rel="stylesheet">
 <div id="carouselExampleIndicators" class="carousel slide w-100" data-ride="carousel">
     <ol class="carousel-indicators">
@@ -61,7 +63,7 @@
                     <c:set var="fId" value="${film.getfId()}"/>
                     <%
                         int fId = Integer.parseInt(pageContext.getAttribute("fId").toString());
-                        String imgPath = "/resources/image/" + new FilmDAO().getFilmPoster(fId);
+                        String imgPath = "/resources/image/" + fd.getFilmPoster(fId);
                         pageContext.setAttribute("imgPath", imgPath);
                     %>
                     <img src="<c:url value="${imgPath}"/>" alt="${film.getfName()}" class="w-100 h-100"/>
@@ -100,4 +102,5 @@
         </div>
     </div>
 </div>
+<% fd.closeConnect();%>
 <%@include file="footer.jsp" %>

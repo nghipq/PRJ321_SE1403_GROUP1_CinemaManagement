@@ -11,17 +11,18 @@
 <%@page import="models.Scheldule"%>
 <%@page import="org.springframework.scheduling.annotation.Scheduled"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="DAO.TicketDAO"%>
-<%@page import="DAO.FilmDAO"%>
+<%@page import="DAO.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="header.jsp" %>
 <link href="<c:url value="/resources/css/Detail.css"/>" rel="stylesheet"/>
+<%  FilmDAO fd = new FilmDAO();
+    TicketDAO td = new TicketDAO();
+%>
 <div class="bg-white container mt-5">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-12">
-                <%                    
-                    FilmDAO fd = new FilmDAO();
+                <%
                     String imgPath = "/resources/image/" + fd.getFilmPoster(Integer.parseInt(request.getParameter("id")));
                     pageContext.setAttribute("imgPath", imgPath);
                     SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -110,7 +111,6 @@
                                     <c:set var="sesId" value="${schedule.value.getSesId()}"/>
                                     <c:set var="scheId" value="${schedule.value.getScheId()}"/>
                                     <%
-                                        TicketDAO td = new TicketDAO();
                                         int sesId = Integer.parseInt(pageContext.getAttribute("sesId").toString());
                                         int scheId = Integer.parseInt(pageContext.getAttribute("scheId").toString());
                                         ArrayList<String> details = td.getDetail(sesId, scheId);
@@ -127,4 +127,8 @@
         </div>
     </div>
 </div>
+<%
+    fd.closeConnect();
+    td.closeConnect();
+%>
 <%@include file="footer.jsp" %>

@@ -74,5 +74,9 @@
 
     </div>
 </div>
-
+<%
+    fd.closeConnect();
+    sed.closeConnect();
+    td.closeConnect();
+%>
 <%@include  file="admin.footer.jsp" %>

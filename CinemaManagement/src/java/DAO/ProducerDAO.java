@@ -47,4 +47,13 @@ public class ProducerDAO {
 
         return producers;
     }
+
+    /**
+     * Close db connection
+     *
+     * @throws SQLException
+     */
+    public void closeConnect() throws SQLException {
+        this.conn.close();
+    }
 }

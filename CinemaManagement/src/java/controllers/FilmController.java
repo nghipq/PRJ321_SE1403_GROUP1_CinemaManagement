@@ -74,6 +74,9 @@ public class FilmController {
         mm.put("filmsNew", filmsNew);
         mm.put("filmsJSON", gson.toJson((Map) filmsJSON));
 
+        fd.closeConnect();
+        sched.closeConnect();
+        
         return "filmList";
     }
 
@@ -117,6 +120,11 @@ public class FilmController {
         } catch (SQLException ex) {
             Logger.getLogger(FilmController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        fd.closeConnect();
+        pd.closeConnect();
+        sd.closeConnect();
+        td.closeConnect();
 
         return "filmDetail";
     }

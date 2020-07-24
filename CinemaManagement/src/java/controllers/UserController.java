@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import models.*;
 import DAO.*;
 import java.sql.Date;
+import java.sql.SQLException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,7 +52,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = {"/login"}, method = RequestMethod.POST)
-    public String LoginAction(@ModelAttribute(value = "tk") User user, ModelMap mm, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+    public String LoginAction(@ModelAttribute(value = "tk") User user, ModelMap mm, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws SQLException {
         String emails = user.getEmail();    // get user Emaill
         String pass = user.getPassword();   // get user password
         UserDAO udao = new UserDAO();       // recall UserDao
@@ -75,18 +76,26 @@ public class UserController {
                     try {
                         String url = request.getParameter("returnURL");
                         if (url != null) {
+                            udao.closeConnect();
                             return ("redirect:/" + url);
                         } else {
+                            udao.closeConnect();
                             return "redirect:/";
                         }
                     } catch (Exception e) {
+                        udao.closeConnect();
                         return "redirect:/";
                     }
                 }
                 case 2://if is admin
+                {   udao.closeConnect();
                     return "redirect:/admins/filmList.html";
-                default:
+                }
+                default:{
+                    udao.closeConnect();
                     return "redirect:/";
+                }
+                    
             }
         } else {
             //assign properties to jsp callback
@@ -111,13 +120,16 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = {"/register"}, method = RequestMethod.POST)
-    public String RegisAction(@ModelAttribute(value = "tk") User user, ModelMap mm, HttpSession session, HttpServletResponse response, HttpServletRequest request) {
+    public String RegisAction(@ModelAttribute(value = "tk") User user, ModelMap mm, HttpSession session, HttpServletResponse response, HttpServletRequest request) throws SQLException {
         UserDAO udao = new UserDAO();   // recall class UserDao
         CustomerDAO cdao = new CustomerDAO();   // recall class CustomerDao
         if (request.getParameter("txtconfirmpass").equals(request.getParameter("txtPass"))) {   //check confirpass and pass 
             // recall insertUser and insertCustomers to add into database
             udao.InsertUser(request.getParameter("txtName"), request.getParameter("txtEmail"), request.getParameter("txtPass"), Date.valueOf(request.getParameter("txtDate")), request.getParameter("txtAddress"), request.getParameter("txtPhone"));
             cdao.InsertCustomers();
+            
+            udao.closeConnect();
+            cdao.closeConnect();
             return "redirect:/";
         } else {
 //        {mm.put("message", "Mật khẩu không hợp lệ");

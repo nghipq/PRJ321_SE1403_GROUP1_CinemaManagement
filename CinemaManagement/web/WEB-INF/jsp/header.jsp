@@ -47,9 +47,19 @@
                         Cookie[] cookies = null;
                         // Get an array of Cookies associated with the this domain
                         cookies = request.getCookies();
+                        boolean checkUser = false;
 
                         if (cookies.length > 1) {
 
+                            for (Cookie cookie : cookies) {
+                                if (cookie.getName().equals("Name")) {
+                                    checkUser = true;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        if(checkUser) {
                             for (Cookie cookie : cookies) {
                                 if (cookie.getName().equals("Name")) {
                                     out.print("<li class='nav-item'>");
@@ -58,6 +68,8 @@
                                     out.print("<li class='nav-item'>");
                                     out.print("<a class='nav-link' href='/auth/logout.html'>Đăng Xuất</a>");
                                     out.print("</li>");
+                                    
+                                    break;
                                 }
                             }
                         } else {

@@ -16,26 +16,35 @@ import java.sql.SQLException;
  * @author phamq
  */
 public class RoomSeatDAO {
+
     private Connection conn;
 
     public RoomSeatDAO() {
         this.conn = new DBConnection().getDBConnection();
     }
-    
+
     /**
      * Get room seat by room id
+     *
      * @param rId
      * @return
-     * @throws SQLException 
+     * @throws SQLException
      */
     public ResultSet getSeatByRoomId(int rId) throws SQLException {
         String sql = "SELECT * FROM `roomseat` WHERE `rId` = ?";
         PreparedStatement ps = conn.prepareStatement(sql);
         ps.setInt(1, rId);
         ResultSet rs = ps.executeQuery();
-        
+
         return rs;
     }
-    
-    
+
+    /**
+     * Close db connection
+     *
+     * @throws SQLException
+     */
+    public void closeConnect() throws SQLException {
+        this.conn.close();
+    }
 }

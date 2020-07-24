@@ -11,10 +11,11 @@ import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -28,23 +29,23 @@ import models.User;
  *
  * @author phamq
  */
-@WebFilter(filterName = "UserFilter", urlPatterns = {"/room.html"})
-public class UserFilter implements Filter {
-
+@WebFilter(filterName = "AdminPageFilter", urlPatterns = {"/index.html"})
+public class AdminPageFilter implements Filter {
+    
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-
-    public UserFilter() {
-    }
-
+    
+    public AdminPageFilter() {
+    }    
+    
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("UserFilter:DoBeforeProcessing");
+            log("AdminPageFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -67,12 +68,12 @@ public class UserFilter implements Filter {
 	    log(buf.toString());
 	}
          */
-    }
-
+    }    
+    
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("UserFilter:DoAfterProcessing");
+            log("AdminPageFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -106,50 +107,49 @@ public class UserFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-
+        
         if (debug) {
-            log("UserFilter:doFilter()");
+            log("AdminPageFilter:doFilter()");
         }
-
+        
         doBeforeProcessing(request, response);
+        
+        HttpServletRequest req = (HttpServletRequest) request;
+        HttpServletResponse res = (HttpServletResponse) response;
 
-        Throwable problem = null;
-        try {
-            HttpServletRequest req = (HttpServletRequest) request;
-            HttpServletResponse res = (HttpServletResponse) response;
+        Cookie[] cookies = null;
+        // Get an array of Cookies associated with the this domain
+        cookies = req.getCookies();
+        UserDAO ud = new UserDAO();
+        boolean check = false;
+        
+        if (cookies.length > 1) {
 
-            Cookie[] cookies = null;
-            // Get an array of Cookies associated with the this domain
-            cookies = req.getCookies();
-
-            boolean check = false;
-
-            if (cookies.length > 1) {
-
-                for (Cookie cookie : cookies) {
-                    if (cookie.getName().equals("ID")) {
-                        int uId = Integer.parseInt(cookie.getValue());
-                        check = true;
-                    }
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("ID")) {
+                    int uId = Integer.parseInt(cookie.getValue());
+                    try {
+                        User user = ud.getUserById(uId);
+                        if(user.getPremission() == 2) {
+                            check = true;
+                        } 
+                    } catch (SQLException ex) {}
                 }
             }
-
-            if (!check) {
-                String rId = req.getParameter("rId");
-                String scheId = req.getParameter("scheId");
-                String fId = req.getParameter("fId");
-                String requestURL = "room.html?rId=" + rId + "&scheId=" + scheId + "&fId=" + fId;
-                
-                req.setAttribute("url", requestURL);
-                
-                String loginURL = req.getScheme() + "://"
-                        + req.getServerName() + ":"
-                        + req.getServerPort() + "/auth.html";
-                
-                RequestDispatcher rd = req.getRequestDispatcher("auth.html");
-                rd.forward(request, response);
-            }
-
+        }
+        
+        try {
+            ud.closeConnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if(check) {
+            res.sendRedirect("/admins.html");
+        }
+        
+        Throwable problem = null;
+        try {
             chain.doFilter(request, response);
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
@@ -158,7 +158,7 @@ public class UserFilter implements Filter {
             problem = t;
             t.printStackTrace();
         }
-
+        
         doAfterProcessing(request, response);
 
         // If there was a problem, we want to rethrow it if it is
@@ -193,17 +193,17 @@ public class UserFilter implements Filter {
     /**
      * Destroy method for this filter
      */
-    public void destroy() {
+    public void destroy() {        
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {
+    public void init(FilterConfig filterConfig) {        
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {
-                log("UserFilter:Initializing filter");
+            if (debug) {                
+                log("AdminPageFilter:Initializing filter");
             }
         }
     }
@@ -214,27 +214,27 @@ public class UserFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("UserFilter()");
+            return ("AdminPageFilter()");
         }
-        StringBuffer sb = new StringBuffer("UserFilter(");
+        StringBuffer sb = new StringBuffer("AdminPageFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
     }
-
+    
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);
-
+        String stackTrace = getStackTrace(t);        
+        
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);
+                PrintWriter pw = new PrintWriter(ps);                
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
-                pw.print(stackTrace);
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
+                pw.print(stackTrace);                
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
@@ -251,7 +251,7 @@ public class UserFilter implements Filter {
             }
         }
     }
-
+    
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -265,9 +265,9 @@ public class UserFilter implements Filter {
         }
         return stackTrace;
     }
-
+    
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);
+        filterConfig.getServletContext().log(msg);        
     }
-
+    
 }

@@ -65,6 +65,12 @@ public class BillController {
         mm.put("total", totalPrice);
         mm.put("billModel", new Bill());
 
+        td.closeConnect();
+        sd.closeConnect();
+        fd.closeConnect();
+        fod.closeConnect();
+        sed.closeConnect();
+        
         return "billForm";
     }
 
@@ -129,6 +135,13 @@ public class BillController {
         mm.put("phone", phone);
         mm.put("total", total);
 
+        bd.closeConnect();
+        bdd.closeConnect();
+        td.closeConnect();
+        sd.closeConnect();
+        fd.closeConnect();
+        fod.closeConnect();
+        
         return "bill";
     }
 
@@ -150,6 +163,8 @@ public class BillController {
         //assign properties to jsp callback
         mm.put("bill", bill);
 
+        bd.closeConnect();
+        
         return "billList";
     }
 
@@ -179,6 +194,12 @@ public class BillController {
         mm.put("phone", bill.getPhone());
         mm.put("total", bill.getTotal());
 
+        bd.closeConnect();
+        fd.closeConnect();
+        fod.closeConnect();
+        bdd.closeConnect();
+        td.closeConnect();
+        
         return "bill";
     }
 }

@@ -36,7 +36,7 @@ import models.User;
  *
  * @author phamq
  */
-@WebFilter(filterName = "AdminFilter", urlPatterns = {"/admins/*"})
+@WebFilter(filterName = "AdminFilter", urlPatterns = {"/admins/*", "/admins.html"})
 public class AdminFilter implements Filter {
 
     private static final boolean debug = false;
@@ -183,8 +183,14 @@ public class AdminFilter implements Filter {
             }
         }
         
+        try {
+            ud.closeConnect();
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminFilter.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         if(!check) {
-            res.sendRedirect("/cinemaManagement/");
+            res.sendRedirect("/");
         }
         
         Throwable problem = null;

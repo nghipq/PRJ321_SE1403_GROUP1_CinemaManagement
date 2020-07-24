@@ -11,6 +11,9 @@
 
 <%@include file="admin.header.jsp" %>
 <%@include file="dashboard.jsp" %>
+<%
+    FilmDAO fd = new FilmDAO();
+%>
 <div class="d-flex flex-column justify-content-center align-items-center">
     <div class="text-center bg-dark text-warning p-2 rounded-sm border border-warning mt-2 mb-2" style="width: 35vw">
         <strong style=" font-size: 2rem">Cập Nhật Phim</strong>
@@ -20,7 +23,6 @@
         <div class="d-flex flex-column justify-content-center align-items-end" style="width: 30vw">
             <c:set var="fId" value="${film.getfId()}"/>
             <%
-                FilmDAO fd = new FilmDAO();
                 int fId = Integer.parseInt(pageContext.getAttribute("fId").toString());
                 String imgPath = "/resources/image/" + fd.getFilmPoster(fId);
                 pageContext.setAttribute("imgPath", imgPath);
@@ -84,4 +86,5 @@
         </form>
     </div>
 </div>
+<% fd.closeConnect();%>
 <%@include file="admin.footer.jsp" %>

@@ -103,4 +103,7 @@
         </div>
     </div>
 </div>
+<%
+    fd.closeConnect();
+%>
 <%@include file="admin.footer.jsp" %>

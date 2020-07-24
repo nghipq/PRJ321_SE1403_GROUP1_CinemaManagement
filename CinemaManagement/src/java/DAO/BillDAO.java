@@ -166,4 +166,12 @@ public class BillDAO {
 
         return 0;
     }
+    
+    /**
+     * Close db connection
+     * @throws SQLException 
+     */
+    public void closeConnect() throws SQLException {
+        this.conn.close();
+    }
 }

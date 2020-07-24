@@ -17,7 +17,7 @@
     </div>
     <div class="bg-white col-12 row p-3 rounded mb-2">
         <div class="col-md-4 col-2 d-none d-lg-flex">
-            <%                FilmDAO fd = new FilmDAO();
+            <%  FilmDAO fd = new FilmDAO();
                 String imgPath = "/resources/image/" + fd.getFilmPoster(Integer.parseInt(request.getParameter("fId")));
                 pageContext.setAttribute("imgPath", imgPath);
             %>
@@ -56,61 +56,61 @@
         tickets[item[0]] = item[1];
     });
 
-    var seatList = document.getElementById("seatList")
-    var seat = ""
-    var count = 0
+    var seatList = document.getElementById("seatList");
+    var seat = "";
+    var count = 0;
 
     for (key in tickets) {
-        var ticket = JSON.parse(tickets[key])
-        console.log(ticket['tId'])
+        var ticket = JSON.parse(tickets[key]);
+        console.log(ticket['tId']);
 
-        if (count == 0) {
-            seat += "<div class='d-flex flex-row justify-content-center align-items-center w-100' >"
+        if (count === 0) {
+            seat += "<div class='d-flex flex-row justify-content-center align-items-center w-100' >";
         }
 
-        if (ticket["status"] == 1) {
-            console.log()
-            seat += `<button class="btn btn-warning" id="` + ticket['tId'] + `" disabled style='width: 20%'>` + key + `</button>`
+        if (ticket["status"] === 1) {
+            console.log();
+            seat += `<button class="btn btn-warning" id="` + ticket['tId'] + `" disabled style='width: 20%'>` + key + `</button>`;
         } else {
-            seat += `<button class='btn btn-secondary' id="` + ticket['tId'] + `" onclick="addSeat('` + key + `',` + ticket['tId'] + `)" style='width: 20%'>` + key + `</button>`
+            seat += `<button class='btn btn-secondary' id="` + ticket['tId'] + `" onclick="addSeat('` + key + `',` + ticket['tId'] + `)" style='width: 20%'>` + key + `</button>`;
         }
 
-        count += 1
-        if (count == 8) {
-            seat += "</div>"
-            count = 0
+        count += 1;
+        if (count === 8) {
+            seat += "</div>";
+            count = 0;
         }
     }
 
-    seatList.innerHTML = seat
+    seatList.innerHTML = seat;
 
-    var seats = document.getElementById("seats")
-    var ticketId = document.getElementById("ticketIds")
+    var seats = document.getElementById("seats");
+    var ticketId = document.getElementById("ticketIds");
 
-    var chooseSeats = []
-    var ticketIds = []
+    var chooseSeats = [];
+    var ticketIds = [];
 
     function addSeat(name, tId) {
-        var choosed = document.getElementById(tId)
-        if (chooseSeats.indexOf(name) == -1) {
-            choosed.classList.replace("btn-secondary", "btn-white")
-            chooseSeats.push(name)
-            ticketIds.push(tId)
+        var choosed = document.getElementById(tId);
+        if (chooseSeats.indexOf(name) === -1) {
+            choosed.classList.replace("btn-secondary", "btn-white");
+            chooseSeats.push(name);
+            ticketIds.push(tId);
         } else {
-            choosed.classList.replace("btn-white", "btn-secondary")
-            chooseSeats = chooseSeats.filter(x => x != name)
-            ticketIds = ticketIds.filter(x => x != tId)
+            choosed.classList.replace("btn-white", "btn-secondary");
+            chooseSeats = chooseSeats.filter(x => x !== name);
+            ticketIds = ticketIds.filter(x => x !== tId);
         }
 
-        var values = chooseSeats.join(", ")
-        seats.value = values
-        ticketId.value = ticketIds.join(", ")
+        var values = chooseSeats.join(", ");
+        seats.value = values;
+        ticketId.value = ticketIds.join(", ");
     }
 
     function billForm() {
-        location.href = `bill.html?rId=` + rId + `&tickets=` + ticketIds.join(", ") + `&ticketNames=` + chooseSeats.join(", ")
+        location.href = `bill.html?rId=` + rId + `&tickets=` + ticketIds.join(", ") + `&ticketNames=` + chooseSeats.join(", ");
     }
 
 </script>
-<script src="<c:url value="/resources/JS/booking.js"/>"></script>
+<% fd.closeConnect();%>
 <%@include file="footer.jsp" %>

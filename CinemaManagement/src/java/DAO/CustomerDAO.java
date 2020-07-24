@@ -72,4 +72,13 @@ public class CustomerDAO {
 
         return rs;
     }
+
+    /**
+     * Close db connection
+     *
+     * @throws SQLException
+     */
+    public void closeConnect() throws SQLException {
+        this.conn.close();
+    }
 }

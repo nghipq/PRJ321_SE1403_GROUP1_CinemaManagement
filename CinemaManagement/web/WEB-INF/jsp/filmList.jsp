@@ -9,19 +9,19 @@
 <%@page import="java.util.Date"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="DAO.TicketDAO"%>
-<%@page import="DAO.ScheduleDAO"%>
 <%@page import="models.Scheldule"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.sql.ResultSet"%>
-<%@page import="DAO.FilmDAO"%>
+<%@page import="DAO.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <%@include file="header.jsp" %>
 <link href="<c:url value="/resources/css/film.css"/>" rel="stylesheet"/>
-<%
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+<%    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat eFormat = new SimpleDateFormat("E");
+    FilmDAO fd = new FilmDAO();
+    ScheduleDAO sd = new ScheduleDAO();
+    TicketDAO td = new TicketDAO();
 %>
 <div class="container">
     <div class="col bg-white mt-2 mb-2">
@@ -33,7 +33,7 @@
                 <div class="item" style="width: 10rem; height: 15rem;">
                     <c:set var="fId" value="${film.getfId()}"/>
                     <%                        int fId = Integer.parseInt(pageContext.getAttribute("fId").toString());
-                        String imgPath = "/resources/image/" + new FilmDAO().getFilmPoster(fId);
+                        String imgPath = "/resources/image/" + fd.getFilmPoster(fId);
                         pageContext.setAttribute("imgPath", imgPath);
                     %>
                     <img src="<c:url value="${imgPath}"/>" alt="${film.getfName()}" class="w-100 h-100"/>
@@ -57,29 +57,29 @@
                     eCal.setTime(new Date());
                 %>
                 <li class="page-item"><a class="page-link" href="?date=0"><%=eFormat.format(eCal.getTime())%></a></li>
-                <%
-                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
-                %>
+                    <%
+                        eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                    %>
                 <li class="page-item"><a class="page-link" href="?date=1"><%=eFormat.format(eCal.getTime())%></a></li>
-                <%
-                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
-                %>
+                    <%
+                        eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                    %>
                 <li class="page-item"><a class="page-link" href="?date=2"><%=eFormat.format(eCal.getTime())%></a></li>
-                <%
-                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
-                %>
+                    <%
+                        eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                    %>
                 <li class="page-item"><a class="page-link" href="?date=3"><%=eFormat.format(eCal.getTime())%></a></li>
-                <%
-                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
-                %>
+                    <%
+                        eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                    %>
                 <li class="page-item"><a class="page-link" href="?date=4"><%=eFormat.format(eCal.getTime())%></a></li>
-                <%
-                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
-                %>
+                    <%
+                        eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                    %>
                 <li class="page-item"><a class="page-link" href="?date=5"><%=eFormat.format(eCal.getTime())%></a></li>
-                <%
-                    eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
-                %>
+                    <%
+                        eCal.add(GregorianCalendar.DAY_OF_MONTH, 1);
+                    %>
                 <li class="page-item"><a class="page-link" href="?date=6"><%=eFormat.format(eCal.getTime())%></a></li>
             </ul>
         </nav>
@@ -90,7 +90,7 @@
                         <c:set var="fId" value="${film.getfId()}"/>
                         <%
                             int fId1 = Integer.parseInt(pageContext.getAttribute("fId").toString());
-                            String imgPath1 = "/resources/image/" + new FilmDAO().getFilmPoster(fId1);
+                            String imgPath1 = "/resources/image/" + fd.getFilmPoster(fId1);
                             pageContext.setAttribute("imgPath", imgPath1);
                         %>
                         <img src="<c:url value="${imgPath}"/>" alt="${film.getfName()}" class="w-100 h-100"/>
@@ -98,15 +98,13 @@
                     <div class="d-flex flex-column justify-content-center align-items-start col-10">
                         <div class="ml-5">
                             <h4 style="color: #635423;">${film.getfName()}</h4>
-                            <p>${film.getDescription()}</p>
                         </div>
                         <div class="ml-5">
                             <h5 style="color: #635423;">LỊCH CHIẾU</h5>
                             <div class="border row p-2">
                                 <%
-                                    ScheduleDAO sd = new ScheduleDAO();
-                                    if(request.getParameter("date") == null) {
-      
+                                    if (request.getParameter("date") == null) {
+
                                         HashMap<Integer, Scheldule> schedules = sd.getSchedulesDetail(Integer.parseInt(pageContext.getAttribute("fId").toString()), format.format(new Date()));
                                         pageContext.setAttribute("schedules", schedules);
                                     } else {
@@ -114,12 +112,10 @@
                                         Calendar cal = Calendar.getInstance();
                                         cal.setTime(new Date());
                                         cal.add(GregorianCalendar.DAY_OF_MONTH, changeDate);
-                                        
+
                                         HashMap<Integer, Scheldule> schedules = sd.getSchedulesDetail(Integer.parseInt(pageContext.getAttribute("fId").toString()), format.format(cal.getTime()));
                                         pageContext.setAttribute("schedules", schedules);
                                     }
-                                    
-                                    
                                 %>
                                 <c:forEach var="schedule" items="${schedules}">
                                     <a href="/room.html?rId=${schedule.value.getrId()}&scheId=${schedule.key}&fId=${schedule.value.getfId()}">
@@ -127,7 +123,6 @@
                                             <c:set var="sesId" value="${schedule.value.getSesId()}"/>
                                             <c:set var="scheId" value="${schedule.value.getScheId()}"/>
                                             <%
-                                                TicketDAO td = new TicketDAO();
                                                 int sesId = Integer.parseInt(pageContext.getAttribute("sesId").toString());
                                                 int scheId = Integer.parseInt(pageContext.getAttribute("scheId").toString());
                                                 ArrayList<String> details = td.getDetail(sesId, scheId);
@@ -176,7 +171,7 @@
                 <div class="item" style="width: 14rem; height: 20rem;" onclick='changeFilm(${film.getfId()})'>
                     <c:set var="fId2" value="${film.getfId()}"/>
                     <%  int fId2 = Integer.parseInt(pageContext.getAttribute("fId2").toString());
-                        String imgPath2 = "/resources/image/" + new FilmDAO().getFilmPoster(fId2);
+                        String imgPath2 = "/resources/image/" + fd.getFilmPoster(fId2);
                         pageContext.setAttribute("imgPath2", imgPath2);
                     %>
                     <img src="<c:url value="${imgPath2}"/>" alt="${film.getfName()}" class="w-100 h-100"/>
@@ -205,10 +200,15 @@
     filmInfo.textContent = arr[0]["description"]
 
     function changeFilm(fId) {
-        var film = arr.filter(x => x["fId"] == parseInt(fId) )
+        var film = arr.filter(x => x["fId"] == parseInt(fId))
         filmName.textContent = film[0]["fName"]
         filmDate.textContent = film[0]["airDate"]
         filmInfo.textContent = film[0]["description"]
     }
 </script>
+<%
+    fd.closeConnect();
+    td.closeConnect();
+    sd.closeConnect();
+%>
 <%@include file="footer.jsp" %>
