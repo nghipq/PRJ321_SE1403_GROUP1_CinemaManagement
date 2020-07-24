@@ -71,8 +71,15 @@ public class billDetailDAO {
         int rs = ps.executeUpdate();
         return rs > 0 ? true : false;
     }
-    
-    public ArrayList<BillDetail> getBillDetailByBillId(int bId) throws SQLException{
+
+    /**
+     * Select billdetail where billid=?
+     *
+     * @param bId
+     * @return
+     * @throws SQLException
+     */
+    public ArrayList<BillDetail> getBillDetailByBillId(int bId) throws SQLException {
         ArrayList<BillDetail> billDetail = new ArrayList<BillDetail>();
 
         String sql = "SELECT * FROM `billdetail` WHERE `bId` = ?";
