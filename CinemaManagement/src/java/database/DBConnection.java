@@ -20,7 +20,7 @@ public class DBConnection {
     public DBConnection(){
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            conn = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/group1", "root", "");
+            conn = (Connection) DriverManager.getConnection("jdbc:mysql://node229403-bktcnm.j.layershift.co.uk/group1", "root", "NMQbpi32317");
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(DBConnection.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
