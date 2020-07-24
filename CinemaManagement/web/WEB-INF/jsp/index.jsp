@@ -67,7 +67,7 @@
                         pageContext.setAttribute("imgPath", imgPath);
                     %>
                     <img src="<c:url value="${imgPath}"/>" alt="${film.getfName()}" class="w-100 h-100"/>
-                    <a href="/films/film.html?id=${film.getfId()}">
+                    <a href="/cinemaManagement/films/film.html?id=${film.getfId()}">
                         <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">
                             <p class="detail">Chi Tiết</p>
                         </div>

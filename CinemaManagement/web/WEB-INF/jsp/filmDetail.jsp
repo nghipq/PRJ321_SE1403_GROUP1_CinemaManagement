@@ -106,7 +106,7 @@
                     </div>
                     <div class="border row" >
                         <c:forEach var="schedule" items="${schedules}">
-                            <a href="/room.html?rId=${schedule.value.getrId()}&scheId=${schedule.key}&fId=${schedule.value.getfId()}">
+                            <a href="/cinemaManagement/room.html?rId=${schedule.value.getrId()}&scheId=${schedule.key}&fId=${schedule.value.getfId()}">
                                 <button type="button" class="btn btn-secondary">                            
                                     <c:set var="sesId" value="${schedule.value.getSesId()}"/>
                                     <c:set var="scheId" value="${schedule.value.getScheId()}"/>
