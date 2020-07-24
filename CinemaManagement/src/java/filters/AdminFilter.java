@@ -190,7 +190,7 @@ public class AdminFilter implements Filter {
         }
         
         if(!check) {
-            res.sendRedirect("/");
+            res.sendRedirect("/cinemaManagement/");
         }
         
         Throwable problem = null;

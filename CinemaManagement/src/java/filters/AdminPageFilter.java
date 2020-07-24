@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -132,6 +133,7 @@ public class AdminPageFilter implements Filter {
                         User user = ud.getUserById(uId);
                         if(user.getPremission() == 2) {
                             check = true;
+                            break;
                         } 
                     } catch (SQLException ex) {}
                 }
@@ -145,7 +147,7 @@ public class AdminPageFilter implements Filter {
         }
         
         if(check) {
-            res.sendRedirect("/admins.html");
+            res.sendRedirect("/cinemaManagement/admins.html");
         }
         
         Throwable problem = null;

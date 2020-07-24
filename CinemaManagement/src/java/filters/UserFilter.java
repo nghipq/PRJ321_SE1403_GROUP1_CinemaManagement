@@ -144,7 +144,7 @@ public class UserFilter implements Filter {
                 
                 String loginURL = req.getScheme() + "://"
                         + req.getServerName() + ":"
-                        + req.getServerPort() + "/auth.html";
+                        + req.getServerPort() + "/cinemaManagement/auth.html";
                 
                 RequestDispatcher rd = req.getRequestDispatcher("auth.html");
                 rd.forward(request, response);

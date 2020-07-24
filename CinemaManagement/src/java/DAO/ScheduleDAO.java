@@ -107,7 +107,7 @@ public class ScheduleDAO {
      * @throws SQLException
      */
     public ResultSet getAll() throws SQLException {
-        String sql = "SELECT * FROM schedule JOIN session on schedule.sesId = session.sesId ORDER BY session.startTime ASC, schedule.sDate ASC";
+        String sql = "SELECT * FROM schedule JOIN session on schedule.sesId = session.sesId ORDER BY schedule.sDate ASC, session.startTime ASC";
         PreparedStatement ps = conn.prepareStatement(sql);
 
         ResultSet rs = null;
@@ -293,6 +293,17 @@ public class ScheduleDAO {
      */
     public void autoUpdateSchedule() throws SQLException {
         String sql = "update schedule set status = 0 where sDate < CURRENT_DATE";
+        Statement st = conn.createStatement();
+        st.execute(sql);
+    }
+
+    /**
+     * delete schedule by id
+     *
+     * @throws SQLException
+     */
+    public void deleteSchedule(int scheId) throws SQLException {
+        String sql = "delete from schedule where scheId = " + scheId;
         Statement st = conn.createStatement();
         st.execute(sql);
     }

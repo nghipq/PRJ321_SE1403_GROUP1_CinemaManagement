@@ -12,6 +12,7 @@
         <strong style=" font-size: 2rem">Thêm Lịch Chiếu</strong>
     </div>
     <form action="updateSuccess.html" method="POST" class="d-flex flex-column justify-content-center align-items-center rounded-sm p-3 bg-dark" style="width: 35vw">
+        <label class="text-white">${mss}</label>
         <input type="hidden" placeholder="Id" name="sId" value="${fId}">
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Rạp:</label>

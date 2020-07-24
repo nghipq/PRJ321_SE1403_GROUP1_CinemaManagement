@@ -60,6 +60,8 @@
     var seat = "";
     var count = 0;
 
+    console.log(tickets)
+
     for (key in tickets) {
         var ticket = JSON.parse(tickets[key]);
         console.log(ticket['tId']);
@@ -89,7 +91,7 @@
 
     var chooseSeats = [];
     var ticketIds = [];
-
+    
     function addSeat(name, tId) {
         var choosed = document.getElementById(tId);
         if (chooseSeats.indexOf(name) === -1) {

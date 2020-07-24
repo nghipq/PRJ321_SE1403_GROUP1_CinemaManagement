@@ -642,6 +642,13 @@ public class AdminController {
             while (rs.next()) {//the loop to check element in database exist
                 td.createTicket(scheId, rs.getInt("seatId"), 0);//create ticket
             }
+            
+            ResultSet tRs = td.getTicketByCheduleId(scheId, 0);
+            if(!tRs.next()) {
+                sched.deleteSchedule(scheId);
+                mm.put("mss", "Cannot create schedule");
+                return "updateShowtimes";
+            } 
 
             sed.closeConnect();
             sched.closeConnect();
