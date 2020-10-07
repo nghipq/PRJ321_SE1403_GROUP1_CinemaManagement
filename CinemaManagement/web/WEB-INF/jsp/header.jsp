@@ -63,7 +63,7 @@
                             for (Cookie cookie : cookies) {
                                 if (cookie.getName().equals("Name")) {
                                     out.print("<li class='nav-item'>");
-                                    out.print("<a class='nav-link' href='#'>" + cookie.getValue() + "</a>");
+                                    out.print("<a class='nav-link' href='#' id='"+cookie.getValue()+"'>" + cookie.getValue() + "</a>");
                                     out.print("</li>");
                                     out.print("<li class='nav-item'>");
                                     out.print("<a class='nav-link' href='/cinemaManagement/auth/logout.html'>Đăng Xuất</a>");

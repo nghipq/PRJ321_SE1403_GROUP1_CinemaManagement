@@ -37,7 +37,7 @@
                 <tr class="d-flex flex-row justify-content-start align-items-center p-3 w-100 border border-warning rounded-sm m-2 bg-white text-dark ">
 
                     <td class="d-flex flex-row justify-content-center align-items-center"  style="width: 3vw">
-                        <strong>${row.getbId()}</strong>
+                        <strong id="id_MHD">${row.getbId()}</strong>
                     </td>
                     <td class="d-flex flex-row justify-content-center align-items-center"  style="width: 15vw">
                         <strong>${row.getName()}</strong>
@@ -59,7 +59,7 @@
                     </td>
                     <td class="d-flex flex-column justify-content-center align-items-center text-center" style="width: 6vw">
                         <a href="updateBill.html?bId=${row.getbId()}" class="p-1">
-                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/pencil-alt-solid.svg"/>" alt="Cập nhật" class="w-100"/>
+                            <img id="image_update_bill" style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/pencil-alt-solid.svg"/>" alt="Cập nhật" class="w-100"/>
                         </a>
                         <a href="deleteBill.html?bId=${row.getbId()}" class="p-1">
                             <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/trash-alt-solid.svg"/>" alt="Xóa" class="w-100"/>
