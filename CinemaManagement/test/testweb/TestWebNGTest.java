@@ -32,7 +32,7 @@ public class TestWebNGTest {
 
     @BeforeClass
     public void setUpClass() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "E:\\Chuyên Ngành\\Software Testing\\chromedriver_win32\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "E:\\Selenium-Driver\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get(baseURL);
 
@@ -181,6 +181,65 @@ public class TestWebNGTest {
             assertNull(uID);
         } catch (Exception ex) {
 
+        }
+
+    }
+    @DataProvider(name = "AdminTestUserList")
+    public Object[][] AdminTestUserLsit() {
+
+        Object[][] obj = new Object[2][4];
+        obj[0][0] = "";
+        obj[0][1] = "";
+        obj[0][2] = "";
+        obj[0][3] = true;
+        
+        obj[1][0] = "123";
+        obj[1][1] = "0";
+        obj[1][2] = "staff123";
+        obj[1][3] = false;
+        
+        return obj;
+    }
+
+    @Test(dataProvider = "AdminTestUserList", priority = 1)
+    public void AdminUserLsit(String Uname, String UPhone, String expect, boolean status) throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.findElement(By.id("DSND")).click();
+        Thread.sleep(500);
+        driver.findElement(By.id("image_update_user")).click();
+        Thread.sleep(500);
+        driver.findElement(By.id("UName")).sendKeys(Uname);
+        Thread.sleep(500);
+
+        if (status) {
+            driver.findElement(By.id("female")).click();
+            Thread.sleep(500);
+        } else {
+            driver.findElement(By.id("male")).click();
+            Thread.sleep(500);
+        }
+
+        driver.findElement(By.id("UPhone")).sendKeys(UPhone);
+        Thread.sleep(500);
+
+        if (status) {
+            driver.findElement(By.id("Staff")).click();
+            Thread.sleep(500);
+        } else {
+            driver.findElement(By.id("User")).click();
+            Thread.sleep(500);
+        }
+        driver.findElement(By.id("update_user")).click();
+        Thread.sleep(500);
+//        WebElement fList = driver.findElement(By.id("flist"));
+//        fList.click();
+        WebElement uID;
+        try {
+            uID = driver.findElement(By.id("user_name"));
+            assertEquals(uID.getText(), expect);
+        } catch (Exception ex) {
+            uID = null;
+            assertNull(uID);
         }
 
     }

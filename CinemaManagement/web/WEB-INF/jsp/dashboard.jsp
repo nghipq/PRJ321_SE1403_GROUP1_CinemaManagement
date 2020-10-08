@@ -30,7 +30,7 @@
             <li class="nav-item active p-3 pl-4">
                 <a class="nav-link text-white" href="userList.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Danh sách người dùng</span> 
+                    <span id="DSND">Danh sách người dùng</span> 
                 </a>
             </li>
             <li class="nav-item p-3 pl-4">

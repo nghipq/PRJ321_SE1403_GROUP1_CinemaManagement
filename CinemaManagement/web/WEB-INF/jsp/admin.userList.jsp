@@ -42,7 +42,7 @@
                 <tr class="d-flex flex-row justify-content-between align-items-center p-3 w-100 border border-dark rounded-sm m-2  bg-white text-dark">
 
                     <td class="text-center" style="width: 12vw">
-                        <strong>${row.getUsername()}</strong>
+                        <strong id="user_name">${row.getUsername()}</strong>
                     </td>
                     <td class="text-center" style="width: 5vw">
                         <c:if test="${row.getPremission() == 0}">
@@ -73,7 +73,7 @@
                     </td>
                     <td class="text-center" style="width: 5vw">
                         <a href="updateUser.html?id=${row.getuId()}">
-                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/pencil-alt-solid.svg"/>" alt="update" class="w-100"/>
+                            <img id="image_update_user" style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/pencil-alt-solid.svg"/>" alt="update" class="w-100"/>
                         </a>
                         <a href="deleteUser.html?uId=${row.getuId()}">
                             <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/trash-alt-solid.svg"/>" alt="update" class="w-100"/>

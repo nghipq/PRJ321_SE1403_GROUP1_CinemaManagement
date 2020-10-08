@@ -18,15 +18,15 @@
         <input class="p-2" type="hidden" placeholder="Username" name="uId" value="${user.getuId()}" style="width: 25vw; height: 5vh">
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Tên:</label>
-            <input class="w-100 p-2 border border-warning rounded" type="text" placeholder="Username" name="UName" value="${user.getUsername()}" style="width: 25vw; height: 5vh">
+            <input class="w-100 p-2 border border-warning rounded" type="text" placeholder="Username" id="UName" name="UName" value="${user.getUsername()}" style="width: 25vw; height: 5vh">
         </div>
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Email:</label>
-            <input class="w-100 p-2 border border-warning rounded" type="text" placeholder="Email" name="UEmail" value="${user.getEmail()}"  style="width: 25vw; height: 5vh">
+            <input class="w-100 p-2 border border-warning rounded" type="text" placeholder="Email" id="UEmail" name="UEmail" value="${user.getEmail()}"  style="width: 25vw; height: 5vh">
         </div>
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Ngày sinh:</label>
-            <input class="w-100 p-2 border border-warning rounded" type="date" placeholder="Birthday" name="UBirthday" value="${user.getBirthday()}" style="width: 25vw; height: 5vh">
+            <input class="w-100 p-2 border border-warning rounded" type="date" placeholder="Birthday" id="UBirthday" name="UBirthday" value="${user.getBirthday()}" style="width: 25vw; height: 5vh">
         </div>
 
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
@@ -51,15 +51,15 @@
         </div>
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Địa chỉ:</label>
-            <input class="w-100 p-2 border border-warning rounded" type="text" placeholder="Address" name="UAddress" value="${user.getAddress()}" style="width: 25vw; height: 5vh">
+            <input class="w-100 p-2 border border-warning rounded" type="text" placeholder="Address" id="UAddress" name="UAddress" value="${user.getAddress()}" style="width: 25vw; height: 5vh">
         </div>
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">SĐT:</label>
-            <input class="w-100 p-2 border border-warning rounded" type="text" placeholder="Phone" name="UPhone" value="${user.getPhone()}" style="width: 25vw; height: 5vh">
+            <input class="w-100 p-2 border border-warning rounded" type="text" placeholder="Phone" id="UPhone" name="UPhone" value="${user.getPhone()}" style="width: 25vw; height: 5vh">
         </div>
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Ngày đăng ký:</label>
-            <input class="w-100 p-2 border border-warning rounded" type="date" placeholder="Register Date" name="URegis" value="${user.getRegisDate()}" style="width: 25vw; height: 5vh">
+            <input class="w-100 p-2 border border-warning rounded" type="date" placeholder="Register Date" id="URegis" name="URegis" value="${user.getRegisDate()}" style="width: 25vw; height: 5vh">
         </div>
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Quyền:</label>
