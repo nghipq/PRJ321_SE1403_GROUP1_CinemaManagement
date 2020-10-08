@@ -38,7 +38,7 @@
                     <label>Số điện thoại:</label>
                     <a>${phone}</a>
                 </div>
-                <div class="formality">
+                <div id="totals" class="formality">
                     <label style="font-size: 2rem">Tổng giá:</label>
                     <b style="font-size: 2rem;" class="text-danger">${total} VND </b>
 

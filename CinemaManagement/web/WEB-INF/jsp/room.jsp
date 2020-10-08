@@ -36,7 +36,7 @@
             <input class="col-12 w-100 text-center" type="text" value="" id="seats" name="txtSeats" disabled/>
             <input class="d-none" type="text" value="" id="ticketIds" name="txtTickets" disabled/>
         </form>
-        <button class="col-2 btn btn-warning" onclick="billForm()">TIẾP TỤC</button>
+        <button id="cont" class="col-2 btn btn-warning" onclick="billForm()">TIẾP TỤC</button>
     </div>
 </div>
 <script>
