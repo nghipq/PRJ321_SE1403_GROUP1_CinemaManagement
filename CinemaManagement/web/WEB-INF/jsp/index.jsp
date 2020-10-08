@@ -29,7 +29,7 @@
             <div class="carousel-caption">
                 <h1 class="display-2">Asterism Cinema</h1>
                 <h3>Sang Trọng</h3>
-                <button type="button" class="btn btn-primary btn-lg">Đặt Vé</button>
+                <button id="idTICKET" type="button" class="btn btn-primary btn-lg">Đặt Vé</button>
             </div>
         </div>
         <div class="carousel-item w-100 h-100">
@@ -59,13 +59,14 @@
         <div class="owl-carousel px-5 owl-theme bg-white">
 
             <c:forEach var="film" items="${films}">
-                <div class="item" style="width: 10rem; height: 15rem;">
-                    <c:set var="fId" value="${film.getfId()}"/>
-                    <%
-                        int fId = Integer.parseInt(pageContext.getAttribute("fId").toString());
-                        String imgPath = "/resources/image/" + fd.getFilmPoster(fId);
-                        pageContext.setAttribute("imgPath", imgPath);
-                    %>
+
+                <c:set var="fId" value="${film.getfId()}"/>
+                <%
+                    int fId = Integer.parseInt(pageContext.getAttribute("fId").toString());
+                    String imgPath = "/resources/image/" + fd.getFilmPoster(fId);
+                    pageContext.setAttribute("imgPath", imgPath);
+                %>
+                <div id="${film.getfId()}" class="item" style="width: 10rem; height: 15rem;">
                     <img src="<c:url value="${imgPath}"/>" alt="${film.getfName()}" class="w-100 h-100"/>
                     <a href="/cinemaManagement/films/film.html?id=${film.getfId()}">
                         <div class="overlay w-100 h-100 d-flex flex-column justify-content-center align-items-center">

@@ -43,7 +43,7 @@
                         <input type="hidden" class="form-control" id="totals"  name="txtTotal" value="${total}">
                     </div>
                     <div class="form-group">
-                        <input type="submit" value="Đặt Vé"/>
+                        <input id="order" type="submit" value="Đặt Vé"/>
                         <!--                                <button type="button" class="btn btn-warning btn-lg" onclick="">Đặt Vé</button>-->
                     </div>
                 </spring:form>

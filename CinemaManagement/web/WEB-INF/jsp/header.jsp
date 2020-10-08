@@ -74,7 +74,7 @@
                             }
                         } else {
                             out.print("<li class='nav-item'>");
-                            out.print("<a class='nav-link' href='/cinemaManagement/auth.html'>Đăng Nhập</a>");
+                            out.print("<a id='id_DangNhap' class='nav-link' href='/cinemaManagement/auth.html'>Đăng Nhập</a>");
                             out.print("</li>");
                         }
                     %>
