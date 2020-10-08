@@ -32,10 +32,9 @@ public class TestWebNGTest {
 
     @BeforeClass
     public void setUpClass() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "E:\\Selenium-Driver\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "E:\\Chuyên Ngành\\Software Testing\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get(baseURL);
-
     }
 
     @AfterClass
@@ -74,7 +73,7 @@ public class TestWebNGTest {
         return obj;
     }
 
-    @Test(dataProvider = "AdminTest", priority = 0)
+    @Test(dataProvider = "AdminTest", priority = 1)
     public void AdminLogin(String user, String password, String expect) throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
@@ -98,6 +97,49 @@ public class TestWebNGTest {
         }
 
     }
+    
+        @Test(dataProvider = "AdminTestUserList", priority = 2)
+    public void AdminUserLsit(String Uname, String UPhone, String expect, boolean status) throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+        driver.findElement(By.id("DSND")).click();
+        Thread.sleep(500);
+        driver.findElement(By.id("image_update_user")).click();
+        Thread.sleep(500);
+        driver.findElement(By.id("UName")).sendKeys(Uname);
+        Thread.sleep(500);
+
+        if (status) {
+            driver.findElement(By.id("female")).click();
+            Thread.sleep(500);
+        } else {
+            driver.findElement(By.id("male")).click();
+            Thread.sleep(500);
+        }
+
+        driver.findElement(By.id("UPhone")).sendKeys(UPhone);
+        Thread.sleep(500);
+
+        if (status) {
+            driver.findElement(By.id("Staff")).click();
+            Thread.sleep(500);
+        } else {
+            driver.findElement(By.id("User")).click();
+            Thread.sleep(500);
+        }
+        driver.findElement(By.id("update_user")).click();
+        Thread.sleep(500);
+//        WebElement fList = driver.findElement(By.id("flist"));
+//        fList.click();
+        WebElement uID;
+        try {
+            uID = driver.findElement(By.id("user_name"));
+            assertEquals(uID.getText(), expect);
+        } catch (Exception ex) {
+            uID = null;
+            assertNull(uID);
+        }
+
+    }
 
     @DataProvider(name = "AdminTestUpdateBlll")
     public Object[][] AdminTestUpdateBlll() {
@@ -114,7 +156,7 @@ public class TestWebNGTest {
         return obj;
     }
 
-    @Test(dataProvider = "AdminTestUpdateBlll", priority = 1)
+    @Test(dataProvider = "AdminTestUpdateBlll", priority = 3)
     public void AdminUpdateBill(String bName, String bPhone, boolean status, String expect) throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("DSHD")).click();
@@ -170,7 +212,7 @@ public class TestWebNGTest {
 //
 //    }
 
-    @Test(priority = 2)
+    @Test(priority = 4)
     public void AdminDeleteBill() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("image_delete_bill")).click();
@@ -184,7 +226,7 @@ public class TestWebNGTest {
         }
     }
 
-    @Test(priority = 3)
+    @Test(priority = 5)
     public void AdminLogoutTest() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("logout")).click();
@@ -198,7 +240,7 @@ public class TestWebNGTest {
         }
     }
 
-    @Test(priority = 4)
+    @Test(priority = 6)
     public void HomePageTest() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("1")).click();
@@ -212,7 +254,7 @@ public class TestWebNGTest {
         }
     }
 
-    @Test(priority = 5)
+    @Test(priority = 7)
     public void FilmPageTest() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("2")).click();
@@ -239,7 +281,7 @@ public class TestWebNGTest {
         return obj;
     }
 
-    @Test(dataProvider = "UserRes", priority = 6)
+    @Test(dataProvider = "UserRes", priority = 8)
     public void UserResgirter(String user, String email, String pass, String confirm, String date, String Address, String SDT) throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("signUp")).click();
@@ -283,7 +325,7 @@ public class TestWebNGTest {
         }
     }
 
-    @Test(priority = 7)
+    @Test(priority = 9)
     public void HomePageTest2() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("1")).click();
@@ -297,7 +339,7 @@ public class TestWebNGTest {
         }
     }
 
-    @Test(priority = 8)
+    @Test(priority = 10)
     public void FilmPageTest2() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("2")).click();
@@ -311,12 +353,12 @@ public class TestWebNGTest {
         }
     }
 
-    @Test(priority = 9)
+    @Test(priority = 11)
     public void OrderTicket() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
-        driver.findElement(By.id("68")).click();
-        driver.findElement(By.id("69")).click();
-        driver.findElement(By.id("70")).click();
+        driver.findElement(By.id("71")).click();
+        driver.findElement(By.id("72")).click();
+        driver.findElement(By.id("73")).click();
 
         driver.findElement(By.id("cont")).click();
         Thread.sleep(500);
@@ -328,6 +370,7 @@ public class TestWebNGTest {
             fail();
         }
     }
+
     @DataProvider(name = "AdminTestUserList")
     public Object[][] AdminTestUserLsit() {
 
@@ -336,59 +379,17 @@ public class TestWebNGTest {
         obj[0][1] = "";
         obj[0][2] = "";
         obj[0][3] = true;
-        
+
         obj[1][0] = "123";
         obj[1][1] = "0";
         obj[1][2] = "staff123";
         obj[1][3] = false;
-        
+
         return obj;
     }
 
-    @Test(dataProvider = "AdminTestUserList", priority = 1)
-    public void AdminUserLsit(String Uname, String UPhone, String expect, boolean status) throws InterruptedException {
-        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
-        driver.findElement(By.id("DSND")).click();
-        Thread.sleep(500);
-        driver.findElement(By.id("image_update_user")).click();
-        Thread.sleep(500);
-        driver.findElement(By.id("UName")).sendKeys(Uname);
-        Thread.sleep(500);
 
-        if (status) {
-            driver.findElement(By.id("female")).click();
-            Thread.sleep(500);
-        } else {
-            driver.findElement(By.id("male")).click();
-            Thread.sleep(500);
-        }
-
-        driver.findElement(By.id("UPhone")).sendKeys(UPhone);
-        Thread.sleep(500);
-
-        if (status) {
-            driver.findElement(By.id("Staff")).click();
-            Thread.sleep(500);
-        } else {
-            driver.findElement(By.id("User")).click();
-            Thread.sleep(500);
-        }
-        driver.findElement(By.id("update_user")).click();
-        Thread.sleep(500);
-//        WebElement fList = driver.findElement(By.id("flist"));
-//        fList.click();
-        WebElement uID;
-        try {
-            uID = driver.findElement(By.id("user_name"));
-            assertEquals(uID.getText(), expect);
-        } catch (Exception ex) {
-            uID = null;
-            assertNull(uID);
-        }
-
-    }
-
-    @Test(priority = 10)
+    @Test(priority = 12)
     public void BillForm() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("Name")).sendKeys("nghi");

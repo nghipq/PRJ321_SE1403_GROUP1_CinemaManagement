@@ -1033,12 +1033,7 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.commons-fileupload-1.4.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.commons-io-2.7.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.testng.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.byte-buddy-1.8.15.jar-2}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.commons-exec-1.3.jar-2}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.guava-25.0-jre.jar-2}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.okhttp-3.11.0.jar-2}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.okio-1.14.0.jar-2}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.client-combined-3.141.59.jar-2}" todir="${build.web.dir}/WEB-INF/lib"/>
+      
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>
