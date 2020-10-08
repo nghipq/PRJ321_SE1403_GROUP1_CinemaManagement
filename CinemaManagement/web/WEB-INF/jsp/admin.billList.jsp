@@ -62,7 +62,7 @@
                             <img id="image_update_bill" style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/pencil-alt-solid.svg"/>" alt="Cập nhật" class="w-100"/>
                         </a>
                         <a href="deleteBill.html?bId=${row.getbId()}" class="p-1">
-                            <img style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/trash-alt-solid.svg"/>" alt="Xóa" class="w-100"/>
+                            <img id="image_delete_bill" style="width: 1rem; height: 1rem" src="<c:url value="/resources/icons/trash-alt-solid.svg"/>" alt="Xóa" class="w-100"/>
                         </a>
                     </td>
                 </tr>

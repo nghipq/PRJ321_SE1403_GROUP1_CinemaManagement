@@ -79,10 +79,10 @@ public class TestWebNGTest {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
         driver.findElement(By.id("email")).sendKeys(user);
-//        Thread.sleep(500);
+        Thread.sleep(500);
 
         driver.findElement(By.id("password")).sendKeys(password);
-//        Thread.sleep(500);
+        Thread.sleep(500);
 
         driver.findElement(By.id("signIn")).click();
 
@@ -154,7 +154,7 @@ public class TestWebNGTest {
         return obj;
     }
 
-    @Test(dataProvider = "AdminTestUpdateBlllException", priority = 2, expectedExceptions = Exception.class)
+    @Test(dataProvider = "AdminTestUpdateBlllException", priority = 3, expectedExceptions = Exception.class)
     public void AdminUpdateBillException(String bPhone, String expect) throws InterruptedException {
         WebElement uID;
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
@@ -170,37 +170,19 @@ public class TestWebNGTest {
 
     }
 
-//    @DataProvider(name = "UserTest")
-//    public Object[][] UserAuthTest() {
-//        Object[][] obj = new Object[4][3];
-//        obj[0][0] = "nhana";
-//        obj[0][1] = "123";
-//        obj[0][2] = null;
-//        obj[3][0] = "admin@123";
-//        obj[3][1] = "123";
-//        obj[3][2] = "Nhan";
-//        return obj;
-//    }
-//
-//    @Test(dataProvider = "UserTest")
-//    public void UserLogin(String user, String password, String expect) throws InterruptedException {
-//        driver.manage().timeouts().implicitlyWait(8, TimeUnit.SECONDS);
-//       
-//        email.sendKeys(user);
-//        Thread.sleep(500);
-//       
-//        pass.sendKeys(password);
-//        Thread.sleep(500);
-//       
-//        login.click();
-////        WebElement fList = driver.findElement(By.id("flist"));
-////        fList.click();
-//        WebElement uID;
-//        try {
-//            uID = driver.findElement(By.id("Nhan"));
-//        } catch (Exception ex) {
-//            uID = null;
-//        }
-//        assertEquals(uID, expect);
-//    }
+    @Test(priority = 2)
+    public void AdminDeleteBill() throws InterruptedException {
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        driver.findElement(By.id("image_delete_bill")).click();
+        Thread.sleep(500);
+        WebElement uID;
+        try {
+            uID = driver.findElement(By.id("id_BillName"));
+            assertNull(uID);
+        } catch (Exception ex) {
+
+        }
+
+    }
+
 }
