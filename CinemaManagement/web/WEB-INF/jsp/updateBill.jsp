@@ -35,14 +35,14 @@
                     <c:when test="${bill.getStatus() == 0}">
                         <input class="pl-4" type="radio" id="male" name="bStatus" value="1">
                         <label class="text-white" for="male">Đã Thanh Toán</label>
-                        <input type="radio" id="female" id="chuathanhtoan" name="bStatus" value="0" checked>
+                        <input type="radio" id="female"  name="bStatus" value="0" checked>
                         <label class="text-white" for="female">Chưa Thanh Toán</label><br>
                     </c:when>
 
                     <c:otherwise>
                         <input class="pl-4" type="radio" id="male" name="bStatus" value="1" checked>
                         <label class="text-white" for="male">Đã Thanh Toán</label>
-                        <input type="radio" id="female" id="chuathanhtoan" name="bStatus" value="0">
+                        <input type="radio" id="female"  name="bStatus" value="0">
                         <label class="text-white" for="female">Chưa Thanh Toán</label><br>
                     </c:otherwise>
                 </c:choose>

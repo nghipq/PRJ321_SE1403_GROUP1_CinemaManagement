@@ -32,7 +32,7 @@ public class TestWebNGTest {
 
     @BeforeClass
     public void setUpClass() throws Exception {
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Admin\\Desktop\\UNIVERSITY\\FA20\\SWT301\\Selenium\\chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "E:\\Chuyên Ngành\\Software Testing\\chromedriver_win32\\chromedriver.exe");
         driver = new ChromeDriver();
         driver.get(baseURL);
 
@@ -79,10 +79,10 @@ public class TestWebNGTest {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
 
         driver.findElement(By.id("email")).sendKeys(user);
-        Thread.sleep(500);
+//        Thread.sleep(500);
 
         driver.findElement(By.id("password")).sendKeys(password);
-        Thread.sleep(500);
+//        Thread.sleep(500);
 
         driver.findElement(By.id("signIn")).click();
 
@@ -102,18 +102,20 @@ public class TestWebNGTest {
     @DataProvider(name = "AdminTestUpdateBlll")
     public Object[][] AdminTestUpdateBlll() {
 
-        Object[][] obj = new Object[2][3];
+        Object[][] obj = new Object[2][4];
         obj[0][0] = "";
         obj[0][1] = "";
-        obj[0][2] = "5";
+        obj[0][2] = false;
+        obj[0][3] = "nghi";
         obj[1][0] = "ce140186";
         obj[1][1] = "9";
-        obj[1][2] = "5";
+        obj[1][2] = true;
+        obj[1][3] = "nghice140186";
         return obj;
     }
 
     @Test(dataProvider = "AdminTestUpdateBlll", priority = 1)
-    public void AdminUpdateBill(String bName, String bPhone, String expect) throws InterruptedException {
+    public void AdminUpdateBill(String bName, String bPhone, boolean status, String expect) throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
         driver.findElement(By.id("DSHD")).click();
         Thread.sleep(500);
@@ -123,26 +125,47 @@ public class TestWebNGTest {
         Thread.sleep(500);
         driver.findElement(By.name("bPhone")).sendKeys(bPhone);
         Thread.sleep(500);
-        int i = 1;
-        i++;
-        if (i % 2 == 0) {
-            driver.findElement(By.id("chuathanhtoan")).click();
-            Thread.sleep(500);
-        } else {
+
+        if (status) {
             driver.findElement(By.id("male")).click();
-            Thread.sleep(500);
+        } else {
+            driver.findElement(By.id("female")).click();
         }
+        Thread.sleep(500);
         driver.findElement(By.id("update_bill")).click();
         Thread.sleep(500);
-//        WebElement fList = driver.findElement(By.id("flist"));
-//        fList.click();
         WebElement uID;
         try {
-            uID = driver.findElement(By.id("id_MHD"));
+            uID = driver.findElement(By.id("id_BillName"));
             assertEquals(uID.getText(), expect);
         } catch (Exception ex) {
             uID = null;
             assertNull(uID);
+        }
+
+    }
+
+    @DataProvider(name = "AdminTestUpdateBlllException")
+    public Object[][] AdminTestUpdateBlllException() {
+        Object[][] obj = new Object[1][2];
+        obj[0][0] = "111111111111111111111111";
+        obj[0][1] = "";
+
+        return obj;
+    }
+
+    @Test(dataProvider = "AdminTestUpdateBlllException", priority = 2, expectedExceptions = Exception.class)
+    public void AdminUpdateBillException(String bPhone, String expect) throws InterruptedException {
+        WebElement uID;
+        driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+        try {
+            driver.findElement(By.id("image_update_bill")).click();
+            Thread.sleep(500);
+            driver.findElement(By.name("bPhone")).sendKeys(bPhone);
+            Thread.sleep(500);
+            driver.findElement(By.id("update_bill")).click();
+        } catch (Exception ex) {
+            fail();
         }
 
     }

@@ -40,7 +40,7 @@
                         <strong id="id_MHD">${row.getbId()}</strong>
                     </td>
                     <td class="d-flex flex-row justify-content-center align-items-center"  style="width: 15vw">
-                        <strong>${row.getName()}</strong>
+                        <strong id="id_BillName">${row.getName()}</strong>
                     <td>
                     <td class="d-flex flex-row justify-content-center align-items-center w-5" style="width: 15vw">
                         <strong>${row.getPhone()}</strong>
@@ -51,10 +51,10 @@
                     <td class="d-flex flex-row justify-content-center align-items-center w-5" style="width: 10vw">
                         
                             <c:if test="${row.getStatus() == 0}">
-                                <strong class="text-danger">Chưa thanh toán</strong>
+                                <strong class="text-danger" id="id_chuathanhtoan">Chưa thanh toán</strong>
                             </c:if>
                             <c:if test="${row.getStatus() == 1}">
-                                <strong class="text-success">Đã thanh toán</strong>
+                                <strong class="text-success" id="id_thanhtoan">Đã thanh toán</strong>
                             </c:if>
                     </td>
                     <td class="d-flex flex-column justify-content-center align-items-center text-center" style="width: 6vw">
