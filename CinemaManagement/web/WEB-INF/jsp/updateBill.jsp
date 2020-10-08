@@ -25,7 +25,7 @@
         </div>
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
             <label class="text-white">Tổng tiền:</label>
-            <input class="w-100 p-2 border border-warning rounded" type="number" placeholder="Tổng tiền" name="bTotal" value="${bill.getTotal()}" style="width: 25vw; height: 5vh">
+            <input class="w-100 p-2 border border-warning rounded" type="number" placeholder="Tổng tiền" name="bTotal" value="${bill.getTotal()}" style="width: 25vw; height: 5vh" readonly>
         </div>
 
         <div class="d-flex flex-column justify-content-center align-items-start w-100 mt-2 mb-2">
@@ -35,14 +35,14 @@
                     <c:when test="${bill.getStatus() == 0}">
                         <input class="pl-4" type="radio" id="male" name="bStatus" value="1">
                         <label class="text-white" for="male">Đã Thanh Toán</label>
-                        <input type="radio" id="female" name="bStatus" value="0" checked>
+                        <input type="radio" id="female" id="chuathanhtoan" name="bStatus" value="0" checked>
                         <label class="text-white" for="female">Chưa Thanh Toán</label><br>
                     </c:when>
 
                     <c:otherwise>
                         <input class="pl-4" type="radio" id="male" name="bStatus" value="1" checked>
                         <label class="text-white" for="male">Đã Thanh Toán</label>
-                        <input type="radio" id="female" name="bStatus" value="0">
+                        <input type="radio" id="female" id="chuathanhtoan" name="bStatus" value="0">
                         <label class="text-white" for="female">Chưa Thanh Toán</label><br>
                     </c:otherwise>
                 </c:choose>
@@ -51,7 +51,7 @@
         
 
         <div class="d-flex flex-row justify-content-between align-items-center m-2 w-100">
-            <input type="submit" class="btn btn-warning btn-lg w-100" value="Cập Nhật"/>
+            <input type="submit" id="update_bill" class="btn btn-warning btn-lg w-100" value="Cập Nhật"/>
         </div>
     </form>
 </div>

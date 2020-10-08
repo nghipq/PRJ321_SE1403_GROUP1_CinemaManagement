@@ -53,7 +53,7 @@
                         <spring:input path="email" /><br>
                         <spring:password path="password"/><br>
                         <h3 style="color: red">${message}</h3>
-                        <button>Đăng nhập</button>
+                        <button id="signIn">Đăng nhập</button>
 
                     </spring:form>
 
@@ -63,7 +63,7 @@
                         <div class="overlay-panel overlay-left">
                             <h1>Chào mừng đến với Asterism Cinema</h1>
                             <p style="margin-left:50;">Để tiếp tục, xin vui lòng đăng nhập!</p>
-                            <button class="ghost" id="signIn">Đăng nhập</button>
+                            <button class="ghost" id="signIn1">Đăng nhập</button>
                         </div>
                         <div class="overlay-panel overlay-right">
                             <h1>Xin chào!</h1>
